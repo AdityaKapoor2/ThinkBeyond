@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const skipBtn = document.getElementById('skip-btn');
 
   // Play the video
-  splashVideo.play().catch(() => {});
+  splashVideo.play().catch(() => { });
 
   // Update progress bar
   splashVideo.addEventListener('timeupdate', () => {
@@ -13,11 +13,8 @@ document.addEventListener('DOMContentLoaded', () => {
       progressFill.style.width = progress + '%';
     }
   });
-
-  // Show skip button after 2 seconds
-  setTimeout(() => {
-    skipBtn.classList.add('visible');
-  }, 2000);
+  //skip button with no delay
+  skipBtn.classList.add('visible');
 
   // Skip button — for now just pauses video (you can add redirect later)
   skipBtn.addEventListener('click', () => {
