@@ -3196,4 +3196,746 @@ body {
     justify-content: center;
   }
 }
+
+/* ============================================================
+   8. CIVILISATION & ANCIENT INDIA CONNECTIVE TIMELINE MAP
+   Pixel-Matched to User's Mockup Reference (Non-Overlapping Hotspots)
+   ============================================================ */
+
+.civilisation-map-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 850;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+  background-color: #050709;
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1);
+  transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              visibility 0.35s;
+  overflow: hidden;
+}
+
+.civilisation-map-screen.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: scale(0.98);
+}
+
+.civilisation-map-overlay-bg {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 30%, #15110d 0%, #080a0d 70%, #030406 100%);
+  pointer-events: none;
+}
+
+/* Floating Sleek Back Button */
+.civilisation-floating-back {
+  position: fixed;
+  top: 20px;
+  left: 28px;
+  z-index: 920;
+  background: rgba(14, 18, 24, 0.9);
+  border: 1.5px solid rgba(212, 163, 89, 0.6);
+  border-radius: 30px;
+  padding: 8px 18px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.8), 0 0 12px rgba(212, 163, 89, 0.25);
+  backdrop-filter: blur(6px);
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.civilisation-floating-back:hover {
+  background: rgba(36, 28, 16, 0.95);
+  border-color: #F7D488;
+  color: #FFF;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.9), 0 0 20px rgba(245, 198, 108, 0.5);
+}
+
+/* Canvas Wrapper matching exact 1024:600 aspect ratio */
+.civilisation-canvas-wrapper {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1340px;
+  height: 94vh;
+  max-height: 860px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+}
+
+.civilisation-map-canvas {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  aspect-ratio: 1024 / 600;
+  border-radius: 12px;
+  box-shadow:
+    0 0 0 2px rgba(0, 0, 0, 0.95),
+    0 24px 70px rgba(0, 0, 0, 0.95),
+    0 0 45px rgba(212, 163, 89, 0.2);
+  overflow: hidden;
+}
+
+.civilisation-bg-art {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  display: block;
+}
+
+/* Interactive Nodes Layer */
+.civilisation-nodes-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: auto;
+}
+
+/* Individual Circular Era Node Hotspot */
+.civilisation-node-hotspot {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  width: 10.8%;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  z-index: 10;
+}
+
+.civilisation-node-hotspot:focus-visible {
+  outline: none;
+}
+
+.civilisation-node-hotspot:hover,
+.civilisation-node-hotspot:focus-visible {
+  transform: translate(-50%, -50%) scale(1.05);
+}
+
+.civilisation-node-hotspot:hover .hotspot-ring,
+.civilisation-node-hotspot:focus-visible .hotspot-ring {
+  border-color: #FFE299;
+  box-shadow:
+    0 0 0 2px rgba(0, 0, 0, 0.8),
+    0 0 28px rgba(245, 198, 108, 0.95),
+    inset 0 0 16px rgba(245, 198, 108, 0.4);
+  transform: scale(1.04);
+}
+
+.civilisation-node-hotspot.status-in_progress .hotspot-ring {
+  border-color: rgba(229, 169, 60, 0.7);
+  box-shadow: 0 0 16px rgba(229, 169, 60, 0.7);
+  animation: civHotspotAura 2s infinite;
+}
+
+@keyframes civHotspotAura {
+  0%, 100% {
+    box-shadow: 0 0 10px rgba(229, 169, 60, 0.5), inset 0 0 8px rgba(229, 169, 60, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 24px rgba(245, 198, 108, 0.95), inset 0 0 14px rgba(245, 198, 108, 0.45);
+  }
+}
+
+.civilisation-node-hotspot:hover .hotspot-tooltip {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ============================================================
+   9. DEDICATED CIVILISATION ERA STORY SCREEN (OTHER PAGE)
+   ============================================================ */
+
+.civilisation-event-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 900;
+  background-color: #06080B;
+  display: flex;
+  flex-direction: column;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.35s ease, visibility 0.35s;
+  overflow-y: auto;
+}
+
+.civilisation-event-screen.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.civ-screen-bg {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at 50% 15%, #18130B 0%, #090B0E 65%, #030405 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.civ-screen-container {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1260px;
+  margin: 0 auto;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 16px 24px 30px;
+}
+
+.civ-screen-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0 16px;
+  border-bottom: 1px solid rgba(212, 163, 89, 0.25);
+  margin-bottom: 20px;
+}
+
+.civ-topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.civ-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  color: #A39D90;
+}
+
+.civ-breadcrumb .crumb-sep {
+  color: rgba(212, 163, 89, 0.5);
+}
+
+.civ-breadcrumb .crumb-active {
+  color: #F7D488;
+  font-weight: 600;
+}
+
+.civ-era-nav {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.civ-scroll-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Hero Card */
+.civ-hero-card {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  background: linear-gradient(135deg, rgba(28, 22, 14, 0.9) 0%, rgba(14, 17, 23, 0.92) 100%);
+  border: 1.5px solid rgba(212, 163, 89, 0.4);
+  border-radius: 14px;
+  padding: 24px 28px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.civ-hero-artwork-frame {
+  width: 110px;
+  height: 110px;
+  min-width: 110px;
+  border-radius: 50%;
+  padding: 4px;
+  background: linear-gradient(135deg, #F5C66C, #946B2D);
+  box-shadow: 0 0 20px rgba(245, 198, 108, 0.4);
+}
+
+.civ-hero-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+}
+
+.civ-hero-details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.civ-hero-meta-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.civ-order-pill {
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  background: rgba(212, 163, 89, 0.2);
+  border: 1px solid rgba(212, 163, 89, 0.45);
+  color: #F7D488;
+  padding: 3px 9px;
+  border-radius: 12px;
+}
+
+.civ-period-pill {
+  font-size: 0.75rem;
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: #E2DDD5;
+  padding: 3px 10px;
+  border-radius: 12px;
+}
+
+.civ-tags-pill {
+  font-size: 0.75rem;
+  color: #C8BFB0;
+  font-style: italic;
+}
+
+.civ-status-pill {
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  padding: 3px 9px;
+  border-radius: 12px;
+  margin-left: auto;
+}
+
+.civ-status-pill.status-completed {
+  background: rgba(46, 139, 87, 0.25);
+  border: 1px solid #2E8B57;
+  color: #72E5A3;
+}
+
+.civ-status-pill.status-in_progress {
+  background: rgba(229, 169, 60, 0.25);
+  border: 1px solid #E5A93C;
+  color: #FFD478;
+}
+
+.civ-status-pill.status-available {
+  background: rgba(100, 149, 237, 0.25);
+  border: 1px solid #6495ED;
+  color: #9EC0FF;
+}
+
+.civ-status-pill.status-locked {
+  background: rgba(120, 120, 120, 0.2);
+  border: 1px solid #666;
+  color: #AAA;
+}
+
+.civ-hero-title {
+  font-family: 'Cinzel', 'Playfair Display', serif;
+  font-size: clamp(1.5rem, 2.5vw, 2.1rem);
+  font-weight: 700;
+  color: #FFF2CC;
+  letter-spacing: 0.02em;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+  margin: 0;
+}
+
+.civ-hero-snippet {
+  color: #D4CDBC;
+  font-size: 0.95rem;
+  line-height: 1.45;
+  margin: 0;
+}
+
+.civ-hero-sites-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.82rem;
+  margin-top: 4px;
+}
+
+.civ-hero-sites-row .sites-label {
+  color: #F5C66C;
+  font-weight: 600;
+}
+
+.civ-hero-sites-row .sites-val {
+  color: #A39D90;
+}
+
+/* 2-Column Content Layout */
+.civ-story-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 24px;
+  align-items: start;
+}
+
+.civ-story-left,
+.civ-story-right {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Reusable Content Card */
+.civ-card {
+  background: rgba(16, 20, 27, 0.85);
+  border: 1px solid rgba(212, 163, 89, 0.28);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(8px);
+}
+
+.civ-card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(212, 163, 89, 0.18);
+  margin-bottom: 14px;
+}
+
+.civ-card-icon {
+  font-size: 1.25rem;
+}
+
+.civ-card-title {
+  font-family: 'Cinzel', serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #F7D488;
+  letter-spacing: 0.03em;
+  margin: 0;
+}
+
+.civ-card-body {
+  color: #D6D0C2;
+  font-size: 0.92rem;
+  line-height: 1.68;
+}
+
+.civ-card-body p {
+  margin-bottom: 12px;
+}
+
+.civ-card-body p:last-child {
+  margin-bottom: 0;
+}
+
+/* Innovations Grid */
+.civ-innovations-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 14px;
+}
+
+.civ-innovation-item {
+  background: rgba(28, 22, 15, 0.55);
+  border: 1px solid rgba(212, 163, 89, 0.2);
+  border-radius: 8px;
+  padding: 12px;
+  display: flex;
+  gap: 12px;
+  transition: all 0.2s ease;
+}
+
+.civ-innovation-item:hover {
+  border-color: rgba(245, 198, 108, 0.5);
+  background: rgba(40, 30, 18, 0.7);
+  transform: translateY(-2px);
+}
+
+.civ-innovation-icon {
+  font-size: 1.6rem;
+  line-height: 1;
+}
+
+.civ-innovation-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.civ-innovation-info h5 {
+  margin: 0;
+  font-size: 0.88rem;
+  color: #FFE299;
+  font-weight: 600;
+}
+
+.civ-innovation-info p {
+  margin: 0;
+  font-size: 0.8rem;
+  line-height: 1.4;
+  color: #BDB5A4;
+}
+
+/* Archaeological Geography Details */
+.civ-geo-badge-row {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.civ-geo-line {
+  display: flex;
+  gap: 8px;
+  font-size: 0.86rem;
+}
+
+.civ-geo-line strong {
+  color: #F5C66C;
+  min-width: 110px;
+}
+
+.civ-geo-line span {
+  color: #D6D0C2;
+}
+
+/* Historical Figures List */
+.civ-figures-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.civ-figure-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(212, 163, 89, 0.2);
+  border-radius: 8px;
+  padding: 12px 14px;
+}
+
+.civ-figure-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.civ-figure-name {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #FFE299;
+}
+
+.civ-figure-role {
+  font-size: 0.72rem;
+  color: #D4A359;
+  background: rgba(212, 163, 89, 0.15);
+  padding: 2px 7px;
+  border-radius: 10px;
+}
+
+.civ-figure-desc {
+  font-size: 0.82rem;
+  color: #B5AD9E;
+  line-height: 1.4;
+  margin: 0;
+}
+
+/* Ethos Quote */
+.civ-ethos-blockquote {
+  margin: 0;
+  padding: 14px 18px;
+  background: rgba(245, 198, 108, 0.06);
+  border-left: 3px solid #D4A359;
+  border-radius: 0 8px 8px 0;
+}
+
+.civ-ethos-devanagari {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #FFE6A3;
+  margin-bottom: 8px;
+  line-height: 1.5;
+}
+
+.civ-ethos-trans {
+  font-size: 0.88rem;
+  color: #D6D0C2;
+  font-style: italic;
+  margin-bottom: 8px;
+}
+
+.civ-ethos-cite {
+  display: block;
+  font-size: 0.78rem;
+  color: #D4A359;
+  font-weight: 600;
+}
+
+/* Quiz Card */
+.civ-reward-tag {
+  margin-left: auto;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #FFD573;
+  background: rgba(229, 169, 60, 0.2);
+  border: 1px solid rgba(229, 169, 60, 0.4);
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+
+.civ-quiz-prompt {
+  font-size: 0.95rem;
+  color: #FFF2CC;
+  font-weight: 600;
+  line-height: 1.5;
+  margin-bottom: 14px;
+}
+
+.civ-quiz-options-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.civ-quiz-opt-btn {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(212, 163, 89, 0.3);
+  border-radius: 8px;
+  padding: 10px 14px;
+  text-align: left;
+  color: #E2DDD5;
+  font-size: 0.88rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.civ-quiz-opt-btn:hover {
+  background: rgba(212, 163, 89, 0.15);
+  border-color: #F5C66C;
+  color: #FFF;
+}
+
+.civ-quiz-opt-btn.selected {
+  background: rgba(212, 163, 89, 0.28);
+  border-color: #F7D488;
+  color: #FFE299;
+  box-shadow: 0 0 12px rgba(245, 198, 108, 0.3);
+}
+
+.civ-quiz-opt-btn.correct {
+  background: rgba(46, 139, 87, 0.3) !important;
+  border-color: #2E8B57 !important;
+  color: #A3FFC8 !important;
+}
+
+.civ-quiz-opt-btn.incorrect {
+  background: rgba(178, 34, 34, 0.3) !important;
+  border-color: #B22222 !important;
+  color: #FFB3B3 !important;
+}
+
+.civ-quiz-feedback-box {
+  padding: 12px 14px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  line-height: 1.45;
+  margin-bottom: 14px;
+}
+
+.civ-quiz-feedback-box.correct {
+  background: rgba(46, 139, 87, 0.2);
+  border: 1px solid #2E8B57;
+  color: #72E5A3;
+}
+
+.civ-quiz-feedback-box.incorrect {
+  background: rgba(178, 34, 34, 0.2);
+  border: 1px solid #B22222;
+  color: #FF9E9E;
+}
+
+.civ-quiz-submit-btn {
+  width: 100%;
+  padding: 10px;
+  font-size: 0.85rem;
+  justify-content: center;
+}
+
+/* Sticky Action Footer */
+.civ-screen-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 0 10px;
+  border-top: 1px solid rgba(212, 163, 89, 0.25);
+  margin-top: 24px;
+}
+
+.civ-footer-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+@media (max-width: 900px) {
+  .civ-hero-card {
+    flex-direction: column;
+    text-align: center;
+  }
+  .civ-hero-meta-row {
+    justify-content: center;
+  }
+  .civ-status-pill {
+    margin-left: 0;
+  }
+  .civ-hero-sites-row {
+    justify-content: center;
+  }
+  .civ-story-grid {
+    grid-template-columns: 1fr;
+  }
+  .civilisation-canvas-wrapper {
+    overflow-x: auto;
+  }
+  .civilisation-map-canvas {
+    min-width: 700px;
+  }
+  .civilisation-floating-back {
+    top: 10px;
+    left: 10px;
+    padding: 6px 12px;
+    font-size: 0.8rem;
+  }
+  .civ-screen-footer {
+    flex-direction: column;
+    gap: 12px;
+  }
+  .civ-footer-actions {
+    width: 100%;
+    flex-direction: column;
+  }
+}
+
 

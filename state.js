@@ -521,6 +521,320 @@
         }
       ]
     },
+    civilisationTimeline: {
+      title: 'BHARATAM / TIMELINE MAP',
+      subtitle: 'Six Eras • A Timeless Civilization • One Incredible Journey',
+      quote: '"Different Times, Same Eternal Bharat"',
+      motto: 'Rooted in the Past ✦ Inspired for the Future',
+      eras: [
+        {
+          id: 'indus_valley',
+          order: 1,
+          title: 'Indus Valley Civilisation',
+          period: '3300 – 1300 BCE',
+          tags: 'Cities • Trade • Innovation',
+          status: 'completed',
+          badgeType: 'completed',
+          coords: { left: 10.01, top: 34.58 },
+          image: 'assets/civilisation_nodes/indus_valley.png',
+          leadSnippet: 'The cradle of urban sophistication, standardized civic architecture, dockyards, and maritime trade.',
+          sacredGeography: {
+            sites: 'Harappa, Mohenjo-daro, Lothal, Dholavira, Kalibangan, Rakhigarhi',
+            rivers: 'Indus (Sindhu), Saraswati, Ghaggar-Hakra system',
+            modernRegions: 'Gujarat, Punjab, Haryana, Rajasthan, Sindh, Balochistan'
+          },
+          chronicle: [
+            'Along the fertile floodplains of the Sindhu (Indus) and the sacred Saraswati river systems flourished one of the earliest and most vast urban civilisations in human history.',
+            'Spanning over a million square kilometres, the Harappan cities featured master-planned grid layouts, kiln-fired brick houses, covered underground drainage networks, granaries, and public assemblies that were centuries ahead of their contemporary world.',
+            'Maritime port cities like Lothal possessed the world\'s oldest known tidal dockyard, navigating trade routes connecting ancient Mesopotamia, the Persian Gulf, and Central Asia through standardized weights, steatite seals, and metallurgy.'
+          ],
+          innovations: [
+            { icon: '📐', title: 'Grid City Planning', desc: 'Precise orthogonal streets oriented north-south and east-west with multi-story baked-brick homes.' },
+            { icon: '💧', title: 'Advanced Hydrology', desc: 'World-first covered sewer conduits, private household wells, and the waterproof bitumen Great Bath of Mohenjo-daro.' },
+            { icon: '⚓', title: 'Maritime Dockyards', desc: 'Tidal hydraulic engineering dockyard at Lothal enabling oceanic trade across the Arabian Sea.' },
+            { icon: '⚖️', title: 'Standardized Metrology', desc: 'Binary and decimal weight ratios of remarkable accuracy across thousands of kilometres.' }
+          ],
+          keyFigures: [
+            { name: 'Chief Scribe & Seal Artisan', role: 'Glyptic Master', desc: 'Master artisans who carved intricate unicorn, Pashupati, and bull steatite seals featuring the enigmatic Harappan script.' },
+            { name: 'Maritime Sea Captain', role: 'Lothal Guildsman', desc: 'Pioneering navigators crossing the Arabian Sea carrying carnelian beads, copper, and cotton to Sumer and Akkad.' },
+            { name: 'The Priest-King / Civic Elders', role: 'Civic Steward', desc: 'Statues and seals reflect civic councils committed to welfare, public sanitation, and collective harmony.' }
+          ],
+          ethosQuote: {
+            text: 'सत्यं बृहद् ऋतं उग्रं दीक्षा तपो ब्रह्म यज्ञः पृथिवीं धारयन्ति',
+            translation: 'Vast truth, dynamic cosmic harmony (Rta), dedication, austerity, knowledge, and sacrifice uphold the sacred earth.',
+            source: 'Atharva Veda (Bhumi Sukta 12.1.1)'
+          },
+          quiz: {
+            question: 'Which Harappan archaeological city is globally famous for possessing the world\'s earliest known engineered tidal dockyard and maritime port?',
+            options: [
+              { text: 'Kalibangan', correct: false },
+              { text: 'Lothal', correct: true },
+              { text: 'Banawali', correct: false },
+              { text: 'Mohenjo-daro', correct: false }
+            ],
+            explanation: 'Lothal in modern Gujarat possessed a colossal engineered basin with sluice gates designed to dock sea-going vessels at high tide for international trade.',
+            rewardXp: 180,
+            rewardCoins: 60,
+            relicName: 'Carved Unicorn Steatite Seal of Lothal'
+          }
+        },
+        {
+          id: 'vedic_period',
+          order: 2,
+          title: 'Vedic Period',
+          period: '1500 – 600 BCE',
+          tags: 'Knowledge • Society • Janapadas',
+          status: 'completed',
+          badgeType: 'completed',
+          coords: { left: 28.42, top: 49.17 },
+          image: 'assets/civilisation_nodes/vedic_period.png',
+          leadSnippet: 'The eternal awakening of sacred philosophy, the four Vedas, Upanishadic debates, and early Mahajanapadas.',
+          sacredGeography: {
+            sites: 'Sapta Sindhu, Kurukshetra, Kashi, Naimisharanya, Ayodhya, Mithila',
+            rivers: 'Saraswati, Ganga, Yamuna, Sarayu, Sutudri (Sutlej)',
+            modernRegions: 'Northern & Central India, Indo-Gangetic Plain'
+          },
+          chronicle: [
+            'Across the lush banks of the Sapta Sindhu (Seven Sacred Rivers) and the sprawling Ganga-Yamuna Doab, the Rishis and Rishikas heard (Shruti) and preserved through unmatched oral mnemonic science the foundational hymns of the Vedas.',
+            'This epoch established the foundational cosmic concepts of Rta (universal order), Dharma (righteous ethical living), and Yajna (selfless sacrifice for cosmic harmony). Society evolved into thriving Janapadas led by assemblies (Sabha and Samiti).',
+            'In the forest hermitages (Ashramas) and royal academies of King Janaka and Ajatashatru, the profound philosophical inquiries of the Upanishads blossomed—exploring the identity of the individual soul (Atman) with the supreme cosmic reality (Brahman).'
+          ],
+          innovations: [
+            { icon: '🗣️', title: 'Oral Mnemonic Mastery', desc: 'Patha methods (Pada, Krama, Jata, Ghana) preserving millions of syllables without a single vowel shift across millennia.' },
+            { icon: '📐', title: 'Sulba Sutras Geometry', desc: 'Vedic geometric treatises detailing squaring the circle, altar geometry, and early principles of the Pythagorean theorem.' },
+            { icon: '🩺', title: 'Early Ayurveda & Botany', desc: 'Systematic medical treatises classifying hundreds of healing herbs, plant pharmacology, and holistic wellbeing.' },
+            { icon: '🗳️', title: 'Sabha & Samiti Governance', desc: 'Participatory democratic councils deliberating laws, diplomacy, and societal welfare alongside the monarch.' }
+          ],
+          keyFigures: [
+            { name: 'Maharishi Vyasa', role: 'Compiler of Vedas', desc: 'The revered sage who codified the single Vedic knowledge stream into Rig, Yajur, Sama, and Atharva Vedas.' },
+            { name: 'Gargi Vachaknavi', role: 'Vedic Philosopher', desc: 'The brilliant female philosopher who famously challenged and debated Sage Yajnavalkya on the cosmic fabric of reality.' },
+            { name: 'King Janaka of Mithila', role: 'Rajarshi (Philosopher King)', desc: 'The noble monarch of Videha who hosted the grandest philosophical assemblies and exemplified detached dharmic duty.' }
+          ],
+          ethosQuote: {
+            text: 'संगच्छध्वं संवदध्वं सं वो मनांसि जानताम् । देवा भागं यथा पूर्वे सञ्जानाना उपासते ॥',
+            translation: 'May you assemble together, may you converse together, may your minds be united in understanding, just as enlightened beings lived in harmony of purpose.',
+            source: 'Rig Veda (Samjnana Sukta 10.191.2)'
+          },
+          quiz: {
+            question: 'Which ancient Vedic texts contained precise geometric guidelines for altar construction, recording geometric formulations of right triangles?',
+            options: [
+              { text: 'Sulba Sutras', correct: true },
+              { text: 'Aranyaka Suktas', correct: false },
+              { text: 'Brahmana Mantras', correct: false },
+              { text: 'Jyotisha Kalpa', correct: false }
+            ],
+            explanation: 'The Sulba Sutras (such as Baudhayana Sulba Sutra) documented geometric formulas for construction of Vedic altars, formulating the theorem of squares long before Pythagoras.',
+            rewardXp: 190,
+            rewardCoins: 65,
+            relicName: 'Gilded Palm-Leaf of Baudhayana Sulba Sutra'
+          }
+        },
+        {
+          id: 'mauryan_empire',
+          order: 3,
+          title: 'Mauryan Empire & Ashoka',
+          period: '322 – 185 BCE',
+          tags: 'Unity • Governance • Dhamma',
+          status: 'in_progress',
+          badgeType: 'in_progress',
+          coords: { left: 50.29, top: 56.67 },
+          image: 'assets/civilisation_nodes/mauryan_empire.png',
+          leadSnippet: 'The historic political unification of Bharat under Chandragupta, Chanakya\'s Arthashastra, and Ashoka\'s pillars of Dhamma.',
+          sacredGeography: {
+            sites: 'Pataliputra, Taxila, Ujjayini, Sarnath, Sanchi, Girnar, Dhauli',
+            rivers: 'Ganga, Son, Gandaki, Saraswati, Yamuna',
+            modernRegions: 'Pan-Indian Subcontinent (spanning Afghanistan to Bengal and the Deccan)'
+          },
+          chronicle: [
+            'Guided by the master statesman Acharya Chanakya (Kautilya), young Chandragupta Maurya overthrew the corrupt Nanda dynasty and repelled the Seleucid Hellenistic invasions, uniting the Indian subcontinent into a singular, colossal realm administered from the imperial metropolis of Pataliputra.',
+            'Kautilya authored the monumental \'Arthashastra\', an unmatched comprehensive masterpiece on statecraft, espionage, economic administration, defense, civil law, and the ethical responsibilities of kingship (Raja-dharma).',
+            'Following the devastating Kalinga War, Emperor Ashoka the Great underwent a profound spiritual transformation. Embracing the ethics of Ahimsa and Dhamma, he erected monumental stone pillars and rock edicts across the subcontinent, dispatched diplomatic peace missions across Asia, and pioneered state veterinary care and tree-lined public highways.'
+          ],
+          innovations: [
+            { icon: '📜', title: 'Chanakya\'s Arthashastra', desc: 'The world\'s earliest comprehensive treatise on political realism, treasury management, civic intelligence, and diplomacy (Mandala theory).' },
+            { icon: '🦁', title: 'Monolithic Polish Columns', desc: 'Finely polished sandstone pillars crowned by magnificent capitals, including the Lion Capital of Sarnath, now the National Emblem of India.' },
+            { icon: '🛣️', title: 'Grand Trunk Road Network', desc: 'The Uttarapatha royal highway spanning from Taxila through Pataliputra to the eastern ports, with wells, rest-houses, and shade trees.' },
+            { icon: '🕊️', title: 'Dhamma Edicts & Welfare', desc: 'State-sponsored moral governance guaranteeing freedom from animal slaughter, free hospitals, and moral harmony across religious communities.' }
+          ],
+          keyFigures: [
+            { name: 'Acharya Chanakya', role: 'Prime Minister & Strategist', desc: 'Takshashila professor, author of Arthashastra and Chanakya Niti, and architect of the Mauryan Empire.' },
+            { name: 'Chandragupta Maurya', role: 'First Mauryan Emperor', desc: 'Valiant warrior and visionary monarch who unified northern, central, and northwestern India into a centralized empire.' },
+            { name: 'Samrat Ashoka the Great', role: 'Emperor of Dhamma', desc: 'Grandson of Chandragupta whose transformation towards peace, moral edicts, and Buddhist patronship reshaped Asian civilization.' }
+          ],
+          ethosQuote: {
+            text: 'सर्वे मुनिसा मे पजा । यथा पजाये इच्छामि किन्ति मे सबेण हितेन सुखेन च युजेयूं ... तथा मे सब मुनिसेसु इच्छामि ॥',
+            translation: 'All people are my children. Just as I desire for my own children that they may enjoy all prosperity and happiness in both this world and the next, so do I desire for all people.',
+            source: 'Ashoka\'s Edict (Kalinga Rock Edict I, Dhauli)'
+          },
+          quiz: {
+            question: 'Which ancient university city served as the intellectual hub where Acharya Chanakya taught and mentored Chandragupta Maurya?',
+            options: [
+              { text: 'Nalanda', correct: false },
+              { text: 'Takshashila (Taxila)', correct: true },
+              { text: 'Vikramashila', correct: false },
+              { text: 'Vallabhi', correct: false }
+            ],
+            explanation: 'Acharya Chanakya was a master professor at Takshashila, one of the world\'s foremost ancient centers of higher learning, medicine, military strategy, and statecraft.',
+            rewardXp: 200,
+            rewardCoins: 75,
+            relicName: 'Polished Sandstone Ashoka Chakra Emblem'
+          }
+        },
+        {
+          id: 'gupta_empire',
+          order: 4,
+          title: 'Gupta Golden Age',
+          period: '320 – 550 CE',
+          tags: 'Science • Art • Learning',
+          status: 'available',
+          badgeType: 'available',
+          coords: { left: 72.36, top: 51.67 },
+          image: 'assets/civilisation_nodes/gupta_empire.png',
+          leadSnippet: 'The classic golden renaissance: discovery of Zero, Aryabhata\'s astronomy, Kalidasa\'s poetry, and Nalanda Mahavihara.',
+          sacredGeography: {
+            sites: 'Pataliputra, Ujjayini, Nalanda, Ajanta Caves, Sanchi, Deogarh, Vidisha',
+            rivers: 'Ganga, Yamuna, Narmada, Shipra',
+            modernRegions: 'Northern, Central, and Western India'
+          },
+          chronicle: [
+            'Under the enlightened patronage of Chandragupta I, Samudragupta (\'The Napoleon of India\'), and Chandragupta II Vikramaditya, India entered its Classical Golden Age of intellectual, artistic, and scientific supremacy.',
+            'In the royal observatory and city of Ujjayini, mathematical genius Aryabhata formulated the decimal place-value system, the mathematical concept and symbol of zero, the calculation of Pi to four decimals, and determined that the Earth rotates on its own axis around the Sun.',
+            'Sanskrit literature achieved unmatched poetic heights through Mahakavi Kalidasa, while metal artisans forged the Rustless Iron Pillar of Delhi. The world\'s premier residential university, Nalanda Mahavihara, was established, attracting tens of thousands of international scholars.'
+          ],
+          innovations: [
+            { icon: '0️⃣', title: 'Zero & Decimal System', desc: 'The mathematical revolution of zero (Shunya) as a number and calculation value, enabling modern science and global commerce.' },
+            { icon: '🔭', title: 'Heliocentric Astronomy', desc: 'Aryabhata\'s Aryabhatiya explaining planetary motion, lunar eclipses as earth shadows, and exact year length (365.258 days).' },
+            { icon: '🏛️', title: 'Nalanda Mahavihara', desc: 'The premier residential global university housing millions of manuscripts in the Dharmaganja library complex.' },
+            { icon: '⚔️', title: 'Rustless Metallurgy', desc: 'The famous Iron Pillar of Delhi displaying advanced forge-welding technology that remains corrosion-free after 1,600 years.' }
+          ],
+          keyFigures: [
+            { name: 'Aryabhata', role: 'Mathematician & Astronomer', desc: 'Legendary scholar who computed the rotation of earth, solar eclipses, trigonometry sine tables, and mathematical zero.' },
+            { name: 'Mahakavi Kalidasa', role: 'Immortal Sanskrit Poet', desc: 'Author of Shakuntala, Meghaduta, and Raghuvamsha, regarded as one of history\'s greatest dramatists.' },
+            { name: 'Chandragupta II Vikramaditya', role: 'Gupta Emperor', desc: 'Legendary monarch renowned for justice, cultural patronage, military triumphs, and the assembly of the Navaratnas (Nine Gems).' }
+          ],
+          ethosQuote: {
+            text: 'अनुलोमगतिर्नौस्थः पश्यत्यचलं विलोमगं यद्वत् । अचलानि भानि तद्वत् समपश्चिमगानि लङ्कायाम् ॥',
+            translation: 'Just as a person in a boat sailing downstream sees stationary objects moving backwards on the bank, so do the stationary constellations appear to rotate westward due to the real rotation of the Earth on its axis.',
+            source: 'Aryabhata (Aryabhatiya, Golapada 9)'
+          },
+          quiz: {
+            question: 'What revolutionary mathematical and astronomical discovery was articulated by Aryabhata during the Gupta Era in his treatise Aryabhatiya?',
+            options: [
+              { text: 'Discovery of the magnetic compass', correct: false },
+              { text: 'Earth\'s axial rotation and the mathematical value of zero', correct: true },
+              { text: 'Invention of paper printing press', correct: false },
+              { text: 'First steam turbine engine', correct: false }
+            ],
+            explanation: 'Aryabhata accurately postulated that the Earth is spherical and rotates on its axis, while formulating the decimal system and treating zero as an active mathematical concept.',
+            rewardXp: 220,
+            rewardCoins: 80,
+            relicName: 'Golden Dinar of Chandragupta Vikramaditya'
+          }
+        },
+        {
+          id: 'early_medieval',
+          order: 5,
+          title: 'Early Medieval & Temple Era',
+          period: '600 – 1200 CE',
+          tags: 'Temples • Kingdoms • Trade',
+          status: 'locked',
+          badgeType: 'locked',
+          coords: { left: 56.15, top: 74.17 },
+          image: 'assets/civilisation_nodes/early_medieval.png',
+          leadSnippet: 'The zenith of sacred monumental architecture: Chola maritime expeditions, Khajuraho carvings, and Brihadisvara.',
+          sacredGeography: {
+            sites: 'Thanjavur, Kanchipuram, Badami, Ellora, Khajuraho, Bhubaneswar, Puri, Somnath',
+            rivers: 'Kaveri, Krishna, Godavari, Narmada, Mahanadi',
+            modernRegions: 'Southern, Western, Central, and Eastern India'
+          },
+          chronicle: [
+            'The early medieval period witnessed a spectacular efflorescence of regional kingdoms—the Cholas, Pallavas, Chalukyas, Rashtrakutas, Gurjara-Pratiharas, and Palas—who transformed India into a panorama of living stone sculpture and sacred architecture.',
+            'In the deep south, the Imperial Cholas engineered the world\'s first all-granite monumental skyscraper temple: the Brihadisvara Temple of Thanjavur. Their indomitable naval fleet commanded the Bay of Bengal (dubbed the \'Chola Lake\'), protecting trade convoys across Srivijaya (Indonesia), Malaya, and Song China.',
+            'Simultaneously, rock-cut monoliths at Ellora (Kailasa Temple), the celestial temple carvings of Khajuraho, and Adi Shankaracharya\'s Advaita philosophical journeys unified the spiritual geography of Bharat from Kedarnath to Rameshwaram.'
+          ],
+          innovations: [
+            { icon: '🛕', title: 'Dravidian & Nagara Architecture', desc: 'Granite interlocking vimana towers, pillared mandapas, and astronomical alignment of sanctums without mortar.' },
+            { icon: '🚢', title: 'Chola Maritime Armada', desc: 'Blue-water ocean navies navigating monsoon winds, establishing overseas embassies, and controlling spice routes.' },
+            { icon: '🪔', title: 'Lost-Wax Bronze Sculpture', desc: 'World-renowned Chola bronzes of Nataraja, depicting the cosmic dance of creation and dissolution with metallurgical mastery.' },
+            { icon: '🌾', title: 'Anicut Dam & Water Reservoirs', desc: 'Sophisticated irrigation canal systems and lake-harvesting infrastructure preserving agricultural abundance.' }
+          ],
+          keyFigures: [
+            { name: 'Rajaraja Chola I', role: 'Chola Great Emperor', desc: 'Visionary ruler who built the magnificent Brihadisvara Temple, surveyed land systems, and established maritime supremacy.' },
+            { name: 'Adi Shankaracharya', role: 'Philosopher-Reformer', desc: 'The young master from Kalady who harmonized Sanatana Dharma, established the four Amnaya Mathas, and expounded Advaita Vedanta.' },
+            { name: 'Krishna I of Rashtrakutas', role: 'Patron of Kailasa Temple', desc: 'Monarch under whose reign the world-wonder Kailasa Temple at Ellora was carved top-to-bottom from a single colossal mountain basalt cliff.' }
+          ],
+          ethosQuote: {
+            text: 'आकाशात् पतितं तोयं यथा गच्छति सागरम् । सर्वदेवनमस्कारः केशवं प्रतिगच्छति ॥',
+            translation: 'Just as all raindrops falling from the celestial sky ultimately flow into the singular ocean, so do all reverent prayers offered to any manifestation of the Divine reach the One Supreme Reality.',
+            source: 'Mahabharata / Traditional Invocatory Subhashita'
+          },
+          quiz: {
+            question: 'Which legendary royal monument in Thanjavur, built entirely from interlocking granite without mortar by Rajaraja Chola I, is crowned by an 80-tonne monolithic cupola?',
+            options: [
+              { text: 'Shore Temple at Mamallapuram', correct: false },
+              { text: 'Brihadisvara Temple', correct: true },
+              { text: 'Sun Temple at Konark', correct: false },
+              { text: 'Virupaksha Temple at Hampi', correct: false }
+            ],
+            explanation: 'The majestic Brihadisvara (Rajarajeswaram) Temple at Thanjavur was completed in 1010 CE and stands as an engineering marvel of granite Dravidian architecture.',
+            rewardXp: 240,
+            rewardCoins: 90,
+            relicName: 'Chola Bronze Nataraja Inscription Plaque'
+          }
+        },
+        {
+          id: 'delhi_sultanate',
+          order: 6,
+          title: 'Delhi Sultanate & Regional Kingdoms',
+          period: '1200 – 1600 CE',
+          tags: 'Empires • Cultures • New Horizons',
+          status: 'locked',
+          badgeType: 'locked',
+          coords: { left: 79.30, top: 69.17 },
+          image: 'assets/civilisation_nodes/delhi_sultanate.png',
+          leadSnippet: 'The confluence of medieval traditions, the glorious Vijayanagara Empire, Rajput valor, and Bhakti saint-poets.',
+          sacredGeography: {
+            sites: 'Delhi, Hampi (Vijayanagara), Chittorgarh, Warangal, Madurai, Varanasi, Gaur',
+            rivers: 'Tungabhadra, Yamuna, Ganga, Narmada, Krishna',
+            modernRegions: 'Pan-Indian Subcontinent'
+          },
+          chronicle: [
+            'The thirteenth century onwards inaugurated an era of profound cultural intersection, military transformations, and regional brilliance across the subcontinent.',
+            'In the Deccan and southern peninsula arose the glorious Vijayanagara Empire (\'City of Victory\') founded by brothers Harihara and Bukka, reaching its zenith under Sri Krishnadevaraya. Renowned for its gold markets, sprawling aqueducts, and the jewel-like architecture of Hampi, it became a bastion of civilisational continuity.',
+            'Concurrently, the Bhakti and Sufi movements swept through villages and towns. Saints such as Kabir, Mirabai, Guru Nanak, and Chaitanya Mahaprabhu sang verses of boundless divine love, challenging rigid social divides and enriching the composite tapestry of Indian music, poetry, and philosophy.'
+          ],
+          innovations: [
+            { icon: '🏰', title: 'Indo-Islamic & Vijayanagara Architecture', desc: 'True arches, domes, minarets, combined with Dravidian stone carvings, musical pillars, and lotus palaces.' },
+            { icon: '🎶', title: 'Bhakti & Sufi Musical Renaissance', desc: 'Evolution of Khayal, Dhrupad, Qawwali, Bhajans, and new musical instruments like the Sitar and Tabla by Amir Khusrau.' },
+            { icon: '📖', title: 'Vernacular Literature', desc: 'Flourishing of literature in Hindi, Telugu, Tamil, Bengali, Kannada, Punjabi, Marathi, and Awadhi (e.g. Ramcharitmanas).' },
+            { icon: '⚔️', title: 'Composite Military Strategy', desc: 'Fortification designs, Rajput hill forts (UNESCO world heritage), cavalry tactics, and gunpowder siege weaponry.' }
+          ],
+          keyFigures: [
+            { name: 'Sri Krishnadevaraya', role: 'Vijayanagara Emperor', desc: 'Celebrated warrior-king, patron of Ashtadiggajas (eight great Telugu poets), and author of the classic Amuktamalyada.' },
+            { name: 'Sant Kabir Das', role: 'Bhakti Mystic & Poet', desc: 'Visionary weaver of Varanasi whose sharp couplets (Dohas) emphasized pure inward devotion and the oneness of God.' },
+            { name: 'Maharana Pratap', role: 'Rana of Mewar', desc: 'Heroic symbol of Rajput defiance, freedom, and valor who defended his motherland at the Battle of Haldighati.' }
+          ],
+          ethosQuote: {
+            text: 'जाति पाँति पूछे नहिं कोई । हरि को भजै सो हरि का होई ॥',
+            translation: 'Let no one ask of caste or lineage; whoever adores the Supreme Divine becomes one with the Divine.',
+            source: 'Sant Ramananda / Sant Kabir'
+          },
+          quiz: {
+            question: 'Which magnificent empire in southern India, founded on the banks of the Tungabhadra River at Hampi, was described by foreign travelers as richer than Rome?',
+            options: [
+              { text: 'Bahmani Sultanate', correct: false },
+              { text: 'Vijayanagara Empire', correct: true },
+              { text: 'Hoysala Empire', correct: false },
+              { text: 'Kakatiya Dynasty', correct: false }
+            ],
+            explanation: 'The Vijayanagara Empire, headquartered at Hampi, was renowned globally in the 14th–16th centuries for immense wealth, diamond trade, and majestic temple art.',
+            rewardXp: 260,
+            rewardCoins: 100,
+            relicName: 'Golden Varaha Coin of Sri Krishnadevaraya'
+          }
+        }
+      ]
+    },
     religiousTraditions: [
       {
         id: 'hindu_traditions',
@@ -913,7 +1227,10 @@
             selectedReligiousPathId: parsed.selectedReligiousPathId || defaultState.selectedReligiousPathId,
             ramayanaTimeline: (parsed.ramayanaTimeline && parsed.ramayanaTimeline.events && parsed.ramayanaTimeline.events.length === 10) 
               ? parsed.ramayanaTimeline 
-              : defaultState.ramayanaTimeline
+              : defaultState.ramayanaTimeline,
+            civilisationTimeline: (parsed.civilisationTimeline && parsed.civilisationTimeline.eras && parsed.civilisationTimeline.eras.length === 6)
+              ? parsed.civilisationTimeline
+              : defaultState.civilisationTimeline
           };
         }
       } catch (e) {
@@ -1207,6 +1524,86 @@
         xpGained,
         coinsGained,
         relicName: currentEvent.quiz?.relicName,
+        leveledUp: levelResult.leveledUp,
+        newLevel: levelResult.newLevel
+      };
+    }
+
+    // ─── Civilisation Timeline Map Methods ───
+    getCivilisationTimeline() {
+      return this.state.civilisationTimeline || defaultState.civilisationTimeline;
+    }
+
+    getCivilisationEras() {
+      return (this.state.civilisationTimeline && this.state.civilisationTimeline.eras) 
+        ? this.state.civilisationTimeline.eras 
+        : defaultState.civilisationTimeline.eras;
+    }
+
+    getCivilisationEra(eraId) {
+      const eras = this.getCivilisationEras();
+      return eras.find(e => e.id === eraId) || null;
+    }
+
+    completeCivilisationEra(eraId) {
+      const eras = this.getCivilisationEras();
+      const currentEra = eras.find(e => e.id === eraId);
+      if (!currentEra) return null;
+
+      const wasAlreadyCompleted = currentEra.status === 'completed';
+      currentEra.status = 'completed';
+      currentEra.badgeType = 'completed';
+
+      // Unlock next era if it is locked or in progress
+      const currentIndex = eras.findIndex(e => e.id === eraId);
+      if (currentIndex !== -1 && currentIndex + 1 < eras.length) {
+        const nextEra = eras[currentIndex + 1];
+        if (nextEra.status === 'locked' || nextEra.status === 'available') {
+          nextEra.status = 'in_progress';
+          nextEra.badgeType = 'in_progress';
+        }
+      }
+
+      // Rewards
+      const xpGained = wasAlreadyCompleted ? 40 : (currentEra.quiz?.rewardXp || 180);
+      const coinsGained = wasAlreadyCompleted ? 20 : (currentEra.quiz?.rewardCoins || 60);
+
+      // Add relic if not already completed
+      if (!wasAlreadyCompleted && currentEra.quiz?.relicName) {
+        const newRelic = {
+          id: `relic_${currentEra.id}`,
+          title: currentEra.quiz.relicName,
+          era: `${currentEra.title} (${currentEra.period})`,
+          type: 'Ancient Historical Relic',
+          icon: '🏛️',
+          image: currentEra.id
+        };
+        this.state.recentUnlocks.unshift(newRelic);
+        if (this.state.recentUnlocks.length > 15) {
+          this.state.recentUnlocks.pop();
+        }
+      }
+
+      // Update Civilisation path card progress
+      const civPath = (this.state.paths || []).find(p => p.id === 'civilisation');
+      if (civPath) {
+        const completedCount = eras.filter(e => e.status === 'completed').length;
+        civPath.completedEvents = completedCount;
+        civPath.totalEvents = eras.length;
+        civPath.progress = Math.round((completedCount / eras.length) * 100);
+      }
+
+      this.advanceDailyQuest();
+      const levelResult = this.addXP(xpGained);
+      this.addCurrencies(coinsGained, 12, 1);
+
+      this.saveState();
+      return {
+        era: currentEra,
+        wasAlreadyCompleted,
+        xpGained,
+        coinsGained,
+        relicName: currentEra.quiz?.relicName,
         leveledUp: levelResult.leveledUp,
         newLevel: levelResult.newLevel
       };
