@@ -1395,28 +1395,28 @@ body {
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
 }
 
-/* Five Thematic Color Themes matching screenshot */
-.path-hindu {
+/* Five Thematic Color Themes for Explore Paths */
+.path-spiritual {
+  background: radial-gradient(circle at 50% 20%, #5C2810 0%, #2A1008 100%);
+  border-color: rgba(235, 150, 50, 0.4);
+}
+
+.path-civilisation {
   background: radial-gradient(circle at 50% 20%, #4D1A14 0%, #200B08 100%);
   border-color: rgba(220, 80, 60, 0.35);
 }
 
-.path-buddhist {
-  background: radial-gradient(circle at 50% 20%, #17422E 0%, #0A1C14 100%);
-  border-color: rgba(60, 180, 120, 0.35);
-}
-
-.path-jain {
+.path-artculture {
   background: radial-gradient(circle at 50% 20%, #4A3312 0%, #201507 100%);
   border-color: rgba(212, 163, 89, 0.45);
 }
 
-.path-sikh {
+.path-folklore {
   background: radial-gradient(circle at 50% 20%, #15324D 0%, #091724 100%);
   border-color: rgba(70, 140, 210, 0.35);
 }
 
-.path-kingdoms {
+.path-tradgames {
   background: radial-gradient(circle at 50% 20%, #3B1B48 0%, #190B1F 100%);
   border-color: rgba(180, 90, 210, 0.35);
 }

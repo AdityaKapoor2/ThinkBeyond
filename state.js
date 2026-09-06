@@ -45,147 +45,147 @@
     },
     paths: [
       {
-        id: 'hindu',
-        title: 'Hindu Traditions',
-        subtitle: 'Yugas, Epics, Philosophy & more',
-        emblem: 'ॐ',
-        colorClass: 'path-hindu',
+        id: 'spiritual',
+        title: 'Religious & Spiritual Traditions',
+        subtitle: 'Vedas, Dharma, Rituals & Devotion',
+        emblem: '🙏',
+        colorClass: 'path-spiritual',
         progress: 45,
         totalEvents: 12,
         completedEvents: 5,
         currentModule: {
-          title: 'The Principles of Dharma & Karma',
-          question: 'In the epic Mahabharata, which foundational concept dictates righteous duty and moral cosmic order?',
+          title: 'The Vedic Fire Rituals',
+          question: 'The ancient Vedic Yajna (fire ritual) was performed to invoke the blessings of the gods. Which Veda is primarily a collection of hymns and mantras used during these rituals?',
           options: [
-            { text: 'Moksha (Liberation)', correct: false },
-            { text: 'Dharma (Cosmic Order & Righteous Duty)', correct: true },
-            { text: 'Artha (Material Prosperity)', correct: false },
-            { text: 'Kama (Desire)', correct: false }
+            { text: 'Yajur Veda', correct: false },
+            { text: 'Rig Veda', correct: true },
+            { text: 'Sama Veda', correct: false },
+            { text: 'Atharva Veda', correct: false }
           ],
           rewardXp: 150,
           rewardCoins: 40,
           rewardRelic: {
-            id: 'relic_gita',
-            title: 'Sacred Palm Leaf of Dharma',
+            id: 'relic_veda',
+            title: 'Sacred Palm Leaf of Rig Veda',
             type: 'Manuscript',
-            era: 'Dvapara Yuga',
+            era: 'Vedic Period',
             icon: '📜'
           }
         }
       },
       {
-        id: 'buddhist',
-        title: 'Buddhist Heritage',
-        subtitle: 'Teachings, Stupas, Spread & more',
-        emblem: '☸',
-        colorClass: 'path-buddhist',
+        id: 'civilisation',
+        title: 'Civilisation & Ancient India',
+        subtitle: 'Indus Valley, Empires & Governance',
+        emblem: '🏛️',
+        colorClass: 'path-civilisation',
         progress: 30,
         totalEvents: 10,
         completedEvents: 3,
         currentModule: {
-          title: 'The Great Stupa at Sanchi',
-          question: 'Emperor Ashoka commissioned the monumental Great Stupa at Sanchi primarily to enshrine what sacred elements?',
+          title: 'The Great Bath of Mohenjo-daro',
+          question: 'The advanced urban planning of the Indus Valley Civilisation is showcased by the Great Bath at Mohenjo-daro. What was its primary purpose?',
           options: [
-            { text: 'Royal battle armaments', correct: false },
-            { text: 'Relics of the Buddha & Dhamma teachings', correct: true },
-            { text: 'State taxation treasuries', correct: false },
-            { text: 'Foreign diplomatic gifts', correct: false }
+            { text: 'A royal swimming pool', correct: false },
+            { text: 'Ritualistic bathing & purification', correct: true },
+            { text: 'A water storage reservoir', correct: false },
+            { text: 'A military training ground', correct: false }
           ],
           rewardXp: 140,
           rewardCoins: 35,
           rewardRelic: {
-            id: 'relic_sanchi',
-            title: 'Torana Gateway Relief',
-            type: 'Stone Carving',
-            era: 'Mauryan Era',
-            icon: '🏛️'
+            id: 'relic_indus',
+            title: 'Indus Valley Seal',
+            type: 'Stone Seal',
+            era: 'Indus Valley Period',
+            icon: '🔱'
           }
         }
       },
       {
-        id: 'jain',
-        title: 'Jain Philosophy',
-        subtitle: 'Tirthankaras, Values & more',
-        emblem: '✋',
-        colorClass: 'path-jain',
+        id: 'artculture',
+        title: 'Art, Architecture & Culture',
+        subtitle: 'Temples, Dance, Music & Crafts',
+        emblem: '🎭',
+        colorClass: 'path-artculture',
         progress: 20,
         totalEvents: 8,
         completedEvents: 2,
         currentModule: {
-          title: 'Ahimsa Paramo Dharma',
-          question: 'Which paramount ethical principle is symbolized by the wheel inscribed within the open palm of Jain iconography?',
+          title: 'The Rock-Cut Temples of Ellora',
+          question: 'The Kailasa Temple at Ellora, carved from a single monolithic rock, is dedicated to which Hindu deity?',
           options: [
-            { text: 'Aparigraha (Non-possession)', correct: false },
-            { text: 'Satya (Truthfulness)', correct: false },
-            { text: 'Ahimsa (Universal Non-Violence)', correct: true },
-            { text: 'Brahmacharya (Chastity)', correct: false }
+            { text: 'Lord Vishnu', correct: false },
+            { text: 'Lord Brahma', correct: false },
+            { text: 'Lord Shiva', correct: true },
+            { text: 'Lord Ganesha', correct: false }
           ],
           rewardXp: 130,
           rewardCoins: 30,
           rewardRelic: {
-            id: 'relic_ahimsa',
-            title: 'Embossed Brass Vow Tablet',
-            type: 'Relic Seal',
-            era: 'Ancient Bharat',
-            icon: '✋'
+            id: 'relic_ellora',
+            title: 'Kailasa Temple Miniature',
+            type: 'Stone Carving',
+            era: 'Rashtrakuta Dynasty',
+            icon: '🛕'
           }
         }
       },
       {
-        id: 'sikh',
-        title: 'Sikh Legacy',
-        subtitle: 'Gurus, History, Sacrifice & more',
-        emblem: '☬',
-        colorClass: 'path-sikh',
+        id: 'folklore',
+        title: 'Stories & Folklore',
+        subtitle: 'Epics, Legends, Myths & Tales',
+        emblem: '📖',
+        colorClass: 'path-folklore',
         progress: 15,
         totalEvents: 8,
         completedEvents: 1,
         currentModule: {
-          title: 'The Foundation of Langar',
-          question: 'Guru Nanak Dev Ji instituted the timeless practice of "Langar" to foster which core civilizational virtue?',
+          title: 'The Panchatantra Tales',
+          question: 'The Panchatantra, one of the oldest collections of fables, was written by which ancient scholar to educate the princes of a king?',
           options: [
-            { text: 'Military marching discipline', correct: false },
-            { text: 'Universal equality & selfless community service (Seva)', correct: true },
-            { text: 'Guild trading negotiations', correct: false },
-            { text: 'Secret philosophical discourse', correct: false }
+            { text: 'Chanakya (Kautilya)', correct: false },
+            { text: 'Vishnu Sharma', correct: true },
+            { text: 'Valmiki', correct: false },
+            { text: 'Kalidasa', correct: false }
           ],
           rewardXp: 160,
           rewardCoins: 45,
           rewardRelic: {
-            id: 'relic_khanda',
-            title: 'Wootz Steel Kirpan Emblem',
-            type: 'Royal Metalwork',
-            era: 'Medieval Punjab',
-            icon: '⚔️'
+            id: 'relic_panchatantra',
+            title: 'Illustrated Panchatantra Scroll',
+            type: 'Ancient Manuscript',
+            era: 'Classical India',
+            icon: '📜'
           }
         }
       },
       {
-        id: 'kingdoms',
-        title: 'Indian Kingdoms',
-        subtitle: 'Empires, Battles, Administration',
-        emblem: '🏰',
-        colorClass: 'path-kingdoms',
+        id: 'tradgames',
+        title: 'Traditional Games',
+        subtitle: 'Chaturanga, Kabaddi, Gilli-Danda',
+        emblem: '🎲',
+        colorClass: 'path-tradgames',
         progress: 50,
         totalEvents: 14,
         completedEvents: 7,
         currentModule: {
-          title: 'Maritime Supremacy of Rajendra Chola I',
-          question: 'The Chola Empire deployed its formidable naval armada across the Bay of Bengal to secure trade routes to which kingdom?',
+          title: 'Chaturanga — The Origin of Chess',
+          question: 'Chaturanga, the ancient Indian game that evolved into modern chess, derives its name from four divisions of which institution?',
           options: [
-            { text: 'The Srivijaya Empire (Southeast Asia)', correct: true },
-            { text: 'The Roman Senate', correct: false },
-            { text: 'The Kingdom of Aksum', correct: false },
-            { text: 'The Han Dynasty frontier', correct: false }
+            { text: 'The ancient Indian army (infantry, cavalry, elephants, chariots)', correct: true },
+            { text: 'The four Vedas', correct: false },
+            { text: 'The four stages of life (Ashramas)', correct: false },
+            { text: 'The four cardinal directions', correct: false }
           ],
           rewardXp: 180,
           rewardCoins: 60,
           rewardRelic: {
-            id: 'relic_chola',
-            title: 'Chola Royal Tiger Coin',
-            type: 'Imperial Currency',
-            era: 'Chola Dynasty',
-            icon: '🪙'
+            id: 'relic_chaturanga',
+            title: 'Ivory Chaturanga Piece',
+            type: 'Game Artifact',
+            era: 'Gupta Empire',
+            icon: '♟️'
           }
         }
       }
