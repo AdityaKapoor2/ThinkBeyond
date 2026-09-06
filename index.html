@@ -7,12 +7,14 @@
   <meta name="description" content="Experience the glory of India's civilizations through games, challenges and stories in BHARATAM.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@500;600;700;800&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@500;600;700;800&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- Fullscreen Splash Video Screen -->
+  <!-- ============================================================
+       1. FULLSCREEN SPLASH VIDEO SCREEN
+       ============================================================ -->
   <div id="splash-screen" role="region" aria-label="Introductory Video Splash">
     <video id="splash-video" muted playsinline preload="auto" autoplay>
       <source src="splash.mp4" type="video/mp4">
@@ -33,7 +35,10 @@
     </button>
   </div>
 
-  <!-- Landing Page Container -->
+
+  <!-- ============================================================
+       2. LANDING PAGE SCREEN
+       ============================================================ -->
   <div id="landing-page" class="landing-page">
     
     <!-- Background Image Layer -->
@@ -64,7 +69,7 @@
       </button>
     </header>
 
-    <!-- Center Hero Section matching the image reference -->
+    <!-- Center Hero Section -->
     <main class="hero-container">
       <div class="hero-content">
         
@@ -93,7 +98,7 @@
       </div>
     </main>
 
-    <!-- Bottom Feature Bar matching the image reference -->
+    <!-- Bottom Feature Bar -->
     <footer class="bottom-bar-container">
       <nav class="bottom-dock" aria-label="Explore Categories">
         
@@ -150,36 +155,415 @@
 
   </div>
 
-  <!-- Interactive Detail Dialog / Modal -->
-  <div id="info-modal" class="modal-backdrop" aria-hidden="true" role="dialog" aria-labelledby="modal-headline">
-    <div class="modal-card">
+
+  <!-- ============================================================
+       3. MAIN HUB (DASHBOARD) SCREEN - FULLY DYNAMIC STATE-DRIVEN
+       ============================================================ -->
+  <div id="dashboard-screen" class="dashboard-screen hidden" aria-label="Main Hub Dashboard">
+    
+    <!-- Ambient Dashboard Background -->
+    <div class="dashboard-bg"></div>
+
+    <div class="dashboard-container">
+      
+      <!-- Top Section: Header & Title -->
+      <header class="dash-top-header">
+        
+        <!-- Left: Profile Widget -->
+        <div class="profile-widget">
+          <div class="avatar-container">
+            <div class="avatar-ring">
+              <!-- Stylized Seeker Portrait SVG -->
+              <svg viewBox="0 0 100 100" class="avatar-svg" aria-hidden="true">
+                <defs>
+                  <linearGradient id="avatarGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#E2B158" />
+                    <stop offset="100%" stop-color="#7A4B13" />
+                  </linearGradient>
+                  <linearGradient id="skinGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="#D79E6F" />
+                    <stop offset="100%" stop-color="#B07040" />
+                  </linearGradient>
+                  <linearGradient id="clothGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#284B63" />
+                    <stop offset="100%" stop-color="#153243" />
+                  </linearGradient>
+                </defs>
+                <circle cx="50" cy="50" r="46" fill="#120A05" stroke="url(#avatarGrad)" stroke-width="3"/>
+                <!-- Character Silhouette & Robe -->
+                <path d="M22 88 Q50 68 78 88" fill="url(#clothGrad)" />
+                <path d="M35 78 Q50 92 65 78" fill="#D4993B" />
+                <circle cx="50" cy="46" r="22" fill="url(#skinGrad)" />
+                <!-- Hair & Headband -->
+                <path d="M28 44 Q32 24 50 24 Q68 24 72 44 Q60 30 50 32 Q40 30 28 44 Z" fill="#241711" />
+                <path d="M30 38 Q50 33 70 38 L69 41 Q50 36 31 41 Z" fill="url(#avatarGrad)" />
+                <circle cx="50" cy="38" r="3" fill="#FFE89E" />
+              </svg>
+            </div>
+          </div>
+
+          <div class="profile-details">
+            <div class="profile-name-row">
+              <h2 id="dash-user-name" class="user-name">Anveshak</h2>
+            </div>
+            <p id="dash-user-title" class="user-title">Seeker of Knowledge</p>
+            <div class="user-level-row">
+              <span id="dash-user-level" class="user-level">Level 15</span>
+              <div class="xp-bar-track" title="XP Progress">
+                <div id="dash-xp-fill" class="xp-bar-fill" style="width: 62%;"></div>
+              </div>
+              <span id="dash-xp-text" class="xp-numeric">620 / 1000 XP</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Center: Currencies HUD Pill -->
+        <div class="currency-hud">
+          <!-- Gold Coins -->
+          <div class="currency-item" title="Vedic Gold Coins">
+            <div class="curr-icon curr-coin">🪙</div>
+            <span id="dash-coins" class="curr-val">1250</span>
+          </div>
+
+          <div class="curr-divider"></div>
+
+          <!-- Blue Gems / Prana -->
+          <div class="currency-item" title="Prana Gems">
+            <div class="curr-icon curr-gem">🔷</div>
+            <span id="dash-gems" class="curr-val">340</span>
+          </div>
+
+          <div class="curr-divider"></div>
+
+          <!-- Purple Shards / Amrit -->
+          <div class="currency-item" title="Amrit Shards">
+            <div class="curr-icon curr-shard">🔮</div>
+            <span id="dash-shards" class="curr-val">18</span>
+          </div>
+        </div>
+
+        <!-- Right: Utility & Controls -->
+        <div class="dash-utility-bar">
+          <button class="hud-icon-btn" id="btn-messages" title="Messages">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+              <polyline points="22,6 12,13 2,6"></polyline>
+            </svg>
+          </button>
+
+          <button class="hud-icon-btn" id="btn-tasks" title="Completed Logs">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+          </button>
+
+          <button class="hud-icon-btn has-badge" id="btn-notifications" title="Notifications">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+              <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+            </svg>
+            <span class="hud-badge-dot"></span>
+          </button>
+
+          <button class="hud-icon-btn" id="btn-dash-sound" title="Sound Effects">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="3"></circle>
+              <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+            </svg>
+          </button>
+
+          <button class="hud-icon-btn" id="btn-back-to-landing" title="Back to Title Screen">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+              <polyline points="9 22 9 12 15 12 15 22"></polyline>
+            </svg>
+          </button>
+        </div>
+
+      </header>
+
+      <!-- Main Body: Sidebar + Dynamic Content -->
+      <div class="dash-body-grid">
+        
+        <!-- Left Sidebar Navigation Menu -->
+        <aside class="dash-sidebar" aria-label="Dashboard Menu">
+          <nav class="sidebar-nav">
+            <button class="nav-item active" data-tab="home">
+              <span class="nav-icon">🏠</span>
+              <span class="nav-text">Home</span>
+            </button>
+            <button class="nav-item" data-tab="timeline">
+              <span class="nav-icon">⏳</span>
+              <span class="nav-text">Timeline</span>
+            </button>
+            <button class="nav-item" data-tab="quests">
+              <span class="nav-icon">📜</span>
+              <span class="nav-text">Quests</span>
+            </button>
+            <button class="nav-item" data-tab="map">
+              <span class="nav-icon">🗺️</span>
+              <span class="nav-text">Map</span>
+            </button>
+            <button class="nav-item" data-tab="vault">
+              <span class="nav-icon">📖</span>
+              <span class="nav-text">Knowledge Vault</span>
+            </button>
+            <button class="nav-item" data-tab="achievements">
+              <span class="nav-icon">🏆</span>
+              <span class="nav-text">Achievements</span>
+            </button>
+            <button class="nav-item" data-tab="collection">
+              <span class="nav-icon">📦</span>
+              <span class="nav-text">Collection</span>
+            </button>
+            <button class="nav-item" data-tab="settings">
+              <span class="nav-icon">⚙️</span>
+              <span class="nav-text">Settings</span>
+            </button>
+          </nav>
+        </aside>
+
+        <!-- Center Workspace View -->
+        <main class="dash-main-area" id="dash-views-container">
+          
+          <!-- HOME VIEW (Default View matching screenshot) -->
+          <div class="dash-view-panel active" id="view-home">
+            
+            <!-- Top Hero Row: Continue Journey + Daily Quest + Daily Streak -->
+            <div class="home-hero-row">
+              
+              <!-- 1. Continue Your Journey Card -->
+              <div class="journey-card">
+                <div class="journey-card-header">
+                  <span class="card-section-kicker">Continue Your Journey</span>
+                </div>
+                
+                <div class="journey-card-content">
+                  <!-- Illustrated Ancient Temple Background -->
+                  <div class="journey-art-bg">
+                    <div class="temple-silhouette"></div>
+                  </div>
+
+                  <div class="journey-info-layer">
+                    <h3 id="dash-journey-era" class="journey-era-title">Treta Yuga</h3>
+                    <p id="dash-journey-chapter" class="journey-chapter-title">The Exile Begins</p>
+                    
+                    <div class="journey-action-bar">
+                      <div class="journey-progress-group">
+                        <span id="dash-journey-pct" class="progress-pct-badge">60%</span>
+                        <div class="journey-progress-track">
+                          <div id="dash-journey-fill" class="journey-progress-fill" style="width: 60%;"></div>
+                        </div>
+                      </div>
+
+                      <button id="btn-resume-journey" class="btn-resume-glow" aria-label="Resume Journey">
+                        <span>RESUME</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 2. Daily Quest Card -->
+              <div class="quest-card">
+                <h4 class="card-subhead">Daily Quest</h4>
+                <p id="dash-quest-desc" class="quest-instruction">Complete 2 events from any timeline</p>
+                
+                <div class="quest-progress-container">
+                  <div class="quest-bar-track">
+                    <div id="dash-quest-fill" class="quest-bar-fill" style="width: 50%;"></div>
+                  </div>
+                  <div id="dash-quest-fraction" class="quest-count-label">1/2</div>
+                </div>
+
+                <div class="quest-reward-footer">
+                  <div class="reward-pill" id="btn-claim-quest" title="Click to claim reward when complete">
+                    <span class="coin-disc">🪙</span>
+                    <span id="dash-quest-reward-val" class="reward-amount">50</span>
+                    <span id="dash-quest-status" class="claim-tag">In Progress</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 3. Daily Streak Card -->
+              <div class="streak-card">
+                <h4 class="card-subhead">Daily Streak</h4>
+                
+                <div class="streak-flame-container">
+                  <div class="flame-glow"></div>
+                  <div class="flame-icon">🔥</div>
+                </div>
+
+                <div class="streak-data">
+                  <span id="dash-streak-days" class="streak-number">7</span>
+                  <span class="streak-label">days</span>
+                </div>
+                <p id="dash-streak-sub" class="streak-cheer">Keep it up!</p>
+              </div>
+
+            </div>
+
+            <!-- Middle Section: Explore Paths -->
+            <section class="explore-paths-section">
+              <div class="section-title-row">
+                <h3 class="section-heading">Explore Paths</h3>
+              </div>
+
+              <!-- Dynamic 5 Themed Path Cards Grid -->
+              <div class="paths-grid" id="dash-paths-grid">
+                <!-- Dynamically populated from PlayerState.paths -->
+              </div>
+            </section>
+
+            <!-- Bottom Section: Recent Unlocks -->
+            <section class="recent-unlocks-section">
+              <div class="unlocks-header">
+                <div class="unlocks-title-group">
+                  <span class="unlocks-arrows">↔</span>
+                  <h4 class="unlocks-heading">Recent Unlocks</h4>
+                </div>
+                <span class="unlocks-count-badge" id="unlocks-total-count">7 Relics Discovered</span>
+              </div>
+
+              <!-- Dynamic Recent Unlocks Carousel/Shelf -->
+              <div class="unlocks-tray" id="dash-unlocks-tray">
+                <!-- Dynamically populated from PlayerState.recentUnlocks -->
+              </div>
+            </section>
+
+          </div>
+
+          <!-- OTHER VIEW PANELS (Dynamically switchable) -->
+          <div class="dash-view-panel" id="view-timeline">
+            <div class="panel-placeholder">
+              <h3 class="panel-title">Cosmic Timeline of Bharat</h3>
+              <p class="panel-subtitle">Traverse the Yugas, Vedic eras, and Historical Empires.</p>
+              <div class="timeline-visual-cards" id="timeline-cards-list"></div>
+            </div>
+          </div>
+
+          <div class="dash-view-panel" id="view-quests">
+            <div class="panel-placeholder">
+              <h3 class="panel-title">Quests & Sacred Vows</h3>
+              <p class="panel-subtitle">Active assignments to advance your spiritual & historical wisdom.</p>
+              <div class="quests-list-container" id="quests-list-full"></div>
+            </div>
+          </div>
+
+          <div class="dash-view-panel" id="view-map">
+            <div class="panel-placeholder">
+              <h3 class="panel-title">The Sacred Geography of Jambudvipa</h3>
+              <p class="panel-subtitle">Ancient pilgrimage centers, rivers, empires, and architectural wonders.</p>
+              <div class="map-interactive-view">
+                <div class="map-art-placeholder">
+                  <div class="map-marker-pin pin-1" title="Ayodhya"><span>🏛️ Ayodhya</span></div>
+                  <div class="map-marker-pin pin-2" title="Kashi"><span>🪔 Kashi</span></div>
+                  <div class="map-marker-pin pin-3" title="Nalanda"><span>📖 Nalanda</span></div>
+                  <div class="map-marker-pin pin-4" title="Thanjavur"><span>⚔️ Thanjavur</span></div>
+                  <div class="map-marker-pin pin-5" title="Sanchi"><span>☸️ Sanchi</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="dash-view-panel" id="view-vault">
+            <div class="panel-placeholder">
+              <h3 class="panel-title">Knowledge Vault & Archives</h3>
+              <p class="panel-subtitle">Rare manuscripts, astronomical treatises, and philosophical texts.</p>
+              <div class="vault-grid" id="vault-items-grid"></div>
+            </div>
+          </div>
+
+          <div class="dash-view-panel" id="view-achievements">
+            <div class="panel-placeholder">
+              <h3 class="panel-title">Hall of Achievements</h3>
+              <p class="panel-subtitle">Trophies of virtue, scholarly mastery, and historical breakthroughs.</p>
+              <div class="achievements-grid" id="achievements-grid-list"></div>
+            </div>
+          </div>
+
+          <div class="dash-view-panel" id="view-collection">
+            <div class="panel-placeholder">
+              <h3 class="panel-title">Your Relic Collection</h3>
+              <p class="panel-subtitle">All discovered antiquities, coins, stone reliefs, and seals.</p>
+              <div class="collection-full-grid" id="collection-items-container"></div>
+            </div>
+          </div>
+
+          <div class="dash-view-panel" id="view-settings">
+            <div class="panel-placeholder">
+              <h3 class="panel-title">Sanctum Settings</h3>
+              <div class="settings-form-box">
+                <div class="setting-row">
+                  <label for="input-player-name">Player Name:</label>
+                  <input type="text" id="input-player-name" class="settings-input" value="Anveshak" />
+                </div>
+                <div class="setting-row">
+                  <label>Audio SFX:</label>
+                  <button id="settings-audio-toggle" class="btn-resume-glow btn-sm">Sound ON</button>
+                </div>
+                <div class="setting-row">
+                  <label>Progress Reset:</label>
+                  <button id="settings-reset-btn" class="btn-danger-glass">Reset State</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </main>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- ============================================================
+       4. INTERACTIVE GAMEPLAY MODULE MODAL (GROWTH ENGINE)
+       ============================================================ -->
+  <div id="module-modal" class="modal-backdrop" aria-hidden="true" role="dialog">
+    <div class="modal-card challenge-modal-card">
       <div class="modal-header">
-        <span class="modal-kicker" id="modal-kicker">EXPLORE</span>
-        <h3 id="modal-headline" class="modal-headline">Feature Overview</h3>
-        <button id="modal-close-btn" class="modal-close-btn" aria-label="Close modal">✕</button>
+        <span class="modal-kicker" id="module-kicker">PATH CHALLENGE</span>
+        <h3 id="module-title" class="modal-headline">Challenge Title</h3>
+        <button id="module-close-btn" class="modal-close-btn" aria-label="Close">✕</button>
       </div>
-      <div class="modal-body" id="modal-body">
-        <!-- Injected via JavaScript -->
+
+      <div class="modal-body" id="module-content">
+        <p id="module-prompt" class="challenge-prompt">Question text here</p>
+        
+        <div class="challenge-options" id="module-options-container">
+          <!-- Dynamically populated options -->
+        </div>
+
+        <div id="module-feedback" class="challenge-feedback hidden"></div>
       </div>
+
       <div class="modal-footer">
-        <button id="modal-action-btn" class="btn-start-journey modal-btn">
-          <span class="btn-text">CONTINUE JOURNEY</span>
+        <button id="module-submit-btn" class="btn-start-journey modal-btn">
+          <span class="btn-text">CONFIRM ANSWER</span>
         </button>
       </div>
     </div>
   </div>
 
-  <!-- Journey Start Toast Banner -->
-  <div id="journey-toast" class="journey-toast" role="status" aria-live="polite">
+
+  <!-- ============================================================
+       5. LEVEL UP & REWARD CELEBRATION TOAST
+       ============================================================ -->
+  <div id="reward-toast" class="journey-toast" role="status" aria-live="polite">
     <div class="toast-inner">
-      <span class="toast-symbol">🪔</span>
+      <span class="toast-symbol" id="toast-icon">⚡</span>
       <div class="toast-text">
-        <strong>JOURNEY BEGUN</strong>
-        <p>Entering the Grand Courtyard of Ancient Bharat...</p>
+        <strong id="toast-title">PROGRESS RECORDED</strong>
+        <p id="toast-message">Experience points and rewards granted.</p>
       </div>
     </div>
   </div>
 
+  <!-- State Engine & Main Controller Scripts -->
+  <script src="state.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
