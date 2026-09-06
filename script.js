@@ -94,43 +94,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const btnCompleteEvent = document.getElementById('btn-complete-event');
   const btnCompleteEventText = document.getElementById('btn-complete-event-text');
 
-  // Civilisation Timeline Map Screen Elements
-  const civilisationMapScreen = document.getElementById('civilisation-map-screen');
-  const btnBackFromCivilisation = document.getElementById('btn-back-from-civilisation');
-  const civilisationNodesLayer = document.getElementById('civilisation-nodes-layer');
-
-  // Civilisation Dedicated Era Screen Elements
-  const civilisationEventScreen = document.getElementById('civilisation-event-screen');
-  const btnBackToCivMap = document.getElementById('btn-back-to-civ-map');
-  const btnCivFooterBackMap = document.getElementById('btn-civ-footer-back-map');
-  const civCrumbTitle = document.getElementById('civ-crumb-title');
-  const civEraCounter = document.getElementById('civ-era-counter');
-  const btnPrevCivEra = document.getElementById('btn-prev-civ-era');
-  const btnNextCivEra = document.getElementById('btn-next-civ-era');
-  const btnCivFooterNext = document.getElementById('btn-civ-footer-next');
-  const civHeroImg = document.getElementById('civ-hero-img');
-  const civHeroOrder = document.getElementById('civ-hero-order');
-  const civHeroPeriod = document.getElementById('civ-hero-period');
-  const civHeroTags = document.getElementById('civ-hero-tags');
-  const civHeroStatus = document.getElementById('civ-hero-status');
-  const civHeroTitle = document.getElementById('civ-hero-title');
-  const civHeroSnippet = document.getElementById('civ-hero-snippet');
-  const civHeroSites = document.getElementById('civ-hero-sites');
-  const civChronicleText = document.getElementById('civ-chronicle-text');
-  const civInnovationsContainer = document.getElementById('civ-innovations-container');
-  const civGeographyContent = document.getElementById('civ-geography-content');
-  const civFiguresContainer = document.getElementById('civ-figures-container');
-  const civEthosDevanagari = document.getElementById('civ-ethos-devanagari');
-  const civEthosTrans = document.getElementById('civ-ethos-trans');
-  const civEthosSource = document.getElementById('civ-ethos-source');
-  const civQuizRewards = document.getElementById('civ-quiz-rewards');
-  const civQuizQuestion = document.getElementById('civ-quiz-question');
-  const civQuizOptions = document.getElementById('civ-quiz-options');
-  const civQuizFeedback = document.getElementById('civ-quiz-feedback');
-  const btnCivSubmitQuiz = document.getElementById('btn-civ-submit-quiz');
-  const btnCivMarkCompleted = document.getElementById('btn-civ-mark-completed');
-  const civMarkCompleteText = document.getElementById('civ-mark-complete-text');
-
   // Ramayana Timeline Info Modal
   const timelineInfoModal = document.getElementById('timeline-info-modal');
   const timelineInfoCloseBtn = document.getElementById('timeline-info-close-btn');
@@ -453,13 +416,11 @@ document.addEventListener('DOMContentLoaded', () => {
       card.setAttribute('aria-label', `Explore ${path.title}`);
 
       const isSpiritual = (path.id === 'spiritual');
-      const isCivilisation = (path.id === 'civilisation');
       card.innerHTML = `
         <div class="path-emblem-wrap">${path.emblem}</div>
         <h4 class="path-title">${path.title}</h4>
         <p class="path-subtitle">${path.subtitle}</p>
         ${isSpiritual ? '<span style="display:inline-block; font-size:0.68rem; color:#F5C66C; background:rgba(212,163,89,0.18); border:1px solid rgba(212,163,89,0.35); padding:2px 8px; border-radius:10px; margin-bottom:6px;">✦ 5 Sacred Paths</span>' : ''}
-        ${isCivilisation ? '<span style="display:inline-block; font-size:0.68rem; color:#F5C66C; background:rgba(212,163,89,0.18); border:1px solid rgba(212,163,89,0.35); padding:2px 8px; border-radius:10px; margin-bottom:6px;">✦ 6 Historical Eras</span>' : ''}
         <div class="path-mini-progress" title="${path.progress}% Complete">
           <div class="path-mini-fill" style="width: ${path.progress}%;"></div>
         </div>
@@ -469,8 +430,6 @@ document.addEventListener('DOMContentLoaded', () => {
         playClickSound();
         if (path.id === 'spiritual') {
           openPathSelectionScreen();
-        } else if (path.id === 'civilisation') {
-          openCivilisationMapScreen();
         } else {
           launchPathModule(path);
         }
@@ -757,45 +716,70 @@ document.addEventListener('DOMContentLoaded', () => {
   if (timelineInfoOkBtn) timelineInfoOkBtn.addEventListener('click', closeTimelineInfoModal);
 
   function renderRamayanaMap() {
-    if (!window.PlayerState || !ramayanaNodesLayer) return;
+    if (!window.PlayerState || !ramayanaNodesLayer || !ramayanaSvgPaths) return;
     const events = window.PlayerState.getRamayanaEvents();
 
+    // Render SVG connecting line matching the user's reference mockup path
+    ramayanaSvgPaths.innerHTML = `
+      <defs>
+        <filter id="gold-glow" x="-20%" y="-20%" width="140%" height="140%">
+          <feGaussianBlur stdDeviation="3" result="blur" />
+          <feComposite in="SourceGraphic" in2="blur" operator="over" />
+        </filter>
+      </defs>
+      <!-- Connected golden dashed pathway -->
+      <path class="timeline-conn-path" filter="url(#gold-glow)"
+        d="M 115 230 C 185 210, 225 205, 282 205 C 315 205, 305 315, 339 335 C 375 355, 410 245, 462 235 C 520 225, 580 220, 638 225 C 700 230, 760 230, 823 235 C 870 240, 915 290, 918 360 C 920 420, 840 435, 780 440 C 720 445, 650 425, 590 425 C 530 425, 480 445, 427 445" />
+    `;
+
+    // Render the 10 interactive node markers
     ramayanaNodesLayer.innerHTML = '';
 
     events.forEach(event => {
-      const hotspot = document.createElement('button');
-      hotspot.className = `ramayana-node-hotspot status-${event.status}`;
-      hotspot.style.left = `${event.coords.left}%`;
-      hotspot.style.top = `${event.coords.top}%`;
-      hotspot.setAttribute('type', 'button');
-      hotspot.setAttribute('aria-label', `${event.title} (${event.location}): ${event.status}`);
-      hotspot.dataset.eventId = event.id;
+      const marker = document.createElement('button');
+      marker.className = 'ramayana-node-marker';
+      marker.style.left = `${event.coords.left}%`;
+      marker.style.top = `${event.coords.top}%`;
+      marker.setAttribute('type', 'button');
+      marker.setAttribute('aria-label', `${event.title} (${event.location}): ${event.status}`);
+      marker.dataset.eventId = event.id;
 
-      // Status badge: green checkmark if completed, red exclamation if boss, lock if locked
-      let badgeHtml = '';
+      let badgeSymbol = '✓';
+      let badgeClass = 'badge-completed';
       if (event.status === 'completed') {
-        badgeHtml = '<span class="hotspot-badge badge-completed">✓</span>';
+        badgeSymbol = '✓';
+        badgeClass = 'badge-completed';
+      } else if (event.status === 'in_progress') {
+        badgeSymbol = '◯';
+        badgeClass = 'badge-inprogress';
       } else if (event.status === 'boss') {
-        badgeHtml = '<span class="hotspot-badge badge-boss">!</span>';
+        badgeSymbol = '!';
+        badgeClass = 'badge-boss';
       } else if (event.status === 'locked') {
-        badgeHtml = '<span class="hotspot-badge badge-locked">🔒</span>';
+        badgeSymbol = '🔒';
+        badgeClass = 'badge-locked';
+      } else {
+        badgeSymbol = '◯';
+        badgeClass = 'badge-available';
       }
 
-      hotspot.innerHTML = `
-        <div class="hotspot-ring"></div>
-        ${badgeHtml}
-        <div class="hotspot-tooltip">
-          <span class="tooltip-action">ENTER CHAPTER</span>
-          <span class="tooltip-title">${event.title}</span>
+      marker.innerHTML = `
+        <div class="node-circle-portal">
+          <img src="${event.image}" alt="${event.title}" class="node-thumb-img" loading="lazy" />
+          <span class="node-status-icon-badge ${badgeClass}">${badgeSymbol}</span>
+        </div>
+        <div class="node-label-pill">
+          <span class="node-title-text">${event.title}</span>
+          <span class="node-location-text">(${event.location})</span>
         </div>
       `;
 
-      hotspot.addEventListener('click', () => {
+      marker.addEventListener('click', () => {
         playClickSound();
         openRamayanaEventScreen(event.id);
       });
 
-      ramayanaNodesLayer.appendChild(hotspot);
+      ramayanaNodesLayer.appendChild(marker);
     });
   }
 
@@ -1120,355 +1104,6 @@ document.addEventListener('DOMContentLoaded', () => {
     window.speechSynthesis.speak(utterance);
   }
 
-  // ════════════════════════════════════════════════════════════
-  // 3F & 3G. CIVILISATION CONNECTIVE TIMELINE MAP & ERA PAGES
-  // ════════════════════════════════════════════════════════════
-  let currentActiveCivEraId = null;
-  let currentCivQuizSelectedOptionIdx = null;
-
-  function openCivilisationMapScreen() {
-    if (!civilisationMapScreen) return;
-    if (dashboardScreen) dashboardScreen.classList.add('hidden');
-    if (pathSelectionScreen) pathSelectionScreen.classList.add('hidden');
-    if (ramayanaMapScreen) ramayanaMapScreen.classList.add('hidden');
-    if (ramayanaEventScreen) ramayanaEventScreen.classList.add('hidden');
-    if (civilisationEventScreen) civilisationEventScreen.classList.add('hidden');
-    
-    civilisationMapScreen.classList.remove('hidden');
-    renderCivilisationMap();
-  }
-
-  function closeCivilisationMapScreen() {
-    if (!civilisationMapScreen) return;
-    civilisationMapScreen.classList.add('hidden');
-    if (dashboardScreen) {
-      dashboardScreen.classList.remove('hidden');
-      dashboardScreen.classList.add('active');
-    }
-    renderDashboard();
-  }
-
-  if (btnBackFromCivilisation) {
-    btnBackFromCivilisation.addEventListener('click', () => {
-      playClickSound();
-      closeCivilisationMapScreen();
-    });
-  }
-
-  function renderCivilisationMap() {
-    if (!window.PlayerState || !civilisationNodesLayer) return;
-    const eras = window.PlayerState.getCivilisationEras();
-
-    civilisationNodesLayer.innerHTML = '';
-
-    eras.forEach(era => {
-      const hotspot = document.createElement('button');
-      hotspot.className = `civilisation-node-hotspot status-${era.status}`;
-      hotspot.style.left = `${era.coords.left}%`;
-      hotspot.style.top = `${era.coords.top}%`;
-      hotspot.setAttribute('type', 'button');
-      hotspot.setAttribute('aria-label', `${era.title} (${era.period}): ${era.status}`);
-      hotspot.dataset.eraId = era.id;
-
-      // Status badge: green checkmark if completed, pulsing if in progress, lock if locked
-      let badgeHtml = '';
-      if (era.status === 'completed') {
-        badgeHtml = '<span class="hotspot-badge badge-completed">✓</span>';
-      } else if (era.status === 'in_progress') {
-        badgeHtml = '<span class="hotspot-badge badge-inprogress">●</span>';
-      } else if (era.status === 'locked') {
-        badgeHtml = '<span class="hotspot-badge badge-locked">🔒</span>';
-      }
-
-      hotspot.innerHTML = `
-        <div class="hotspot-ring"></div>
-        ${badgeHtml}
-        <div class="hotspot-tooltip">
-          <span class="tooltip-action">ENTER ERA</span>
-          <span class="tooltip-title">${era.order}. ${era.title}</span>
-        </div>
-      `;
-
-      hotspot.addEventListener('click', () => {
-        playClickSound();
-        openCivilisationEraScreen(era.id);
-      });
-
-      civilisationNodesLayer.appendChild(hotspot);
-    });
-  }
-
-  // ─── Dedicated Civilisation Era Story Page Controller ───
-  function openCivilisationEraScreen(eraId) {
-    if (!civilisationEventScreen || !window.PlayerState) return;
-    currentActiveCivEraId = eraId;
-
-    if (civilisationMapScreen) civilisationMapScreen.classList.add('hidden');
-    civilisationEventScreen.classList.remove('hidden');
-
-    renderCivilisationEraScreen(eraId);
-
-    const scrollBody = document.getElementById('civ-scroll-body');
-    if (scrollBody) scrollBody.scrollTop = 0;
-  }
-
-  function closeCivilisationEraScreen() {
-    if (!civilisationEventScreen) return;
-    civilisationEventScreen.classList.add('hidden');
-    if (civilisationMapScreen) civilisationMapScreen.classList.remove('hidden');
-    renderCivilisationMap();
-  }
-
-  if (btnBackToCivMap) {
-    btnBackToCivMap.addEventListener('click', () => {
-      playClickSound();
-      closeCivilisationEraScreen();
-    });
-  }
-
-  if (btnCivFooterBackMap) {
-    btnCivFooterBackMap.addEventListener('click', () => {
-      playClickSound();
-      closeCivilisationEraScreen();
-    });
-  }
-
-  function renderCivilisationEraScreen(eraId) {
-    const era = window.PlayerState.getCivilisationEra(eraId);
-    if (!era) return;
-
-    const allEras = window.PlayerState.getCivilisationEras();
-    const currentIndex = allEras.findIndex(e => e.id === eraId);
-
-    // Breadcrumb and counter
-    if (civCrumbTitle) civCrumbTitle.textContent = era.title;
-    if (civEraCounter) {
-      civEraCounter.textContent = `Era ${era.order} of ${allEras.length}`;
-    }
-
-    // Prev / Next Era Buttons
-    if (btnPrevCivEra) {
-      btnPrevCivEra.disabled = (currentIndex <= 0);
-      btnPrevCivEra.onclick = () => {
-        if (currentIndex > 0) {
-          playClickSound();
-          openCivilisationEraScreen(allEras[currentIndex - 1].id);
-        }
-      };
-    }
-    if (btnNextCivEra) {
-      btnNextCivEra.disabled = (currentIndex >= allEras.length - 1);
-      btnNextCivEra.onclick = () => {
-        if (currentIndex < allEras.length - 1) {
-          playClickSound();
-          openCivilisationEraScreen(allEras[currentIndex + 1].id);
-        }
-      };
-    }
-    if (btnCivFooterNext) {
-      btnCivFooterNext.disabled = (currentIndex >= allEras.length - 1);
-      btnCivFooterNext.onclick = () => {
-        if (currentIndex < allEras.length - 1) {
-          playClickSound();
-          openCivilisationEraScreen(allEras[currentIndex + 1].id);
-        }
-      };
-    }
-
-    // Hero Section
-    if (civHeroImg) civHeroImg.src = era.image;
-    if (civHeroOrder) civHeroOrder.textContent = `ERA 0${era.order}`;
-    if (civHeroPeriod) civHeroPeriod.textContent = era.period;
-    if (civHeroTags) civHeroTags.textContent = era.tags;
-    if (civHeroTitle) civHeroTitle.textContent = era.title;
-    if (civHeroSnippet) civHeroSnippet.textContent = era.leadSnippet;
-    if (civHeroSites) civHeroSites.textContent = era.sacredGeography.sites;
-
-    // Status badge
-    if (civHeroStatus) {
-      civHeroStatus.className = `civ-status-pill status-${era.status}`;
-      if (era.status === 'completed') {
-        civHeroStatus.textContent = '✓ COMPLETED';
-      } else if (era.status === 'in_progress') {
-        civHeroStatus.textContent = '● IN PROGRESS';
-      } else if (era.status === 'locked') {
-        civHeroStatus.textContent = '🔒 LOCKED';
-      } else {
-        civHeroStatus.textContent = '◯ AVAILABLE';
-      }
-    }
-
-    // Complete Era button text
-    if (civMarkCompleteText) {
-      civMarkCompleteText.textContent = (era.status === 'completed') ? 'ERA COMPLETED ✓' : 'MARK ERA COMPLETED ✓';
-    }
-
-    // Historical Chronicle paragraphs
-    if (civChronicleText) {
-      civChronicleText.innerHTML = era.chronicle.map(para => `<p>${para}</p>`).join('');
-    }
-
-    // Innovations & Breakthroughs
-    if (civInnovationsContainer) {
-      civInnovationsContainer.innerHTML = era.innovations.map(inn => `
-        <div class="civ-innovation-item">
-          <span class="civ-innovation-icon">${inn.icon}</span>
-          <div class="civ-innovation-info">
-            <h5>${inn.title}</h5>
-            <p>${inn.desc}</p>
-          </div>
-        </div>
-      `).join('');
-    }
-
-    // Archaeological Geography
-    if (civGeographyContent) {
-      civGeographyContent.innerHTML = `
-        <div class="civ-geo-badge-row">
-          <div class="civ-geo-line">
-            <strong>Key Excavations:</strong>
-            <span>${era.sacredGeography.sites}</span>
-          </div>
-          <div class="civ-geo-line">
-            <strong>Sacred Waterways:</strong>
-            <span>${era.sacredGeography.rivers}</span>
-          </div>
-          <div class="civ-geo-line">
-            <strong>Modern Regions:</strong>
-            <span>${era.sacredGeography.modernRegions}</span>
-          </div>
-        </div>
-      `;
-    }
-
-    // Prominent Historical Figures
-    if (civFiguresContainer) {
-      civFiguresContainer.innerHTML = era.keyFigures.map(fig => `
-        <div class="civ-figure-card">
-          <div class="civ-figure-header">
-            <span class="civ-figure-name">${fig.name}</span>
-            <span class="civ-figure-role">${fig.role}</span>
-          </div>
-          <p class="civ-figure-desc">${fig.desc}</p>
-        </div>
-      `).join('');
-    }
-
-    // Ethos Inscription & Quote
-    if (civEthosDevanagari) civEthosDevanagari.textContent = era.ethosQuote.text;
-    if (civEthosTrans) civEthosTrans.textContent = `"${era.ethosQuote.translation}"`;
-    if (civEthosSource) civEthosSource.textContent = `— ${era.ethosQuote.source}`;
-
-    // Era Quiz Challenge
-    if (civQuizRewards) {
-      civQuizRewards.textContent = `+${era.quiz.rewardXp} XP • +${era.quiz.rewardCoins} Coins`;
-    }
-    if (civQuizQuestion) civQuizQuestion.textContent = era.quiz.question;
-
-    currentCivQuizSelectedOptionIdx = null;
-    if (civQuizFeedback) {
-      civQuizFeedback.className = 'civ-quiz-feedback-box hidden';
-      civQuizFeedback.textContent = '';
-    }
-    if (btnCivSubmitQuiz) {
-      btnCivSubmitQuiz.disabled = false;
-      btnCivSubmitQuiz.querySelector('.btn-text').textContent = 'CONFIRM ANSWER';
-    }
-
-    if (civQuizOptions) {
-      civQuizOptions.innerHTML = '';
-      era.quiz.options.forEach((opt, idx) => {
-        const optBtn = document.createElement('button');
-        optBtn.className = 'civ-quiz-opt-btn';
-        optBtn.setAttribute('type', 'button');
-        optBtn.textContent = `${String.fromCharCode(65 + idx)}) ${opt.text}`;
-
-        optBtn.addEventListener('click', () => {
-          playClickSound();
-          currentCivQuizSelectedOptionIdx = idx;
-          const allOptBtns = civQuizOptions.querySelectorAll('.civ-quiz-opt-btn');
-          allOptBtns.forEach((b, i) => {
-            if (i === idx) b.classList.add('selected');
-            else b.classList.remove('selected');
-          });
-        });
-
-        civQuizOptions.appendChild(optBtn);
-      });
-    }
-
-    // Submit Quiz button
-    if (btnCivSubmitQuiz) {
-      btnCivSubmitQuiz.onclick = () => {
-        handleCivQuizSubmission(era);
-      };
-    }
-
-    // Mark completed button
-    if (btnCivMarkCompleted) {
-      btnCivMarkCompleted.onclick = () => {
-        playClickSound();
-        const res = window.PlayerState.completeCivilisationEra(era.id);
-        if (res) {
-          playCelebrationChime();
-          showRewardToast(
-            res.leveledUp ? `LEVEL UP! LEVEL ${res.newLevel}` : `${era.title.toUpperCase()} MASTERED!`,
-            `Earned +${res.xpGained} XP, +${res.coinsGained} Coins, and discovered '${res.relicName}'!`,
-            '🏛️'
-          );
-          renderCivilisationEraScreen(era.id);
-        }
-      };
-    }
-  }
-
-  function handleCivQuizSubmission(era) {
-    if (currentCivQuizSelectedOptionIdx === null) {
-      if (civQuizFeedback) {
-        civQuizFeedback.className = 'civ-quiz-feedback-box incorrect';
-        civQuizFeedback.textContent = 'Please choose an option to confirm your answer.';
-      }
-      return;
-    }
-
-    const selectedOption = era.quiz.options[currentCivQuizSelectedOptionIdx];
-    const allOptBtns = civQuizOptions.querySelectorAll('.civ-quiz-opt-btn');
-
-    if (selectedOption.correct) {
-      playCelebrationChime();
-      allOptBtns[currentCivQuizSelectedOptionIdx].classList.add('correct');
-      if (civQuizFeedback) {
-        civQuizFeedback.className = 'civ-quiz-feedback-box correct';
-        civQuizFeedback.innerHTML = `<strong>Correct!</strong> ${era.quiz.explanation}`;
-      }
-      btnCivSubmitQuiz.disabled = true;
-      btnCivSubmitQuiz.querySelector('.btn-text').textContent = 'ERA MASTERED ✓';
-
-      const res = window.PlayerState.completeCivilisationEra(era.id);
-      if (res) {
-        showRewardToast(
-          res.leveledUp ? `LEVEL UP! LEVEL ${res.newLevel}` : `${era.title.toUpperCase()} MASTERED!`,
-          `Earned +${res.xpGained} XP, +${res.coinsGained} Coins, and discovered '${res.relicName}'!`,
-          '🏛️'
-        );
-        if (civHeroStatus) {
-          civHeroStatus.className = 'civ-status-pill status-completed';
-          civHeroStatus.textContent = '✓ COMPLETED';
-        }
-        if (civMarkCompleteText) {
-          civMarkCompleteText.textContent = 'ERA COMPLETED ✓';
-        }
-      }
-    } else {
-      playClickSound();
-      allOptBtns[currentCivQuizSelectedOptionIdx].classList.add('incorrect');
-      if (civQuizFeedback) {
-        civQuizFeedback.className = 'civ-quiz-feedback-box incorrect';
-        civQuizFeedback.textContent = 'Not quite right. Reflect upon the historical chronicle and try again!';
-      }
-    }
-  }
-
   // ─── Challenge Modal Dialog Logic ───
   let selectedOptionIndex = null;
 
@@ -1752,19 +1387,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
     render();
   }
-
-  // Global Escape key navigation
-  window.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-      if (civilisationEventScreen && !civilisationEventScreen.classList.contains('hidden')) {
-        closeCivilisationEraScreen();
-      } else if (civilisationMapScreen && !civilisationMapScreen.classList.contains('hidden')) {
-        closeCivilisationMapScreen();
-      } else if (ramayanaEventScreen && !ramayanaEventScreen.classList.contains('hidden')) {
-        closeRamayanaEventScreen();
-      } else if (ramayanaMapScreen && !ramayanaMapScreen.classList.contains('hidden')) {
-        closeRamayanaMapScreen();
-      }
-    }
-  });
 });

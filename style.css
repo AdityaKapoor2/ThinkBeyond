@@ -2272,7 +2272,7 @@ body {
 
 /* ============================================================
    6. RAMAYANA CONNECTIVE TIMELINE MAP SCREEN (TRETA YUGA)
-   Pixel-Matched to User's Mockup Reference (Non-Overlapping Hotspots)
+   Pixel-Matched to User's Mockup Reference
    ============================================================ */
 
 .ramayana-map-screen {
@@ -2282,7 +2282,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 12px;
+  padding: 16px;
   background-color: #050709;
   opacity: 1;
   visibility: visible;
@@ -2290,14 +2290,14 @@ body {
   transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1),
               transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
               visibility 0.35s;
-  overflow: hidden;
+  overflow-y: auto;
 }
 
 .ramayana-map-screen.hidden {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  transform: scale(0.98);
+  transform: scale(0.97);
 }
 
 .ramayana-map-overlay-bg {
@@ -2307,55 +2307,183 @@ body {
   pointer-events: none;
 }
 
-/* Floating Sleek Back Button */
-.ramayana-floating-back {
-  position: fixed;
-  top: 20px;
-  left: 28px;
-  z-index: 920;
-  background: rgba(14, 18, 24, 0.9);
-  border: 1.5px solid rgba(212, 163, 89, 0.6);
-  border-radius: 30px;
-  padding: 8px 18px;
-  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.8), 0 0 12px rgba(212, 163, 89, 0.25);
-  backdrop-filter: blur(6px);
-  cursor: pointer;
-  transition: all 0.25s ease;
-}
-
-.ramayana-floating-back:hover {
-  background: rgba(36, 28, 16, 0.95);
-  border-color: #F7D488;
-  color: #FFF;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.9), 0 0 20px rgba(245, 198, 108, 0.5);
-}
-
-/* Canvas Wrapper matching exact 1024:600 aspect ratio */
-.ramayana-canvas-wrapper {
+.ramayana-map-frame {
   position: relative;
   z-index: 2;
   width: 100%;
-  max-width: 1340px;
+  max-width: 1380px;
   height: 94vh;
-  max-height: 860px;
+  max-height: 900px;
+  background: #090c10;
+  border: 2px solid rgba(212, 163, 89, 0.45);
+  border-radius: 12px;
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.95),
+    0 24px 70px rgba(0, 0, 0, 0.9),
+    0 0 50px rgba(212, 163, 89, 0.15),
+    inset 0 0 40px rgba(0, 0, 0, 0.8);
+  display: flex;
+  flex-direction: column;
+  padding: 14px 20px 12px;
+  overflow: hidden;
+}
+
+/* Ornate corner florets matching mockup */
+.ramayana-map-frame::before,
+.ramayana-map-frame::after {
+  content: '❖';
+  position: absolute;
+  color: #D4A359;
+  font-size: 1.1rem;
+  pointer-events: none;
+  z-index: 5;
+  text-shadow: 0 0 8px rgba(245, 198, 108, 0.6);
+}
+.ramayana-map-frame::before { top: 8px; left: 10px; }
+.ramayana-map-frame::after { top: 8px; right: 10px; }
+
+/* Top Header Bar */
+.ramayana-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(212, 163, 89, 0.25);
+  flex-shrink: 0;
+}
+
+.ramayana-topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.ramayana-header-titles {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.ramayana-main-title {
+  font-family: 'Cinzel', serif, 'Times New Roman';
+  font-size: 1.7rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  color: #F7D488;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9), 0 0 20px rgba(245, 198, 108, 0.35);
+  margin: 0;
+}
+
+.ramayana-title-sep {
+  font-size: 1.3rem;
+  color: rgba(212, 163, 89, 0.6);
+  font-weight: 300;
+}
+
+.ramayana-subtitle {
+  font-family: 'Cinzel', serif, 'Times New Roman';
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: #E2DFD2;
+}
+
+.ramayana-yuga-tag {
+  color: #D4A359;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+/* Timeline Info Button */
+.btn-timeline-info {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(18, 22, 28, 0.85);
+  border: 1.5px solid rgba(212, 163, 89, 0.6);
+  border-radius: 30px;
+  padding: 6px 16px;
+  color: #E8DCC0;
+  font-family: 'Cinzel', serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5);
+}
+
+.btn-timeline-info:hover {
+  background: rgba(45, 36, 22, 0.9);
+  border-color: #F7D488;
+  color: #FFF;
+  box-shadow: 0 0 16px rgba(245, 198, 108, 0.35);
+  transform: translateY(-1px);
+}
+
+.info-badge-circle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 1.2px solid #D4A359;
+  font-size: 0.72rem;
+  font-style: italic;
+  font-family: serif;
+}
+
+/* Kicker subbar */
+.ramayana-kicker-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px 6px;
+  flex-shrink: 0;
+}
+
+.ramayana-kicker-title {
+  font-family: 'Cinzel', serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #F3CA7E;
+  margin: 0 0 2px;
+  letter-spacing: 0.04em;
+}
+
+.ramayana-tagline {
+  font-family: 'Cinzel', serif;
+  font-style: italic;
+  font-size: 0.9rem;
+  color: #BDB29A;
+  margin: 0;
+  letter-spacing: 0.08em;
+}
+
+/* Canvas Stage Wrapper */
+.ramayana-canvas-wrapper {
+  position: relative;
+  flex: 1;
+  width: 100%;
+  min-height: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  user-select: none;
+  overflow: hidden;
+  border-radius: 8px;
+  border: 1px solid rgba(212, 163, 89, 0.2);
+  background: #030406;
 }
 
 .ramayana-map-canvas {
   position: relative;
   width: 100%;
+  height: 100%;
   max-width: 100%;
   aspect-ratio: 1024 / 600;
-  border-radius: 12px;
-  box-shadow:
-    0 0 0 2px rgba(0, 0, 0, 0.95),
-    0 24px 70px rgba(0, 0, 0, 0.95),
-    0 0 45px rgba(212, 163, 89, 0.2);
   overflow: hidden;
+  user-select: none;
 }
 
 .ramayana-bg-art {
@@ -2363,31 +2491,34 @@ body {
   inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: fill;
-  display: block;
+  object-fit: cover;
+  object-position: center;
+  filter: contrast(1.04) brightness(0.98);
 }
 
-/* Hotspot for Timeline Info (i) button over top right */
-.ramayana-info-hotspot {
+/* SVG Connection Paths */
+.ramayana-svg-paths {
   position: absolute;
-  left: 85.0%;
-  top: 4.2%;
-  width: 12.0%;
-  height: 8.0%;
-  border-radius: 30px;
-  background: transparent;
-  border: 2px solid transparent;
-  cursor: pointer;
-  z-index: 30;
-  outline: none;
-  transition: all 0.25s ease;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 10;
 }
 
-.ramayana-info-hotspot:hover,
-.ramayana-info-hotspot:focus-visible {
-  border-color: rgba(247, 212, 136, 0.85);
-  box-shadow: 0 0 20px rgba(245, 198, 108, 0.65), inset 0 0 12px rgba(245, 198, 108, 0.3);
-  background: rgba(245, 198, 108, 0.1);
+.timeline-conn-path {
+  fill: none;
+  stroke: rgba(245, 198, 108, 0.75);
+  stroke-width: 3.5;
+  stroke-dasharray: 8, 8;
+  stroke-linecap: round;
+  animation: strokeDashMove 25s linear infinite;
+  filter: drop-shadow(0 0 6px rgba(245, 198, 108, 0.8));
+}
+
+@keyframes strokeDashMove {
+  from { stroke-dashoffset: 200; }
+  to { stroke-dashoffset: 0; }
 }
 
 /* Interactive Nodes Layer */
@@ -2395,145 +2526,282 @@ body {
   position: absolute;
   inset: 0;
   pointer-events: auto;
-  z-index: 25;
+  z-index: 20;
 }
 
-/* Individual Circular Node Hotspot */
-.ramayana-node-hotspot {
+/* Individual Node Marker */
+.ramayana-node-marker {
   position: absolute;
   transform: translate(-50%, -50%);
-  width: clamp(54px, 8.2vw, 84px);
-  height: clamp(54px, 8.2vw, 84px);
-  border-radius: 50%;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  outline: none;
-  padding: 0;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  outline: none;
   transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-.ramayana-node-hotspot:focus-visible {
-  outline: none;
+.ramayana-node-marker:hover {
+  transform: translate(-50%, -50%) scale(1.1);
+  z-index: 50;
 }
 
-/* Pulsing / Glowing Golden Ring Effect on Hover */
-.hotspot-ring {
-  position: absolute;
-  inset: 0;
+.ramayana-node-marker:focus-visible {
+  outline: 2px solid #F7D488;
+  outline-offset: 4px;
+}
+
+/* Node Avatar Circle */
+.node-circle-portal {
+  position: relative;
+  width: 74px;
+  height: 74px;
   border-radius: 50%;
-  border: 2.5px solid transparent;
-  transition: all 0.25s ease;
-  pointer-events: none;
-}
-
-.ramayana-node-hotspot:hover .hotspot-ring,
-.ramayana-node-hotspot:focus-visible .hotspot-ring {
-  border-color: #FFE299;
+  background: #11141A;
+  border: 3px solid #D4A359;
   box-shadow:
     0 0 0 2px rgba(0, 0, 0, 0.8),
-    0 0 26px rgba(245, 198, 108, 0.95),
-    inset 0 0 16px rgba(245, 198, 108, 0.4);
-  transform: scale(1.06);
+    0 6px 18px rgba(0, 0, 0, 0.85),
+    0 0 20px rgba(212, 163, 89, 0.4);
+  overflow: visible;
+  transition: all 0.25s ease;
 }
 
-/* In-progress pulsating halo */
-.ramayana-node-hotspot.status-in_progress .hotspot-ring {
-  border-color: rgba(229, 169, 60, 0.7);
-  box-shadow: 0 0 14px rgba(229, 169, 60, 0.6);
-  animation: hotspotAura 2s infinite;
+.ramayana-node-marker:hover .node-circle-portal {
+  border-color: #FFE299;
+  box-shadow:
+    0 0 0 3px rgba(0, 0, 0, 0.9),
+    0 10px 25px rgba(0, 0, 0, 0.9),
+    0 0 30px rgba(245, 198, 108, 0.8);
 }
 
-@keyframes hotspotAura {
-  0%, 100% {
-    box-shadow: 0 0 10px rgba(229, 169, 60, 0.5), inset 0 0 8px rgba(229, 169, 60, 0.2);
-  }
-  50% {
-    box-shadow: 0 0 22px rgba(245, 198, 108, 0.9), inset 0 0 14px rgba(245, 198, 108, 0.4);
-  }
+.node-thumb-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
 }
 
-/* Status Badges */
-.hotspot-badge {
+/* Status Icon Badge on Node */
+.node-status-icon-badge {
   position: absolute;
-  top: -2px;
-  right: -2px;
-  width: 22px;
-  height: 22px;
+  top: -4px;
+  right: -4px;
+  width: 24px;
+  height: 24px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 0.75rem;
   font-weight: 800;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.8);
   border: 1.5px solid #000;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.9);
   z-index: 5;
-  pointer-events: none;
 }
 
-.hotspot-badge.badge-completed {
+.badge-completed {
   background: #2E8B57;
   color: #FFF;
-  box-shadow: 0 0 10px rgba(46, 139, 87, 0.9);
+  box-shadow: 0 0 8px rgba(46, 139, 87, 0.8);
 }
 
-.hotspot-badge.badge-boss {
+.badge-inprogress {
+  background: #E5A93C;
+  color: #1A1206;
+  animation: badgePulse 1.8s ease-in-out infinite;
+}
+
+.badge-available {
+  background: #A77839;
+  color: #FFF;
+}
+
+.badge-boss {
   background: #C43D2A;
   color: #FFF;
-  animation: badgePulse 1.2s infinite;
-  box-shadow: 0 0 10px rgba(196, 61, 42, 0.9);
+  animation: badgePulse 1.2s ease-in-out infinite;
+  box-shadow: 0 0 10px rgba(196, 61, 42, 0.8);
 }
 
-.hotspot-badge.badge-locked {
+.badge-locked {
   background: #3A424D;
   color: #B0B9C6;
 }
 
-/* Hover Tooltip */
-.hotspot-tooltip {
-  position: absolute;
-  bottom: -36px;
-  left: 50%;
-  transform: translateX(-50%) translateY(4px);
-  background: rgba(10, 13, 18, 0.95);
-  border: 1px solid #F7D488;
+@keyframes badgePulse {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 6px rgba(245, 198, 108, 0.5); }
+  50% { transform: scale(1.15); box-shadow: 0 0 14px rgba(245, 198, 108, 0.9); }
+}
+
+/* Node Label Pill underneath */
+.node-label-pill {
+  margin-top: 6px;
+  background: rgba(9, 12, 16, 0.88);
+  border: 1px solid rgba(212, 163, 89, 0.5);
   border-radius: 6px;
   padding: 4px 10px;
+  text-align: center;
+  backdrop-filter: blur(4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.8);
+  transition: all 0.2s ease;
+  pointer-events: none;
+  max-width: 140px;
+}
+
+.ramayana-node-marker:hover .node-label-pill {
+  background: rgba(22, 18, 12, 0.95);
+  border-color: #F7D488;
+  box-shadow: 0 0 15px rgba(245, 198, 108, 0.3);
+}
+
+.node-title-text {
+  display: block;
+  font-family: 'Cinzel', serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #F5E8CB;
+  white-space: nowrap;
+  letter-spacing: 0.02em;
+}
+
+.node-location-text {
+  display: block;
+  font-size: 0.68rem;
+  color: #D4A359;
+  letter-spacing: 0.04em;
+}
+
+/* Map Legend Box (matching mockup bottom-left) */
+.ramayana-map-legend {
+  position: absolute;
+  bottom: 3.5%;
+  left: 2%;
+  z-index: 25;
+  background: rgba(11, 14, 18, 0.9);
+  border: 1.5px solid rgba(212, 163, 89, 0.5);
+  border-radius: 8px;
+  padding: 10px 14px 8px;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.8), inset 0 0 20px rgba(0,0,0,0.6);
+  min-width: 130px;
+}
+
+.legend-title {
+  font-family: 'Cinzel', serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #F7D488;
+  margin: 0 0 6px;
+  letter-spacing: 0.05em;
+  border-bottom: 1px solid rgba(212, 163, 89, 0.2);
+  padding-bottom: 4px;
+}
+
+.legend-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.74rem;
+  color: #D0D4DB;
+}
+
+.legend-symbol {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.68rem;
+  font-weight: 800;
+}
+
+.icon-completed { background: #2E8B57; color: #FFF; }
+.icon-inprogress { border: 2px solid #E5A93C; color: #E5A93C; background: none; }
+.icon-available { border: 2px solid #A77839; color: #A77839; background: none; }
+.icon-locked { font-size: 0.65rem; }
+.icon-boss { background: #C43D2A; color: #FFF; font-weight: 900; }
+
+/* Bottom Diamond Filigree Banner */
+.ramayana-bottom-banner {
+  position: absolute;
+  bottom: 2%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 25;
+  background: rgba(10, 13, 17, 0.88);
+  border: 1px solid rgba(212, 163, 89, 0.4);
+  border-radius: 20px;
+  padding: 5px 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  white-space: nowrap;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.7);
+  pointer-events: none;
+}
+
+.diamond-flourish {
+  color: #D4A359;
+  font-size: 0.85rem;
+}
+
+.banner-text {
+  font-family: 'Cinzel', serif;
+  font-size: 0.76rem;
+  color: #E2DFD2;
+  letter-spacing: 0.05em;
+}
+
+/* Bottom Right Locked Slot */
+.ramayana-locked-slot {
+  position: absolute;
+  bottom: 4%;
+  right: 2%;
+  z-index: 25;
+}
+
+.locked-slot-frame {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1px;
-  white-space: nowrap;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.2s ease, transform 0.2s ease;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.9), 0 0 10px rgba(245, 198, 108, 0.3);
-  z-index: 60;
+  justify-content: center;
+  width: 90px;
+  height: 90px;
+  background: rgba(14, 18, 24, 0.85);
+  border: 1.5px dashed rgba(212, 163, 89, 0.4);
+  border-radius: 10px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.8);
+  text-align: center;
+  padding: 6px;
+  cursor: not-allowed;
+  opacity: 0.75;
 }
 
-.ramayana-node-hotspot:hover .hotspot-tooltip {
-  opacity: 1;
-  transform: translateX(-50%) translateY(0);
+.locked-icon {
+  font-size: 1.4rem;
+  margin-bottom: 4px;
 }
 
-.tooltip-action {
+.locked-slot-title {
+  font-size: 0.65rem;
+  color: #A0A8B4;
   font-family: 'Cinzel', serif;
-  font-size: 0.62rem;
-  color: #D4A359;
-  letter-spacing: 0.08em;
-  font-weight: 700;
-}
-
-.tooltip-title {
-  font-family: 'Cinzel', serif;
-  font-size: 0.76rem;
-  color: #FFF;
-  font-weight: 700;
-  letter-spacing: 0.03em;
+  line-height: 1.2;
 }
 
 /* ============================================================
@@ -3158,20 +3426,29 @@ body {
   .event-content-grid {
     grid-template-columns: 1fr;
   }
+  .ramayana-topbar-left {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .ramayana-main-title {
+    font-size: 1.3rem;
+  }
+  .ramayana-subtitle {
+    font-size: 0.95rem;
+  }
 }
 
 @media (max-width: 768px) {
+  .ramayana-map-frame {
+    height: auto;
+    max-height: none;
+    padding: 10px;
+  }
   .ramayana-canvas-wrapper {
     overflow-x: auto;
   }
   .ramayana-map-canvas {
-    min-width: 700px;
-  }
-  .ramayana-floating-back {
-    top: 10px;
-    left: 10px;
-    padding: 6px 12px;
-    font-size: 0.8rem;
+    min-width: 800px;
   }
   .event-hero-banner {
     flex-direction: column;
@@ -3196,746 +3473,4 @@ body {
     justify-content: center;
   }
 }
-
-/* ============================================================
-   8. CIVILISATION & ANCIENT INDIA CONNECTIVE TIMELINE MAP
-   Pixel-Matched to User's Mockup Reference (Non-Overlapping Hotspots)
-   ============================================================ */
-
-.civilisation-map-screen {
-  position: fixed;
-  inset: 0;
-  z-index: 850;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 12px;
-  background-color: #050709;
-  opacity: 1;
-  visibility: visible;
-  transform: scale(1);
-  transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-              visibility 0.35s;
-  overflow: hidden;
-}
-
-.civilisation-map-screen.hidden {
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-  transform: scale(0.98);
-}
-
-.civilisation-map-overlay-bg {
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at 50% 30%, #15110d 0%, #080a0d 70%, #030406 100%);
-  pointer-events: none;
-}
-
-/* Floating Sleek Back Button */
-.civilisation-floating-back {
-  position: fixed;
-  top: 20px;
-  left: 28px;
-  z-index: 920;
-  background: rgba(14, 18, 24, 0.9);
-  border: 1.5px solid rgba(212, 163, 89, 0.6);
-  border-radius: 30px;
-  padding: 8px 18px;
-  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.8), 0 0 12px rgba(212, 163, 89, 0.25);
-  backdrop-filter: blur(6px);
-  cursor: pointer;
-  transition: all 0.25s ease;
-}
-
-.civilisation-floating-back:hover {
-  background: rgba(36, 28, 16, 0.95);
-  border-color: #F7D488;
-  color: #FFF;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.9), 0 0 20px rgba(245, 198, 108, 0.5);
-}
-
-/* Canvas Wrapper matching exact 1024:600 aspect ratio */
-.civilisation-canvas-wrapper {
-  position: relative;
-  z-index: 2;
-  width: 100%;
-  max-width: 1340px;
-  height: 94vh;
-  max-height: 860px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  user-select: none;
-}
-
-.civilisation-map-canvas {
-  position: relative;
-  width: 100%;
-  max-width: 100%;
-  aspect-ratio: 1024 / 600;
-  border-radius: 12px;
-  box-shadow:
-    0 0 0 2px rgba(0, 0, 0, 0.95),
-    0 24px 70px rgba(0, 0, 0, 0.95),
-    0 0 45px rgba(212, 163, 89, 0.2);
-  overflow: hidden;
-}
-
-.civilisation-bg-art {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: fill;
-  display: block;
-}
-
-/* Interactive Nodes Layer */
-.civilisation-nodes-layer {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: auto;
-}
-
-/* Individual Circular Era Node Hotspot */
-.civilisation-node-hotspot {
-  position: absolute;
-  transform: translate(-50%, -50%);
-  width: 10.8%;
-  aspect-ratio: 1 / 1;
-  border-radius: 50%;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  outline: none;
-  padding: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
-  z-index: 10;
-}
-
-.civilisation-node-hotspot:focus-visible {
-  outline: none;
-}
-
-.civilisation-node-hotspot:hover,
-.civilisation-node-hotspot:focus-visible {
-  transform: translate(-50%, -50%) scale(1.05);
-}
-
-.civilisation-node-hotspot:hover .hotspot-ring,
-.civilisation-node-hotspot:focus-visible .hotspot-ring {
-  border-color: #FFE299;
-  box-shadow:
-    0 0 0 2px rgba(0, 0, 0, 0.8),
-    0 0 28px rgba(245, 198, 108, 0.95),
-    inset 0 0 16px rgba(245, 198, 108, 0.4);
-  transform: scale(1.04);
-}
-
-.civilisation-node-hotspot.status-in_progress .hotspot-ring {
-  border-color: rgba(229, 169, 60, 0.7);
-  box-shadow: 0 0 16px rgba(229, 169, 60, 0.7);
-  animation: civHotspotAura 2s infinite;
-}
-
-@keyframes civHotspotAura {
-  0%, 100% {
-    box-shadow: 0 0 10px rgba(229, 169, 60, 0.5), inset 0 0 8px rgba(229, 169, 60, 0.2);
-  }
-  50% {
-    box-shadow: 0 0 24px rgba(245, 198, 108, 0.95), inset 0 0 14px rgba(245, 198, 108, 0.45);
-  }
-}
-
-.civilisation-node-hotspot:hover .hotspot-tooltip {
-  opacity: 1;
-  visibility: visible;
-  transform: translateX(-50%) translateY(0);
-}
-
-/* ============================================================
-   9. DEDICATED CIVILISATION ERA STORY SCREEN (OTHER PAGE)
-   ============================================================ */
-
-.civilisation-event-screen {
-  position: fixed;
-  inset: 0;
-  z-index: 900;
-  background-color: #06080B;
-  display: flex;
-  flex-direction: column;
-  opacity: 1;
-  visibility: visible;
-  transition: opacity 0.35s ease, visibility 0.35s;
-  overflow-y: auto;
-}
-
-.civilisation-event-screen.hidden {
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-}
-
-.civ-screen-bg {
-  position: fixed;
-  inset: 0;
-  background: radial-gradient(circle at 50% 15%, #18130B 0%, #090B0E 65%, #030405 100%);
-  pointer-events: none;
-  z-index: 0;
-}
-
-.civ-screen-container {
-  position: relative;
-  z-index: 2;
-  width: 100%;
-  max-width: 1260px;
-  margin: 0 auto;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  padding: 16px 24px 30px;
-}
-
-.civ-screen-topbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 12px 0 16px;
-  border-bottom: 1px solid rgba(212, 163, 89, 0.25);
-  margin-bottom: 20px;
-}
-
-.civ-topbar-left {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
-
-.civ-breadcrumb {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 0.85rem;
-  color: #A39D90;
-}
-
-.civ-breadcrumb .crumb-sep {
-  color: rgba(212, 163, 89, 0.5);
-}
-
-.civ-breadcrumb .crumb-active {
-  color: #F7D488;
-  font-weight: 600;
-}
-
-.civ-era-nav {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.civ-scroll-body {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-}
-
-/* Hero Card */
-.civ-hero-card {
-  display: flex;
-  align-items: center;
-  gap: 28px;
-  background: linear-gradient(135deg, rgba(28, 22, 14, 0.9) 0%, rgba(14, 17, 23, 0.92) 100%);
-  border: 1.5px solid rgba(212, 163, 89, 0.4);
-  border-radius: 14px;
-  padding: 24px 28px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.08);
-}
-
-.civ-hero-artwork-frame {
-  width: 110px;
-  height: 110px;
-  min-width: 110px;
-  border-radius: 50%;
-  padding: 4px;
-  background: linear-gradient(135deg, #F5C66C, #946B2D);
-  box-shadow: 0 0 20px rgba(245, 198, 108, 0.4);
-}
-
-.civ-hero-img {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  object-fit: cover;
-  display: block;
-}
-
-.civ-hero-details {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.civ-hero-meta-row {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-.civ-order-pill {
-  font-size: 0.72rem;
-  font-weight: 800;
-  letter-spacing: 0.12em;
-  background: rgba(212, 163, 89, 0.2);
-  border: 1px solid rgba(212, 163, 89, 0.45);
-  color: #F7D488;
-  padding: 3px 9px;
-  border-radius: 12px;
-}
-
-.civ-period-pill {
-  font-size: 0.75rem;
-  font-weight: 600;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  color: #E2DDD5;
-  padding: 3px 10px;
-  border-radius: 12px;
-}
-
-.civ-tags-pill {
-  font-size: 0.75rem;
-  color: #C8BFB0;
-  font-style: italic;
-}
-
-.civ-status-pill {
-  font-size: 0.72rem;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  padding: 3px 9px;
-  border-radius: 12px;
-  margin-left: auto;
-}
-
-.civ-status-pill.status-completed {
-  background: rgba(46, 139, 87, 0.25);
-  border: 1px solid #2E8B57;
-  color: #72E5A3;
-}
-
-.civ-status-pill.status-in_progress {
-  background: rgba(229, 169, 60, 0.25);
-  border: 1px solid #E5A93C;
-  color: #FFD478;
-}
-
-.civ-status-pill.status-available {
-  background: rgba(100, 149, 237, 0.25);
-  border: 1px solid #6495ED;
-  color: #9EC0FF;
-}
-
-.civ-status-pill.status-locked {
-  background: rgba(120, 120, 120, 0.2);
-  border: 1px solid #666;
-  color: #AAA;
-}
-
-.civ-hero-title {
-  font-family: 'Cinzel', 'Playfair Display', serif;
-  font-size: clamp(1.5rem, 2.5vw, 2.1rem);
-  font-weight: 700;
-  color: #FFF2CC;
-  letter-spacing: 0.02em;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
-  margin: 0;
-}
-
-.civ-hero-snippet {
-  color: #D4CDBC;
-  font-size: 0.95rem;
-  line-height: 1.45;
-  margin: 0;
-}
-
-.civ-hero-sites-row {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 0.82rem;
-  margin-top: 4px;
-}
-
-.civ-hero-sites-row .sites-label {
-  color: #F5C66C;
-  font-weight: 600;
-}
-
-.civ-hero-sites-row .sites-val {
-  color: #A39D90;
-}
-
-/* 2-Column Content Layout */
-.civ-story-grid {
-  display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
-  gap: 24px;
-  align-items: start;
-}
-
-.civ-story-left,
-.civ-story-right {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-/* Reusable Content Card */
-.civ-card {
-  background: rgba(16, 20, 27, 0.85);
-  border: 1px solid rgba(212, 163, 89, 0.28);
-  border-radius: 12px;
-  padding: 20px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45);
-  backdrop-filter: blur(8px);
-}
-
-.civ-card-header {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding-bottom: 12px;
-  border-bottom: 1px solid rgba(212, 163, 89, 0.18);
-  margin-bottom: 14px;
-}
-
-.civ-card-icon {
-  font-size: 1.25rem;
-}
-
-.civ-card-title {
-  font-family: 'Cinzel', serif;
-  font-size: 1.05rem;
-  font-weight: 600;
-  color: #F7D488;
-  letter-spacing: 0.03em;
-  margin: 0;
-}
-
-.civ-card-body {
-  color: #D6D0C2;
-  font-size: 0.92rem;
-  line-height: 1.68;
-}
-
-.civ-card-body p {
-  margin-bottom: 12px;
-}
-
-.civ-card-body p:last-child {
-  margin-bottom: 0;
-}
-
-/* Innovations Grid */
-.civ-innovations-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-  gap: 14px;
-}
-
-.civ-innovation-item {
-  background: rgba(28, 22, 15, 0.55);
-  border: 1px solid rgba(212, 163, 89, 0.2);
-  border-radius: 8px;
-  padding: 12px;
-  display: flex;
-  gap: 12px;
-  transition: all 0.2s ease;
-}
-
-.civ-innovation-item:hover {
-  border-color: rgba(245, 198, 108, 0.5);
-  background: rgba(40, 30, 18, 0.7);
-  transform: translateY(-2px);
-}
-
-.civ-innovation-icon {
-  font-size: 1.6rem;
-  line-height: 1;
-}
-
-.civ-innovation-info {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.civ-innovation-info h5 {
-  margin: 0;
-  font-size: 0.88rem;
-  color: #FFE299;
-  font-weight: 600;
-}
-
-.civ-innovation-info p {
-  margin: 0;
-  font-size: 0.8rem;
-  line-height: 1.4;
-  color: #BDB5A4;
-}
-
-/* Archaeological Geography Details */
-.civ-geo-badge-row {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.civ-geo-line {
-  display: flex;
-  gap: 8px;
-  font-size: 0.86rem;
-}
-
-.civ-geo-line strong {
-  color: #F5C66C;
-  min-width: 110px;
-}
-
-.civ-geo-line span {
-  color: #D6D0C2;
-}
-
-/* Historical Figures List */
-.civ-figures-list {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.civ-figure-card {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(212, 163, 89, 0.2);
-  border-radius: 8px;
-  padding: 12px 14px;
-}
-
-.civ-figure-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 4px;
-}
-
-.civ-figure-name {
-  font-size: 0.92rem;
-  font-weight: 700;
-  color: #FFE299;
-}
-
-.civ-figure-role {
-  font-size: 0.72rem;
-  color: #D4A359;
-  background: rgba(212, 163, 89, 0.15);
-  padding: 2px 7px;
-  border-radius: 10px;
-}
-
-.civ-figure-desc {
-  font-size: 0.82rem;
-  color: #B5AD9E;
-  line-height: 1.4;
-  margin: 0;
-}
-
-/* Ethos Quote */
-.civ-ethos-blockquote {
-  margin: 0;
-  padding: 14px 18px;
-  background: rgba(245, 198, 108, 0.06);
-  border-left: 3px solid #D4A359;
-  border-radius: 0 8px 8px 0;
-}
-
-.civ-ethos-devanagari {
-  font-size: 1.05rem;
-  font-weight: 600;
-  color: #FFE6A3;
-  margin-bottom: 8px;
-  line-height: 1.5;
-}
-
-.civ-ethos-trans {
-  font-size: 0.88rem;
-  color: #D6D0C2;
-  font-style: italic;
-  margin-bottom: 8px;
-}
-
-.civ-ethos-cite {
-  display: block;
-  font-size: 0.78rem;
-  color: #D4A359;
-  font-weight: 600;
-}
-
-/* Quiz Card */
-.civ-reward-tag {
-  margin-left: auto;
-  font-size: 0.75rem;
-  font-weight: 700;
-  color: #FFD573;
-  background: rgba(229, 169, 60, 0.2);
-  border: 1px solid rgba(229, 169, 60, 0.4);
-  padding: 2px 8px;
-  border-radius: 10px;
-}
-
-.civ-quiz-prompt {
-  font-size: 0.95rem;
-  color: #FFF2CC;
-  font-weight: 600;
-  line-height: 1.5;
-  margin-bottom: 14px;
-}
-
-.civ-quiz-options-list {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-bottom: 16px;
-}
-
-.civ-quiz-opt-btn {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(212, 163, 89, 0.3);
-  border-radius: 8px;
-  padding: 10px 14px;
-  text-align: left;
-  color: #E2DDD5;
-  font-size: 0.88rem;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.civ-quiz-opt-btn:hover {
-  background: rgba(212, 163, 89, 0.15);
-  border-color: #F5C66C;
-  color: #FFF;
-}
-
-.civ-quiz-opt-btn.selected {
-  background: rgba(212, 163, 89, 0.28);
-  border-color: #F7D488;
-  color: #FFE299;
-  box-shadow: 0 0 12px rgba(245, 198, 108, 0.3);
-}
-
-.civ-quiz-opt-btn.correct {
-  background: rgba(46, 139, 87, 0.3) !important;
-  border-color: #2E8B57 !important;
-  color: #A3FFC8 !important;
-}
-
-.civ-quiz-opt-btn.incorrect {
-  background: rgba(178, 34, 34, 0.3) !important;
-  border-color: #B22222 !important;
-  color: #FFB3B3 !important;
-}
-
-.civ-quiz-feedback-box {
-  padding: 12px 14px;
-  border-radius: 8px;
-  font-size: 0.85rem;
-  line-height: 1.45;
-  margin-bottom: 14px;
-}
-
-.civ-quiz-feedback-box.correct {
-  background: rgba(46, 139, 87, 0.2);
-  border: 1px solid #2E8B57;
-  color: #72E5A3;
-}
-
-.civ-quiz-feedback-box.incorrect {
-  background: rgba(178, 34, 34, 0.2);
-  border: 1px solid #B22222;
-  color: #FF9E9E;
-}
-
-.civ-quiz-submit-btn {
-  width: 100%;
-  padding: 10px;
-  font-size: 0.85rem;
-  justify-content: center;
-}
-
-/* Sticky Action Footer */
-.civ-screen-footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 18px 0 10px;
-  border-top: 1px solid rgba(212, 163, 89, 0.25);
-  margin-top: 24px;
-}
-
-.civ-footer-actions {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-}
-
-@media (max-width: 900px) {
-  .civ-hero-card {
-    flex-direction: column;
-    text-align: center;
-  }
-  .civ-hero-meta-row {
-    justify-content: center;
-  }
-  .civ-status-pill {
-    margin-left: 0;
-  }
-  .civ-hero-sites-row {
-    justify-content: center;
-  }
-  .civ-story-grid {
-    grid-template-columns: 1fr;
-  }
-  .civilisation-canvas-wrapper {
-    overflow-x: auto;
-  }
-  .civilisation-map-canvas {
-    min-width: 700px;
-  }
-  .civilisation-floating-back {
-    top: 10px;
-    left: 10px;
-    padding: 6px 12px;
-    font-size: 0.8rem;
-  }
-  .civ-screen-footer {
-    flex-direction: column;
-    gap: 12px;
-  }
-  .civ-footer-actions {
-    width: 100%;
-    flex-direction: column;
-  }
-}
-
 

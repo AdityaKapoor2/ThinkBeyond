@@ -580,33 +580,91 @@
 
   <!-- ============================================================
        3C. RAMAYANA CONNECTIVE TIMELINE MAP SCREEN (TRETA YUGA)
-       Pixel-matched directly to user reference mockup
+       Matches user reference mockup: "RAMAYANA / TIMELINE MAP (TRETA YUGA)"
        ============================================================ -->
   <div id="ramayana-map-screen" class="ramayana-map-screen hidden" role="region" aria-label="Ramayana Timeline Map">
     <div class="ramayana-map-overlay-bg"></div>
 
-    <!-- Floating Back to Traditions Button -->
-    <button id="btn-back-from-ramayana" class="btn-subpath-back ramayana-floating-back" aria-label="Back to Cultural Paths">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <polyline points="15 18 9 12 15 6"></polyline>
-      </svg>
-      <span>Back to Traditions</span>
-    </button>
+    <div class="ramayana-map-frame">
+      
+      <!-- Top Title Bar -->
+      <header class="ramayana-topbar">
+        <div class="ramayana-topbar-left">
+          <button id="btn-back-from-ramayana" class="btn-subpath-back" aria-label="Back to Cultural Paths">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+            <span>Back to Traditions</span>
+          </button>
+          
+          <div class="ramayana-header-titles">
+            <h1 class="ramayana-main-title">RAMAYANA</h1>
+            <span class="ramayana-title-sep">/</span>
+            <span class="ramayana-subtitle">TIMELINE MAP <span class="ramayana-yuga-tag">(TRETA YUGA)</span></span>
+          </div>
+        </div>
 
-    <!-- Map Stage Container (Maintains 1024:600 Aspect Ratio) -->
-    <div class="ramayana-canvas-wrapper" id="ramayana-canvas-wrapper">
-      <div class="ramayana-map-canvas" id="ramayana-map-canvas">
-        <!-- Painted artwork containing all borders, titles, artwork & legend -->
-        <img src="assets/ramayana_map.jpg" alt="Ramayana Timeline Map Treta Yuga" class="ramayana-bg-art" id="ramayana-bg-art" />
+        <div class="ramayana-topbar-right">
+          <button id="btn-ramayana-info" class="btn-timeline-info" aria-label="Timeline Info">
+            <span>Timeline Info</span>
+            <span class="info-badge-circle">i</span>
+          </button>
+        </div>
+      </header>
 
-        <!-- Hotspot over the printed 'Timeline Info (i)' button at top right -->
-        <button id="btn-ramayana-info" class="ramayana-info-hotspot" type="button" aria-label="Timeline Info" title="Timeline Info (i)"></button>
-
-        <!-- Interactive Hotspot Node Markers on top of the 10 circles -->
-        <div class="ramayana-nodes-layer" id="ramayana-nodes-layer">
-          <!-- Dynamically populated 10 node hotspots -->
+      <!-- Subheader & Epics Kicker -->
+      <div class="ramayana-kicker-bar">
+        <div class="ramayana-story-tag">
+          <h2 class="ramayana-kicker-title">The Story of Ramayana</h2>
+          <p class="ramayana-tagline">Dharma &bull; Bhakti &bull; Victory</p>
         </div>
       </div>
+
+      <!-- Main Map Stage Area (Keeps 1024x600 Reference Layout) -->
+      <div class="ramayana-canvas-wrapper" id="ramayana-canvas-wrapper">
+        <div class="ramayana-map-canvas" id="ramayana-map-canvas">
+          <!-- Background painted artwork of Ancient India / Treta Yuga -->
+          <img src="assets/ramayana_map.jpg" alt="Ramayana Timeline Map Treta Yuga" class="ramayana-bg-art" id="ramayana-bg-art" />
+
+          <!-- Dynamic SVG Connective Pathway Lines connecting the 10 nodes -->
+          <svg class="ramayana-svg-paths" viewBox="0 0 1024 600" preserveAspectRatio="none" id="ramayana-svg-paths">
+            <!-- Rendered in script.js with glowing pulse effect -->
+          </svg>
+
+          <!-- Interactive Hotspot Node Markers -->
+          <div class="ramayana-nodes-layer" id="ramayana-nodes-layer">
+            <!-- Dynamically populated 10 nodes -->
+          </div>
+
+          <!-- Bottom Left Map Legend (matching reference) -->
+          <div class="ramayana-map-legend" id="ramayana-map-legend">
+            <h4 class="legend-title">Map Legend</h4>
+            <ul class="legend-list">
+              <li class="legend-item"><span class="legend-symbol icon-completed">✓</span> <span>Completed</span></li>
+              <li class="legend-item"><span class="legend-symbol icon-inprogress">◯</span> <span>In Progress</span></li>
+              <li class="legend-item"><span class="legend-symbol icon-available">◯</span> <span>Available</span></li>
+              <li class="legend-item"><span class="legend-symbol icon-locked">🔒</span> <span>Locked</span></li>
+              <li class="legend-item"><span class="legend-symbol icon-boss">!</span> <span>Boss/Event</span></li>
+            </ul>
+          </div>
+
+          <!-- Bottom Center Diamond Filigree Banner -->
+          <div class="ramayana-bottom-banner">
+            <span class="diamond-flourish">◇</span>
+            <span class="banner-text">Complete events in order or explore side events to earn more rewards!</span>
+            <span class="diamond-flourish">◇</span>
+          </div>
+
+          <!-- Bottom Right Lock Slot -->
+          <div class="ramayana-locked-slot" id="ramayana-locked-slot">
+            <div class="locked-slot-frame">
+              <span class="locked-icon">🔒</span>
+              <span class="locked-slot-title">More Events to Unlock</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 
@@ -878,220 +936,6 @@
           <span class="btn-text">RETURN TO MAP</span>
         </button>
       </div>
-    </div>
-  </div>
-
-
-  <!-- ============================================================
-       3F. CIVILISATION & ANCIENT INDIA CONNECTIVE TIMELINE MAP
-       Pixel-matched to user reference mockup: "BHARATAM / TIMELINE MAP - SIX ERAS"
-       ============================================================ -->
-  <div id="civilisation-map-screen" class="civilisation-map-screen hidden" role="region" aria-label="Civilisation & Ancient India Timeline Map">
-    <div class="civilisation-map-overlay-bg"></div>
-
-    <!-- Floating Back to Dashboard Button -->
-    <button id="btn-back-from-civilisation" class="btn-subpath-back civilisation-floating-back" aria-label="Back to Dashboard" title="Return to Dashboard">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <polyline points="15 18 9 12 15 6"></polyline>
-      </svg>
-      <span>Back to Dashboard</span>
-    </button>
-
-    <!-- Map Stage Container (Maintains 1024:600 Aspect Ratio) -->
-    <div class="civilisation-canvas-wrapper" id="civilisation-canvas-wrapper">
-      <div class="civilisation-map-canvas" id="civilisation-map-canvas">
-        <!-- Base artwork containing all borders, landscape, titles, connective dotted line, era cards & legend -->
-        <img src="assets/civilisation_map.jpg" alt="Bharatam Civilisation Timeline Map - Six Eras" class="civilisation-bg-art" id="civilisation-bg-art" />
-
-        <!-- Interactive Hotspot Node Markers on top of the 6 era circles -->
-        <div class="civilisation-nodes-layer" id="civilisation-nodes-layer">
-          <!-- Dynamically populated 6 node hotspots -->
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-  <!-- ============================================================
-       3G. DEDICATED CIVILISATION ERA STORY PAGE (OTHER PAGE)
-       Navigated when clicking ANY era node on the connective map
-       ============================================================ -->
-  <div id="civilisation-event-screen" class="civilisation-event-screen hidden" role="region" aria-label="Civilisation Era Chronicle">
-    <div class="civ-screen-bg"></div>
-
-    <div class="civ-screen-container">
-      
-      <!-- Top Nav Bar -->
-      <header class="civ-screen-topbar">
-        <div class="civ-topbar-left">
-          <button id="btn-back-to-civ-map" class="btn-subpath-back" aria-label="Return to Civilisation Map">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="15 18 9 12 15 6"></polyline>
-            </svg>
-            <span>Back to Civilisation Map</span>
-          </button>
-          
-          <nav class="civ-breadcrumb" aria-label="Breadcrumb">
-            <span>Civilisation & Ancient India</span>
-            <span class="crumb-sep">›</span>
-            <span>Six Eras Timeline</span>
-            <span class="crumb-sep">›</span>
-            <span id="civ-crumb-title" class="crumb-active">Indus Valley Civilisation</span>
-          </nav>
-        </div>
-
-        <div class="civ-topbar-right">
-          <div class="civ-era-nav">
-            <button id="btn-prev-civ-era" class="btn-chapter-nav" aria-label="Previous Era">‹ Prev</button>
-            <span id="civ-era-counter" class="chapter-counter-pill">Era 1 of 6</span>
-            <button id="btn-next-civ-era" class="btn-chapter-nav" aria-label="Next Era">Next ›</button>
-          </div>
-        </div>
-      </header>
-
-      <!-- Scrollable Main Content -->
-      <div class="civ-scroll-body" id="civ-scroll-body">
-        
-        <!-- Hero Header -->
-        <section class="civ-hero-card">
-          <div class="civ-hero-artwork-frame">
-            <img id="civ-hero-img" src="assets/civilisation_nodes/indus_valley.png" alt="Era Illustration" class="civ-hero-img" />
-          </div>
-
-          <div class="civ-hero-details">
-            <div class="civ-hero-meta-row">
-              <span id="civ-hero-order" class="civ-order-pill">ERA 01</span>
-              <span id="civ-hero-period" class="civ-period-pill">3300 – 1300 BCE</span>
-              <span id="civ-hero-tags" class="civ-tags-pill">Cities • Trade • Innovation</span>
-              <span id="civ-hero-status" class="civ-status-pill status-completed">COMPLETED</span>
-            </div>
-
-            <h1 id="civ-hero-title" class="civ-hero-title">Indus Valley Civilisation</h1>
-            <p id="civ-hero-snippet" class="civ-hero-snippet">The cradle of urban sophistication, standardized civic architecture, dockyards, and maritime trade.</p>
-            
-            <div class="civ-hero-sites-row">
-              <span class="sites-label">🏛️ Key Sites:</span>
-              <span id="civ-hero-sites" class="sites-val">Harappa, Mohenjo-daro, Lothal, Dholavira, Kalibangan</span>
-            </div>
-          </div>
-        </section>
-
-        <!-- Main 2-Column Content Grid -->
-        <div class="civ-story-grid">
-          
-          <!-- LEFT COLUMN: Historical Chronicle & Innovations & Geography -->
-          <div class="civ-story-left">
-            
-            <!-- Sacred Historical Chronicle Card -->
-            <article class="civ-card civ-chronicle-card">
-              <div class="civ-card-header">
-                <span class="civ-card-icon">📜</span>
-                <h3 class="civ-card-title">Sacred Historical Chronicle</h3>
-              </div>
-              <div class="civ-card-body" id="civ-chronicle-text">
-                <!-- Injected paragraphs -->
-              </div>
-            </article>
-
-            <!-- Innovations & Cultural Milestones -->
-            <article class="civ-card civ-innovations-card">
-              <div class="civ-card-header">
-                <span class="civ-card-icon">✨</span>
-                <h3 class="civ-card-title">Innovations & Civilisational Breakthroughs</h3>
-              </div>
-              <div class="civ-card-body">
-                <div class="civ-innovations-grid" id="civ-innovations-container">
-                  <!-- Dynamically populated innovation cards -->
-                </div>
-              </div>
-            </article>
-
-            <!-- Archaeological Geography -->
-            <article class="civ-card civ-geography-card">
-              <div class="civ-card-header">
-                <span class="civ-card-icon">🗺️</span>
-                <h3 class="civ-card-title">Archaeological Landscape & River Systems</h3>
-              </div>
-              <div class="civ-card-body" id="civ-geography-content">
-                <!-- Injected sites, rivers, modern regions -->
-              </div>
-            </article>
-
-          </div>
-
-          <!-- RIGHT COLUMN: Historical Figures, Ethos Quote, and Interactive Challenge -->
-          <div class="civ-story-right">
-            
-            <!-- Prominent Figures & Guilds -->
-            <article class="civ-card civ-figures-card">
-              <div class="civ-card-header">
-                <span class="civ-card-icon">👑</span>
-                <h3 class="civ-card-title">Architects, Sages & Historical Figures</h3>
-              </div>
-              <div class="civ-card-body">
-                <div class="civ-figures-list" id="civ-figures-container">
-                  <!-- Dynamically populated character cards -->
-                </div>
-              </div>
-            </article>
-
-            <!-- Civilisational Ethos / Epigraphy -->
-            <article class="civ-card civ-ethos-card">
-              <div class="civ-card-header">
-                <span class="civ-card-icon">🏛️</span>
-                <h3 class="civ-card-title">Civilisational Ethos & Inscriptions</h3>
-              </div>
-              <div class="civ-card-body">
-                <blockquote class="civ-ethos-blockquote">
-                  <p class="civ-ethos-devanagari" id="civ-ethos-devanagari">सत्यं बृहद् ऋतं उग्रं दीक्षा तपो ब्रह्म यज्ञः पृथिवीं धारयन्ति</p>
-                  <p class="civ-ethos-trans" id="civ-ethos-trans">"Vast truth, dynamic cosmic harmony (Rta), dedication, austerity, knowledge, and sacrifice uphold the sacred earth."</p>
-                  <cite class="civ-ethos-cite" id="civ-ethos-source">— Atharva Veda (Bhumi Sukta 12.1.1)</cite>
-                </blockquote>
-              </div>
-            </article>
-
-            <!-- Interactive Era Knowledge Challenge (Quiz) -->
-            <article class="civ-card civ-quiz-card">
-              <div class="civ-card-header">
-                <span class="civ-card-icon">⚔️</span>
-                <h3 class="civ-card-title">Era Knowledge Challenge</h3>
-                <span class="civ-reward-tag" id="civ-quiz-rewards">+180 XP • 60 Coins</span>
-              </div>
-              <div class="civ-card-body">
-                <p id="civ-quiz-question" class="civ-quiz-prompt">Question text</p>
-                <div id="civ-quiz-options" class="civ-quiz-options-list">
-                  <!-- Dynamic quiz options -->
-                </div>
-                <div id="civ-quiz-feedback" class="civ-quiz-feedback-box hidden"></div>
-                <button id="btn-civ-submit-quiz" class="btn-enter-tradition civ-quiz-submit-btn" type="button">
-                  <span class="btn-text">CONFIRM ANSWER</span>
-                </button>
-              </div>
-            </article>
-
-          </div>
-
-        </div>
-
-      </div>
-
-      <!-- Sticky Bottom Action Footer -->
-      <footer class="civ-screen-footer">
-        <button id="btn-civ-footer-back-map" class="btn-subpath-back" aria-label="Return to Civilisation Map">
-          <span>← Return to Civilisation Map</span>
-        </button>
-
-        <div class="civ-footer-actions">
-          <button id="btn-civ-mark-completed" class="btn-mark-completed" aria-label="Mark Era Completed">
-            <span class="check-icon">✓</span>
-            <span id="civ-mark-complete-text">MARK ERA COMPLETED</span>
-          </button>
-          <button id="btn-civ-footer-next" class="btn-chapter-nav footer-next-btn">
-            Next Era →
-          </button>
-        </div>
-      </footer>
-
     </div>
   </div>
 
