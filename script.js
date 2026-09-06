@@ -209,6 +209,8 @@ document.addEventListener('DOMContentLoaded', () => {
     landingPage.style.opacity = '0';
     landingPage.style.pointerEvents = 'none';
 
+    window.location.hash = 'dashboard';
+
     setTimeout(() => {
       dashboardScreen.classList.remove('hidden');
       dashboardScreen.classList.add('active');
@@ -219,6 +221,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function closeDashboardToLanding() {
     playClickSound();
     dashboardScreen.classList.remove('active');
+    history.replaceState(null, null, window.location.pathname);
 
     setTimeout(() => {
       dashboardScreen.classList.add('hidden');
@@ -231,6 +234,18 @@ document.addEventListener('DOMContentLoaded', () => {
   startJourneyBtn.addEventListener('click', openDashboard);
   if (btnBackToLanding) {
     btnBackToLanding.addEventListener('click', closeDashboardToLanding);
+  }
+
+  // Direct access check on initial load (e.g. #dashboard)
+  if (window.location.hash === '#dashboard' || window.location.search.includes('dashboard')) {
+    hasTransitioned = true;
+    if (splashVideo) splashVideo.pause();
+    splashScreen.style.display = 'none';
+    landingPage.classList.remove('active');
+    landingPage.style.display = 'none';
+    dashboardScreen.classList.remove('hidden');
+    dashboardScreen.classList.add('active');
+    renderDashboard();
   }
 
   // ─── Sound Toggle Controls ───
