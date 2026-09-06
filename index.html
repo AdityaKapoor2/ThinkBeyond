@@ -579,6 +579,310 @@
 
 
   <!-- ============================================================
+       3C. RAMAYANA CONNECTIVE TIMELINE MAP SCREEN (TRETA YUGA)
+       Pixel-matched directly to user reference mockup
+       ============================================================ -->
+  <div id="ramayana-map-screen" class="ramayana-map-screen hidden" role="region" aria-label="Ramayana Timeline Map">
+    <div class="ramayana-map-overlay-bg"></div>
+
+    <!-- Floating Back to Traditions Button -->
+    <button id="btn-back-from-ramayana" class="btn-subpath-back ramayana-floating-back" aria-label="Back to Cultural Paths">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="15 18 9 12 15 6"></polyline>
+      </svg>
+      <span>Back to Traditions</span>
+    </button>
+
+    <!-- Map Stage Container (Maintains 1024:600 Aspect Ratio) -->
+    <div class="ramayana-canvas-wrapper" id="ramayana-canvas-wrapper">
+      <div class="ramayana-map-canvas" id="ramayana-map-canvas">
+        <!-- Painted artwork containing all borders, titles, artwork & legend -->
+        <img src="assets/ramayana_map.jpg" alt="Ramayana Timeline Map Treta Yuga" class="ramayana-bg-art" id="ramayana-bg-art" />
+
+        <!-- Hotspot over the printed 'Timeline Info (i)' button at top right -->
+        <button id="btn-ramayana-info" class="ramayana-info-hotspot" type="button" aria-label="Timeline Info" title="Timeline Info (i)"></button>
+
+        <!-- Interactive Hotspot Node Markers on top of the 10 circles -->
+        <div class="ramayana-nodes-layer" id="ramayana-nodes-layer">
+          <!-- Dynamically populated 10 node hotspots -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ============================================================
+       3D. DEDICATED RAMAYANA EVENT STORY PAGE (OTHER PAGE)
+       Navigated when clicking ANY node on the connective map
+       ============================================================ -->
+  <div id="ramayana-event-screen" class="ramayana-event-screen hidden" role="region" aria-label="Ramayana Chapter Chronicle">
+    <div class="event-screen-bg"></div>
+
+    <div class="event-screen-container">
+      
+      <!-- Top Nav Bar -->
+      <header class="event-screen-topbar">
+        <div class="event-topbar-left">
+          <button id="btn-back-to-map" class="btn-subpath-back" aria-label="Return to Ramayana Map">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+            <span>Back to Map</span>
+          </button>
+          
+          <nav class="event-breadcrumb" aria-label="Breadcrumb">
+            <span>Hindu Traditions</span>
+            <span class="crumb-sep">›</span>
+            <span>Ramayana Timeline</span>
+            <span class="crumb-sep">›</span>
+            <span id="event-crumb-title" class="crumb-active">Birth of Rama</span>
+          </nav>
+        </div>
+
+        <div class="event-topbar-right">
+          <div class="event-chapter-nav">
+            <button id="btn-prev-event" class="btn-chapter-nav" aria-label="Previous Chapter">‹ Prev</button>
+            <span id="event-chapter-counter" class="chapter-counter-pill">Chapter 1 of 10</span>
+            <button id="btn-next-event" class="btn-chapter-nav" aria-label="Next Chapter">Next ›</button>
+          </div>
+        </div>
+      </header>
+
+      <!-- Scrollable Main Content -->
+      <main class="event-scroll-body" id="event-scroll-body">
+        
+        <!-- Hero Header -->
+        <section class="event-hero-banner" id="event-hero-banner">
+          <div class="hero-avatar-wrapper">
+            <div class="hero-avatar-ring">
+              <img id="event-hero-img" src="assets/ramayana_nodes/birth_of_rama.png" alt="Chapter Artwork" class="hero-avatar-img" />
+            </div>
+            <span id="event-hero-badge" class="hero-status-badge status-completed">✓ Completed</span>
+          </div>
+
+          <div class="hero-text-meta">
+            <div class="hero-kanda-pill" id="event-kanda-pill">BALA KANDA • TRETA YUGA</div>
+            <h1 id="event-hero-title" class="event-main-headline">Birth of Rama</h1>
+            <p id="event-hero-subtitle" class="event-sub-headline">The Descent of Dharma (Maryada Purushottama)</p>
+            
+            <div class="hero-geo-pill">
+              <span class="geo-icon">📍</span>
+              <span id="event-geo-tag">Ayodhya (Kosala Kingdom)</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Two Column Main Body -->
+        <div class="event-content-grid">
+          
+          <!-- Left Column: Sacred Lore & Sanskrit Shloka -->
+          <div class="event-primary-col">
+            
+            <!-- Sacred Chronicle -->
+            <article class="event-card event-story-card">
+              <div class="card-ornate-header">
+                <span class="header-icon">📜</span>
+                <h3>Sacred Chronicle of Treta Yuga</h3>
+              </div>
+              <div class="story-paragraphs" id="event-story-paragraphs">
+                <!-- Injected via script.js -->
+              </div>
+            </article>
+
+            <!-- Valmiki Ramayana Sanskrit Shloka & Recitation Card -->
+            <article class="event-card event-shloka-card">
+              <div class="card-ornate-header">
+                <span class="header-icon">🕉️</span>
+                <h3>Valmiki Ramayana Sacred Shloka</h3>
+                <button id="btn-recite-shloka" class="btn-recite-shloka" aria-label="Listen to Shloka Recitation">
+                  <span class="sound-wave-icon">🔊</span>
+                  <span class="recite-label">Listen Recitation</span>
+                </button>
+              </div>
+
+              <div class="shloka-inner">
+                <blockquote class="shloka-sanskrit" id="event-shloka-sanskrit">
+                  कौसल्याऽजनयद् रामं दिव्यलक्षणसंयुतम् । विष्णोरर्धं महाभागं पुत्रमैक्ष्वाकुवर्धनम् ॥
+                </blockquote>
+                <div class="shloka-translit" id="event-shloka-translit">
+                  kausalyā janayad rāmaṁ divya-lakṣaṇa-saṁyutam | viṣṇor ardhaṁ mahā-bhāgaṁ putram aikṣvāku-vardhanam ||
+                </div>
+                <div class="shloka-meaning">
+                  <strong>Sacred Meaning:</strong>
+                  <span id="event-shloka-meaning">Queen Kaushalya gave birth to Sri Rama, endowed with divine auspicious qualities...</span>
+                </div>
+              </div>
+            </article>
+
+            <!-- Sacred Geography & Modern Heritage -->
+            <article class="event-card event-geo-card">
+              <div class="card-ornate-header">
+                <span class="header-icon">🗺️</span>
+                <h3>Sacred Geography & Living Heritage</h3>
+              </div>
+              <div class="geo-details-box" id="event-geo-details">
+                <!-- Injected via script.js -->
+              </div>
+            </article>
+
+          </div>
+
+          <!-- Right Column: Characters, Dharma Wisdom & Chapter Quiz Challenge -->
+          <div class="event-secondary-col">
+            
+            <!-- Characters Featured -->
+            <article class="event-card event-characters-card">
+              <div class="card-ornate-header">
+                <span class="header-icon">👑</span>
+                <h3>Key Figures & Beings</h3>
+              </div>
+              <div class="characters-list" id="event-characters-list">
+                <!-- Injected via script.js -->
+              </div>
+            </article>
+
+            <!-- Dharma Wisdom Callout -->
+            <article class="event-card event-dharma-card">
+              <div class="card-ornate-header">
+                <span class="header-icon">⚖️</span>
+                <h3>Timeless Dharma Lesson</h3>
+              </div>
+              <p class="dharma-wisdom-text" id="event-dharma-text">
+                True leadership is rooted in humility, devotion, and an unshakeable commitment to universal welfare.
+              </p>
+            </article>
+
+            <!-- Interactive Chapter Quest / Challenge -->
+            <article class="event-card event-quiz-card" id="event-quiz-card">
+              <div class="card-ornate-header">
+                <span class="header-icon">🏹</span>
+                <h3>Chapter Sacred Enquiry</h3>
+                <span class="quiz-reward-pill" id="event-quiz-rewards">+150 XP • +50 Coins</span>
+              </div>
+
+              <div class="quiz-body">
+                <p class="quiz-prompt" id="event-quiz-prompt">Question goes here</p>
+                
+                <div class="quiz-options-container" id="event-quiz-options">
+                  <!-- Dynamically populated options A, B, C, D -->
+                </div>
+
+                <div id="event-quiz-feedback" class="quiz-feedback hidden"></div>
+
+                <button id="btn-submit-event-quiz" class="btn-start-journey full-width-btn">
+                  <span class="btn-text">CONFIRM ANSWER</span>
+                </button>
+              </div>
+            </article>
+
+          </div>
+
+        </div>
+
+      </main>
+
+      <!-- Sticky Action Footer -->
+      <footer class="event-screen-footer">
+        <div class="footer-left">
+          <button id="btn-footer-back-map" class="btn-footer-neutral">
+            ← Return to Ramayana Map
+          </button>
+        </div>
+        <div class="footer-right">
+          <button id="btn-complete-event" class="btn-enter-tradition">
+            <span class="btn-shine"></span>
+            <span class="btn-text" id="btn-complete-event-text">MARK CHAPTER COMPLETED ✓</span>
+          </button>
+          <button id="btn-footer-next" class="btn-chapter-nav footer-next-btn">
+            Next Chapter →
+          </button>
+        </div>
+      </footer>
+
+    </div>
+  </div>
+
+
+  <!-- ============================================================
+       3E. RAMAYANA TIMELINE INFO MODAL (Treta Yuga & Kandas Overview)
+       ============================================================ -->
+  <div id="timeline-info-modal" class="modal-backdrop hidden" aria-hidden="true" role="dialog">
+    <div class="modal-card timeline-info-card">
+      <div class="modal-header">
+        <span class="modal-kicker">EPIC CHRONOLOGY</span>
+        <h3 class="modal-headline">Treta Yuga & The Valmiki Ramayana</h3>
+        <button id="timeline-info-close-btn" class="modal-close-btn" aria-label="Close">✕</button>
+      </div>
+
+      <div class="modal-body timeline-info-body">
+        <div class="timeline-intro-callout">
+          <p>The <strong>Ramayana</strong> composed by the Adi Kavi (First Poet) <strong>Maharishi Valmiki</strong> comprises 24,000 verses across <strong>Seven Sacred Kandas</strong> (Books), documenting the descent of Sri Rama during the <strong>Treta Yuga</strong> to establish eternal Maryada (righteous conduct) and Dharma.</p>
+        </div>
+
+        <h4 class="kandas-section-title">The Seven Kandas (Chronological Journey)</h4>
+        <div class="kandas-grid">
+          <div class="kanda-item">
+            <span class="kanda-num">1</span>
+            <div>
+              <strong>Bala Kanda (Childhood & Youth)</strong>
+              <p>Birth in Ayodhya, protection of Vishvamitra’s yajna, breaking the Shiva Dhanusha in Mithila, and wedding to Sita.</p>
+            </div>
+          </div>
+          <div class="kanda-item">
+            <span class="kanda-num">2</span>
+            <div>
+              <strong>Ayodhya Kanda (The Parting & Exile)</strong>
+              <p>Kaikeyi’s boons, departure for 14-year exile, grief of Dasharatha, and Bharata’s vow with the sacred Padukas.</p>
+            </div>
+          </div>
+          <div class="kanda-item">
+            <span class="kanda-num">3</span>
+            <div>
+              <strong>Aranya Kanda (The Forest Wilderness)</strong>
+              <p>Hermitage at Panchavati along Godavari, golden deer deception, Jatayu’s sacrifice, and abduction of Sita.</p>
+            </div>
+          </div>
+          <div class="kanda-item">
+            <span class="kanda-num">4</span>
+            <div>
+              <strong>Kishkindha Kanda (Alliance with Vanaras)</strong>
+              <p>Meeting with Hanuman and Sugriva, slaying of Vali, and coronation of Sugriva who mobilizes search armies.</p>
+            </div>
+          </div>
+          <div class="kanda-item">
+            <span class="kanda-num">5</span>
+            <div>
+              <strong>Sundara Kanda (The Heroic Ocean Leap)</strong>
+              <p>Hanuman’s flight across the sea, discovery of Sita in Ashok Vatika, imparting the signet ring, and burning of Lanka.</p>
+            </div>
+          </div>
+          <div class="kanda-item">
+            <span class="kanda-num">6</span>
+            <div>
+              <strong>Yuddha Kanda (The Great War & Victory)</strong>
+              <p>Building Rama Setu, epic confrontation, fall of Kumbhakarna and Ravana, Sita’s liberation, and return in Pushpaka.</p>
+            </div>
+          </div>
+          <div class="kanda-item">
+            <span class="kanda-num">7</span>
+            <div>
+              <strong>Uttara Kanda (Coronation & Ramarajya)</strong>
+              <p>Coronation in Ayodhya, the golden reign of truth, justice, universal abundance, and the eternal legacy of Dharma.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button id="timeline-info-ok-btn" class="btn-start-journey modal-btn">
+          <span class="btn-text">RETURN TO MAP</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ============================================================
        4. INTERACTIVE GAMEPLAY MODULE MODAL (GROWTH ENGINE)
        ============================================================ -->
   <div id="module-modal" class="modal-backdrop" aria-hidden="true" role="dialog">

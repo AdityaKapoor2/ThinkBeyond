@@ -56,6 +56,49 @@ document.addEventListener('DOMContentLoaded', () => {
   const btnEnterTradition = document.getElementById('btn-enter-tradition');
   const btnEnterTraditionText = document.getElementById('btn-enter-tradition-text');
 
+  // Ramayana Timeline Map Screen Elements
+  const ramayanaMapScreen = document.getElementById('ramayana-map-screen');
+  const btnBackFromRamayana = document.getElementById('btn-back-from-ramayana');
+  const btnRamayanaInfo = document.getElementById('btn-ramayana-info');
+  const ramayanaSvgPaths = document.getElementById('ramayana-svg-paths');
+  const ramayanaNodesLayer = document.getElementById('ramayana-nodes-layer');
+
+  // Ramayana Dedicated Event Screen Elements
+  const ramayanaEventScreen = document.getElementById('ramayana-event-screen');
+  const btnBackToMap = document.getElementById('btn-back-to-map');
+  const btnFooterBackMap = document.getElementById('btn-footer-back-map');
+  const eventCrumbTitle = document.getElementById('event-crumb-title');
+  const eventChapterCounter = document.getElementById('event-chapter-counter');
+  const btnPrevEvent = document.getElementById('btn-prev-event');
+  const btnNextEvent = document.getElementById('btn-next-event');
+  const btnFooterNext = document.getElementById('btn-footer-next');
+  const eventHeroImg = document.getElementById('event-hero-img');
+  const eventHeroBadge = document.getElementById('event-hero-badge');
+  const eventHeroTitle = document.getElementById('event-hero-title');
+  const eventHeroSubtitle = document.getElementById('event-hero-subtitle');
+  const eventKandaPill = document.getElementById('event-kanda-pill');
+  const eventGeoTag = document.getElementById('event-geo-tag');
+  const eventStoryParagraphs = document.getElementById('event-story-paragraphs');
+  const btnReciteShloka = document.getElementById('btn-recite-shloka');
+  const eventShlokaSanskrit = document.getElementById('event-shloka-sanskrit');
+  const eventShlokaTranslit = document.getElementById('event-shloka-translit');
+  const eventShlokaMeaning = document.getElementById('event-shloka-meaning');
+  const eventGeoDetails = document.getElementById('event-geo-details');
+  const eventCharactersList = document.getElementById('event-characters-list');
+  const eventDharmaText = document.getElementById('event-dharma-text');
+  const eventQuizRewards = document.getElementById('event-quiz-rewards');
+  const eventQuizPrompt = document.getElementById('event-quiz-prompt');
+  const eventQuizOptions = document.getElementById('event-quiz-options');
+  const eventQuizFeedback = document.getElementById('event-quiz-feedback');
+  const btnSubmitEventQuiz = document.getElementById('btn-submit-event-quiz');
+  const btnCompleteEvent = document.getElementById('btn-complete-event');
+  const btnCompleteEventText = document.getElementById('btn-complete-event-text');
+
+  // Ramayana Timeline Info Modal
+  const timelineInfoModal = document.getElementById('timeline-info-modal');
+  const timelineInfoCloseBtn = document.getElementById('timeline-info-close-btn');
+  const timelineInfoOkBtn = document.getElementById('timeline-info-ok-btn');
+
   // Sidebar navigation
   const sidebarNavItems = document.querySelectorAll('.dash-sidebar .nav-item');
   const viewPanels = document.querySelectorAll('.dash-view-panel');
@@ -558,8 +601,18 @@ document.addEventListener('DOMContentLoaded', () => {
       `;
 
       card.addEventListener('click', (e) => {
+        if (item.id === 'hindu_traditions' && isSelected && e.target.closest('.btn-subpath-select')) {
+          playClickSound();
+          openRamayanaMapScreen();
+          return;
+        }
+
         if (isSelected && (e.target.closest('.btn-subpath-select') || e.detail >= 2)) {
-          launchReligiousTraditionModule(item);
+          if (item.id === 'hindu_traditions') {
+            openRamayanaMapScreen();
+          } else {
+            launchReligiousTraditionModule(item);
+          }
           return;
         }
 
@@ -603,9 +656,427 @@ document.addEventListener('DOMContentLoaded', () => {
       playClickSound();
       const selected = window.PlayerState.getSelectedReligiousTradition();
       if (selected) {
-        launchReligiousTraditionModule(selected);
+        if (selected.id === 'hindu_traditions') {
+          openRamayanaMapScreen();
+        } else {
+          launchReligiousTraditionModule(selected);
+        }
       }
     });
+  }
+
+  // ════════════════════════════════════════════════════════════
+  // 3C & 3D. RAMAYANA CONNECTIVE TIMELINE MAP & EVENT PAGES
+  // ════════════════════════════════════════════════════════════
+  let currentActiveRamayanaEventId = null;
+  let currentQuizSelectedOptionIdx = null;
+
+  function openRamayanaMapScreen() {
+    if (!ramayanaMapScreen) return;
+    pathSelectionScreen.classList.add('hidden');
+    if (ramayanaEventScreen) ramayanaEventScreen.classList.add('hidden');
+    ramayanaMapScreen.classList.remove('hidden');
+    renderRamayanaMap();
+  }
+
+  function closeRamayanaMapScreen() {
+    if (!ramayanaMapScreen) return;
+    ramayanaMapScreen.classList.add('hidden');
+    pathSelectionScreen.classList.remove('hidden');
+    renderSubpathsScreen();
+  }
+
+  if (btnBackFromRamayana) {
+    btnBackFromRamayana.addEventListener('click', () => {
+      playClickSound();
+      closeRamayanaMapScreen();
+    });
+  }
+
+  if (btnRamayanaInfo) {
+    btnRamayanaInfo.addEventListener('click', () => {
+      playClickSound();
+      openTimelineInfoModal();
+    });
+  }
+
+  function openTimelineInfoModal() {
+    if (!timelineInfoModal) return;
+    timelineInfoModal.classList.remove('hidden');
+    timelineInfoModal.setAttribute('aria-hidden', 'false');
+  }
+
+  function closeTimelineInfoModal() {
+    if (!timelineInfoModal) return;
+    timelineInfoModal.classList.add('hidden');
+    timelineInfoModal.setAttribute('aria-hidden', 'true');
+  }
+
+  if (timelineInfoCloseBtn) timelineInfoCloseBtn.addEventListener('click', closeTimelineInfoModal);
+  if (timelineInfoOkBtn) timelineInfoOkBtn.addEventListener('click', closeTimelineInfoModal);
+
+  function renderRamayanaMap() {
+    if (!window.PlayerState || !ramayanaNodesLayer) return;
+    const events = window.PlayerState.getRamayanaEvents();
+
+    ramayanaNodesLayer.innerHTML = '';
+
+    events.forEach(event => {
+      const hotspot = document.createElement('button');
+      hotspot.className = `ramayana-node-hotspot status-${event.status}`;
+      hotspot.style.left = `${event.coords.left}%`;
+      hotspot.style.top = `${event.coords.top}%`;
+      hotspot.setAttribute('type', 'button');
+      hotspot.setAttribute('aria-label', `${event.title} (${event.location}): ${event.status}`);
+      hotspot.dataset.eventId = event.id;
+
+      // Status badge: green checkmark if completed, red exclamation if boss, lock if locked
+      let badgeHtml = '';
+      if (event.status === 'completed') {
+        badgeHtml = '<span class="hotspot-badge badge-completed">✓</span>';
+      } else if (event.status === 'boss') {
+        badgeHtml = '<span class="hotspot-badge badge-boss">!</span>';
+      } else if (event.status === 'locked') {
+        badgeHtml = '<span class="hotspot-badge badge-locked">🔒</span>';
+      }
+
+      hotspot.innerHTML = `
+        <div class="hotspot-ring"></div>
+        ${badgeHtml}
+        <div class="hotspot-tooltip">
+          <span class="tooltip-action">ENTER CHAPTER</span>
+          <span class="tooltip-title">${event.title}</span>
+        </div>
+      `;
+
+      hotspot.addEventListener('click', () => {
+        playClickSound();
+        openRamayanaEventScreen(event.id);
+      });
+
+      ramayanaNodesLayer.appendChild(hotspot);
+    });
+  }
+
+  // ─── 3D. Dedicated Event Story Page Controller ───
+  function openRamayanaEventScreen(eventId) {
+    if (!ramayanaEventScreen || !window.PlayerState) return;
+    currentActiveRamayanaEventId = eventId;
+
+    if (ramayanaMapScreen) ramayanaMapScreen.classList.add('hidden');
+    ramayanaEventScreen.classList.remove('hidden');
+
+    renderRamayanaEventScreen(eventId);
+
+    const scrollBody = document.getElementById('event-scroll-body');
+    if (scrollBody) scrollBody.scrollTop = 0;
+  }
+
+  function closeRamayanaEventScreen() {
+    stopShlokaAudio();
+    if (!ramayanaEventScreen) return;
+    ramayanaEventScreen.classList.add('hidden');
+    if (ramayanaMapScreen) ramayanaMapScreen.classList.remove('hidden');
+    renderRamayanaMap();
+  }
+
+  if (btnBackToMap) btnBackToMap.addEventListener('click', () => { playClickSound(); closeRamayanaEventScreen(); });
+  if (btnFooterBackMap) btnFooterBackMap.addEventListener('click', () => { playClickSound(); closeRamayanaEventScreen(); });
+
+  function renderRamayanaEventScreen(eventId) {
+    const event = window.PlayerState.getRamayanaEvent(eventId);
+    if (!event) return;
+
+    const allEvents = window.PlayerState.getRamayanaEvents();
+    const currentIndex = allEvents.findIndex(e => e.id === eventId);
+
+    // Breadcrumb and counter
+    if (eventCrumbTitle) eventCrumbTitle.textContent = event.title;
+    if (eventChapterCounter) {
+      eventChapterCounter.textContent = `Chapter ${event.order} of ${allEvents.length}`;
+    }
+
+    // Prev / Next Chapter Buttons
+    if (btnPrevEvent) {
+      btnPrevEvent.disabled = (currentIndex <= 0);
+      btnPrevEvent.onclick = () => {
+        if (currentIndex > 0) {
+          playClickSound();
+          openRamayanaEventScreen(allEvents[currentIndex - 1].id);
+        }
+      };
+    }
+    if (btnNextEvent) {
+      btnNextEvent.disabled = (currentIndex >= allEvents.length - 1);
+      btnNextEvent.onclick = () => {
+        if (currentIndex < allEvents.length - 1) {
+          playClickSound();
+          openRamayanaEventScreen(allEvents[currentIndex + 1].id);
+        }
+      };
+    }
+    if (btnFooterNext) {
+      btnFooterNext.disabled = (currentIndex >= allEvents.length - 1);
+      btnFooterNext.onclick = () => {
+        if (currentIndex < allEvents.length - 1) {
+          playClickSound();
+          openRamayanaEventScreen(allEvents[currentIndex + 1].id);
+        }
+      };
+    }
+
+    // Hero section
+    if (eventHeroImg) eventHeroImg.src = event.image;
+    if (eventHeroTitle) eventHeroTitle.textContent = event.title;
+    if (eventHeroSubtitle) eventHeroSubtitle.textContent = event.subtitle;
+    if (eventKandaPill) eventKandaPill.textContent = `${event.kanda.toUpperCase()} • TRETA YUGA`;
+    if (eventGeoTag) eventGeoTag.textContent = `${event.sacredGeography.place} (${event.location})`;
+
+    // Status badge
+    if (eventHeroBadge) {
+      if (event.status === 'completed') {
+        eventHeroBadge.textContent = '✓ Completed Chapter';
+        eventHeroBadge.className = 'hero-status-badge status-completed';
+      } else if (event.status === 'in_progress') {
+        eventHeroBadge.textContent = '◯ In Progress';
+        eventHeroBadge.className = 'hero-status-badge status-inprogress';
+      } else if (event.status === 'boss') {
+        eventHeroBadge.textContent = '! Boss Confrontation';
+        eventHeroBadge.className = 'hero-status-badge status-boss';
+      } else if (event.status === 'locked') {
+        eventHeroBadge.textContent = '🔒 Locked Chapter';
+        eventHeroBadge.className = 'hero-status-badge status-locked';
+      } else {
+        eventHeroBadge.textContent = '◯ Available Chapter';
+        eventHeroBadge.className = 'hero-status-badge status-available';
+      }
+    }
+
+    // Complete chapter button text
+    if (btnCompleteEventText) {
+      btnCompleteEventText.textContent = (event.status === 'completed') ? 'COMPLETED ✓' : 'MARK CHAPTER COMPLETED ✓';
+    }
+
+    // Story paragraphs
+    if (eventStoryParagraphs) {
+      eventStoryParagraphs.innerHTML = event.story.map(para => `<p>${para}</p>`).join('');
+    }
+
+    // Valmiki Shloka
+    if (eventShlokaSanskrit) eventShlokaSanskrit.textContent = event.shlokaDevanagari;
+    if (eventShlokaTranslit) eventShlokaTranslit.textContent = event.shlokaTransliteration;
+    if (eventShlokaMeaning) eventShlokaMeaning.textContent = event.shlokaMeaning;
+
+    // Sacred Geography
+    if (eventGeoDetails) {
+      eventGeoDetails.innerHTML = `
+        <div class="geo-row">
+          <strong>Ancient Realm:</strong>
+          <span>${event.sacredGeography.place}</span>
+        </div>
+        <div class="geo-row">
+          <strong>Living Heritage:</strong>
+          <span>${event.sacredGeography.modernName}</span>
+        </div>
+        <div class="geo-row">
+          <strong>Spiritual Significance:</strong>
+          <span>${event.sacredGeography.significance}</span>
+        </div>
+      `;
+    }
+
+    // Characters list
+    if (eventCharactersList) {
+      eventCharactersList.innerHTML = event.characters.map(char => `
+        <div class="character-chip">
+          <div class="char-chip-head">
+            <span class="char-name">${char.name}</span>
+            <span class="char-role">${char.role}</span>
+          </div>
+          <p class="char-desc">${char.desc}</p>
+        </div>
+      `).join('');
+    }
+
+    // Dharma Wisdom text
+    if (eventDharmaText) eventDharmaText.textContent = event.dharmaLesson;
+
+    // Quiz Challenge
+    if (eventQuizRewards) {
+      eventQuizRewards.textContent = `+${event.quiz.rewardXp} XP • +${event.quiz.rewardCoins} Coins`;
+    }
+    if (eventQuizPrompt) eventQuizPrompt.textContent = event.quiz.question;
+
+    currentQuizSelectedOptionIdx = null;
+    if (eventQuizFeedback) {
+      eventQuizFeedback.className = 'quiz-feedback hidden';
+      eventQuizFeedback.textContent = '';
+    }
+    if (btnSubmitEventQuiz) {
+      btnSubmitEventQuiz.disabled = false;
+      btnSubmitEventQuiz.querySelector('.btn-text').textContent = 'CONFIRM ANSWER';
+    }
+
+    if (eventQuizOptions) {
+      eventQuizOptions.innerHTML = '';
+      event.quiz.options.forEach((opt, idx) => {
+        const optBtn = document.createElement('button');
+        optBtn.className = 'quiz-option-btn';
+        optBtn.setAttribute('type', 'button');
+        optBtn.textContent = `${String.fromCharCode(65 + idx)}) ${opt.text}`;
+
+        optBtn.addEventListener('click', () => {
+          playClickSound();
+          currentQuizSelectedOptionIdx = idx;
+          const allOptBtns = eventQuizOptions.querySelectorAll('.quiz-option-btn');
+          allOptBtns.forEach((b, i) => {
+            if (i === idx) b.classList.add('selected');
+            else b.classList.remove('selected');
+          });
+        });
+
+        eventQuizOptions.appendChild(optBtn);
+      });
+    }
+
+    // Audio Recite button
+    if (btnReciteShloka) {
+      btnReciteShloka.onclick = () => {
+        toggleShlokaAudio(event);
+      };
+    }
+
+    // Submit Quiz button
+    if (btnSubmitEventQuiz) {
+      btnSubmitEventQuiz.onclick = () => {
+        handleEventQuizSubmission(event);
+      };
+    }
+
+    // Direct Complete button
+    if (btnCompleteEvent) {
+      btnCompleteEvent.onclick = () => {
+        playClickSound();
+        const res = window.PlayerState.completeRamayanaEvent(event.id);
+        if (res) {
+          playCelebrationChime();
+          showRewardToast(
+            res.leveledUp ? `LEVEL UP! LEVEL ${res.newLevel}` : `${event.title.toUpperCase()} MASTERED!`,
+            `Earned +${res.xpGained} XP, +${res.coinsGained} Coins, and blessed with '${res.relicName}'!`,
+            '🏹'
+          );
+          renderRamayanaEventScreen(event.id);
+        }
+      };
+    }
+  }
+
+  function handleEventQuizSubmission(event) {
+    if (currentQuizSelectedOptionIdx === null) {
+      if (eventQuizFeedback) {
+        eventQuizFeedback.className = 'quiz-feedback error';
+        eventQuizFeedback.textContent = 'Please choose an option to confirm your answer.';
+      }
+      return;
+    }
+
+    const selectedOption = event.quiz.options[currentQuizSelectedOptionIdx];
+    const allOptBtns = eventQuizOptions.querySelectorAll('.quiz-option-btn');
+
+    if (selectedOption.correct) {
+      playCelebrationChime();
+      allOptBtns[currentQuizSelectedOptionIdx].classList.add('correct-answer');
+      if (eventQuizFeedback) {
+        eventQuizFeedback.className = 'quiz-feedback success';
+        eventQuizFeedback.innerHTML = `<strong>Correct!</strong> ${event.quiz.explanation}`;
+      }
+      btnSubmitEventQuiz.disabled = true;
+      btnSubmitEventQuiz.querySelector('.btn-text').textContent = 'CHAPTER MASTERED ✓';
+
+      const res = window.PlayerState.completeRamayanaEvent(event.id);
+      if (res) {
+        showRewardToast(
+          res.leveledUp ? `LEVEL UP! LEVEL ${res.newLevel}` : `${event.title.toUpperCase()} MASTERED!`,
+          `Earned +${res.xpGained} XP, +${res.coinsGained} Coins, and blessed with '${res.relicName}'!`,
+          '🏹'
+        );
+        if (eventHeroBadge) {
+          eventHeroBadge.textContent = '✓ Completed Chapter';
+          eventHeroBadge.className = 'hero-status-badge status-completed';
+        }
+        if (btnCompleteEventText) {
+          btnCompleteEventText.textContent = 'COMPLETED ✓';
+        }
+      }
+    } else {
+      playClickSound();
+      allOptBtns[currentQuizSelectedOptionIdx].classList.add('wrong-answer');
+      if (eventQuizFeedback) {
+        eventQuizFeedback.className = 'quiz-feedback error';
+        eventQuizFeedback.textContent = 'Not quite right. Reflect upon the sacred chronicle and try again!';
+      }
+    }
+  }
+
+  // ─── Shloka Speech Recitation ───
+  let isShlokaSpeaking = false;
+
+  function stopShlokaAudio() {
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.cancel();
+    }
+    isShlokaSpeaking = false;
+    if (btnReciteShloka) {
+      btnReciteShloka.classList.remove('playing');
+      btnReciteShloka.querySelector('.recite-label').textContent = 'Listen Recitation';
+    }
+  }
+
+  function toggleShlokaAudio(event) {
+    if (!('speechSynthesis' in window)) {
+      alert('Speech synthesis is not supported on this browser.');
+      return;
+    }
+
+    if (isShlokaSpeaking) {
+      stopShlokaAudio();
+      return;
+    }
+
+    window.speechSynthesis.cancel();
+    const textToSpeak = event.audioText || event.shlokaMeaning;
+    const utterance = new SpeechSynthesisUtterance(textToSpeak);
+    utterance.rate = 0.85;
+    utterance.pitch = 1.0;
+
+    // Try finding Hindi or Sanskrit or English voice
+    const voices = window.speechSynthesis.getVoices();
+    const suitableVoice = voices.find(v => v.lang.includes('hi') || v.lang.includes('sa')) || voices.find(v => v.lang.includes('en'));
+    if (suitableVoice) utterance.voice = suitableVoice;
+
+    isShlokaSpeaking = true;
+    if (btnReciteShloka) {
+      btnReciteShloka.classList.add('playing');
+      btnReciteShloka.querySelector('.recite-label').textContent = 'Playing Recitation...';
+    }
+
+    utterance.onend = () => {
+      isShlokaSpeaking = false;
+      if (btnReciteShloka) {
+        btnReciteShloka.classList.remove('playing');
+        btnReciteShloka.querySelector('.recite-label').textContent = 'Listen Recitation';
+      }
+    };
+
+    utterance.onerror = () => {
+      isShlokaSpeaking = false;
+      if (btnReciteShloka) {
+        btnReciteShloka.classList.remove('playing');
+        btnReciteShloka.querySelector('.recite-label').textContent = 'Listen Recitation';
+      }
+    };
+
+    window.speechSynthesis.speak(utterance);
   }
 
   // ─── Challenge Modal Dialog Logic ───
