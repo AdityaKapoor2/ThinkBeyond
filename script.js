@@ -48,6 +48,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const dashUnlocksTray = document.getElementById('dash-unlocks-tray');
   const unlocksTotalCount = document.getElementById('unlocks-total-count');
 
+  // Dedicated Path Selection Screen (Religious & Spiritual Traditions)
+  const pathSelectionScreen = document.getElementById('path-selection-screen');
+  const btnBackFromSubpaths = document.getElementById('btn-back-from-subpaths');
+  const activeTraditionTag = document.getElementById('active-tradition-tag');
+  const subpathsCardsContainer = document.getElementById('subpaths-cards-container');
+  const btnEnterTradition = document.getElementById('btn-enter-tradition');
+  const btnEnterTraditionText = document.getElementById('btn-enter-tradition-text');
+
   // Sidebar navigation
   const sidebarNavItems = document.querySelectorAll('.dash-sidebar .nav-item');
   const viewPanels = document.querySelectorAll('.dash-view-panel');
@@ -246,6 +254,15 @@ document.addEventListener('DOMContentLoaded', () => {
     dashboardScreen.classList.remove('hidden');
     dashboardScreen.classList.add('active');
     renderDashboard();
+  } else if (window.location.hash === '#traditions' || window.location.hash === '#paths' || window.location.search.includes('traditions')) {
+    hasTransitioned = true;
+    if (splashVideo) splashVideo.pause();
+    splashScreen.style.display = 'none';
+    landingPage.classList.remove('active');
+    landingPage.style.display = 'none';
+    dashboardScreen.classList.add('hidden');
+    pathSelectionScreen.classList.remove('hidden');
+    renderSubpathsScreen();
   }
 
   // ─── Sound Toggle Controls ───
@@ -355,10 +372,12 @@ document.addEventListener('DOMContentLoaded', () => {
       card.setAttribute('tabindex', '0');
       card.setAttribute('aria-label', `Explore ${path.title}`);
 
+      const isSpiritual = (path.id === 'spiritual');
       card.innerHTML = `
         <div class="path-emblem-wrap">${path.emblem}</div>
         <h4 class="path-title">${path.title}</h4>
         <p class="path-subtitle">${path.subtitle}</p>
+        ${isSpiritual ? '<span style="display:inline-block; font-size:0.68rem; color:#F5C66C; background:rgba(212,163,89,0.18); border:1px solid rgba(212,163,89,0.35); padding:2px 8px; border-radius:10px; margin-bottom:6px;">✦ 5 Sacred Paths</span>' : ''}
         <div class="path-mini-progress" title="${path.progress}% Complete">
           <div class="path-mini-fill" style="width: ${path.progress}%;"></div>
         </div>
@@ -366,7 +385,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
       card.addEventListener('click', () => {
         playClickSound();
-        launchPathModule(path);
+        if (path.id === 'spiritual') {
+          openPathSelectionScreen();
+        } else {
+          launchPathModule(path);
+        }
       });
 
       dashPathsGrid.appendChild(card);
@@ -468,6 +491,121 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     openChallengeModal(currentActiveChallenge);
+  }
+
+  // ─── 3. PATH SELECTION SCREEN CONTROLLER ───
+  function openPathSelectionScreen() {
+    initAudio();
+    playTempleChime(528, 2.0);
+
+    dashboardScreen.classList.remove('active');
+    dashboardScreen.classList.add('hidden');
+    pathSelectionScreen.classList.remove('hidden');
+
+    renderSubpathsScreen();
+  }
+
+  function closeSubpathSelectionToDashboard() {
+    playClickSound();
+    pathSelectionScreen.classList.add('hidden');
+    dashboardScreen.classList.remove('hidden');
+    dashboardScreen.classList.add('active');
+    renderDashboard();
+  }
+
+  if (btnBackFromSubpaths) {
+    btnBackFromSubpaths.addEventListener('click', closeSubpathSelectionToDashboard);
+  }
+
+  function renderSubpathsScreen() {
+    if (!window.PlayerState || !subpathsCardsContainer) return;
+    const state = window.PlayerState.getState();
+    const traditions = state.religiousTraditions || [];
+    const selectedId = state.selectedReligiousPathId || 'hindu_traditions';
+
+    const currentSelected = traditions.find(t => t.id === selectedId) || traditions[0];
+    if (activeTraditionTag && currentSelected) {
+      activeTraditionTag.textContent = `Active: ${currentSelected.title}`;
+    }
+    if (btnEnterTraditionText && currentSelected) {
+      btnEnterTraditionText.textContent = `EXPLORE ${currentSelected.title.toUpperCase()}`;
+    }
+
+    subpathsCardsContainer.innerHTML = '';
+
+    traditions.forEach(item => {
+      const isSelected = (item.id === selectedId);
+      const card = document.createElement('div');
+      card.className = `subpath-card ${item.colorClass || ''} ${isSelected ? 'selected' : ''}`;
+      card.setAttribute('role', 'button');
+      card.setAttribute('tabindex', '0');
+      card.setAttribute('aria-label', `${item.title}: ${item.description}`);
+
+      card.innerHTML = `
+        <div class="subpath-card-art">
+          <img class="subpath-card-img" src="${item.image}" alt="${item.title}" loading="lazy" />
+          <div class="subpath-card-gradient"></div>
+          <div class="subpath-card-emblem">${item.emblem || '🕉️'}</div>
+        </div>
+
+        <div class="subpath-card-body">
+          <h3 class="subpath-card-title">${item.title}</h3>
+          <p class="subpath-card-desc">${item.description}</p>
+          <button class="btn-subpath-select" type="button" aria-label="${isSelected ? 'Selected' : 'Select'} ${item.title}">
+            ${isSelected ? 'SELECTED' : 'SELECT'}
+          </button>
+        </div>
+      `;
+
+      card.addEventListener('click', (e) => {
+        if (isSelected && (e.target.closest('.btn-subpath-select') || e.detail >= 2)) {
+          launchReligiousTraditionModule(item);
+          return;
+        }
+
+        playClickSound();
+        window.PlayerState.selectReligiousTradition(item.id);
+        renderSubpathsScreen();
+      });
+
+      subpathsCardsContainer.appendChild(card);
+    });
+  }
+
+  function launchReligiousTraditionModule(tradition) {
+    if (!tradition || !tradition.currentModule) return;
+    const mod = tradition.currentModule;
+
+    currentActiveChallenge = {
+      type: 'tradition',
+      traditionId: tradition.id,
+      title: mod.title,
+      kicker: `${tradition.title.toUpperCase()} // SACRED ENQUIRY`,
+      prompt: mod.question,
+      options: mod.options,
+      onSuccess: () => {
+        const result = window.PlayerState.completeReligiousTraditionModule(tradition.id);
+        playCelebrationChime();
+        showRewardToast(
+          result.leveledUp ? `LEVEL UP! LEVEL ${result.newLevel}` : `${tradition.title.toUpperCase()} MASTERED!`,
+          `Earned +${result.xpGained} XP, +${result.coinsGained} Coins, and discovered '${result.relic.title}'!`,
+          result.relic.icon || '🕉️'
+        );
+        renderSubpathsScreen();
+      }
+    };
+
+    openChallengeModal(currentActiveChallenge);
+  }
+
+  if (btnEnterTradition) {
+    btnEnterTradition.addEventListener('click', () => {
+      playClickSound();
+      const selected = window.PlayerState.getSelectedReligiousTradition();
+      if (selected) {
+        launchReligiousTraditionModule(selected);
+      }
+    });
   }
 
   // ─── Challenge Modal Dialog Logic ───

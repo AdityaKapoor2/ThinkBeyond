@@ -43,6 +43,174 @@
       reward: 50,
       claimed: false
     },
+    selectedReligiousPathId: 'hindu_traditions',
+    religiousTraditions: [
+      {
+        id: 'hindu_traditions',
+        title: 'Hindu Traditions',
+        emblem: 'ॐ',
+        emblemText: 'ॐ',
+        description: 'Explore the wisdom of Yugas, Epics, Deities, Festivals & Ancient Knowledge',
+        image: 'assets/path_hindu.jpg',
+        badge: 'Sanatana Dharma',
+        colorClass: 'subpath-hindu',
+        accentColor: '#D4993B',
+        progress: 55,
+        totalEvents: 16,
+        completedEvents: 9,
+        currentModule: {
+          title: 'Sanatana Dharma & The Cosmic Order',
+          question: 'In Hindu philosophy and tradition, what fundamental concept represents the cosmic order, universal harmony, righteousness, and the sacred duties of each being?',
+          options: [
+            { text: 'Karma (Action and reaction)', correct: false },
+            { text: 'Dharma (Cosmic order and righteous duty)', correct: true },
+            { text: 'Moksha (Liberation from rebirth)', correct: false },
+            { text: 'Samsara (The cycle of existence)', correct: false }
+          ],
+          rewardXp: 180,
+          rewardCoins: 50,
+          rewardRelic: {
+            id: 'relic_om_yantra',
+            title: 'Sacred Golden Om Yantra',
+            type: 'Sacred Antiquity',
+            era: 'Vedic Antiquity',
+            icon: '🕉️'
+          }
+        }
+      },
+      {
+        id: 'buddhist_heritage',
+        title: 'Buddhist Heritage',
+        emblem: '☸',
+        emblemText: '☸',
+        description: 'Follow the path of Buddha, his teachings and the spread of Dharma',
+        image: 'assets/path_buddhist.jpg',
+        badge: 'Noble Eightfold Path',
+        colorClass: 'subpath-buddhist',
+        accentColor: '#6B90B5',
+        progress: 35,
+        totalEvents: 14,
+        completedEvents: 5,
+        currentModule: {
+          title: 'The First Sermon at Sarnath',
+          question: 'Where did Gautama Buddha deliver his historic first discourse, known as the Dhammacakkappavattana Sutta, setting the Wheel of Dhamma in motion?',
+          options: [
+            { text: 'Bodh Gaya under the sacred Bodhi Tree', correct: false },
+            { text: 'Deer Park in Sarnath near Varanasi', correct: true },
+            { text: 'Nalanda Monastic University', correct: false },
+            { text: 'The mountain cave at Rajgir', correct: false }
+          ],
+          rewardXp: 160,
+          rewardCoins: 45,
+          rewardRelic: {
+            id: 'relic_dharmachakra',
+            title: 'Sarnath Monolithic Dharmachakra',
+            type: 'Imperial Stone Relic',
+            era: 'Mauryan Empire',
+            icon: '☸️'
+          }
+        }
+      },
+      {
+        id: 'jain_philosophy',
+        title: 'Jain Philosophy',
+        emblem: '✋',
+        emblemText: '✋',
+        description: 'Discover the journey of Tirthankaras, Ahimsa, and Jain heritage',
+        image: 'assets/path_jain.jpg',
+        badge: 'Ahimsa & Anekantavada',
+        colorClass: 'subpath-jain',
+        accentColor: '#C49752',
+        progress: 25,
+        totalEvents: 12,
+        completedEvents: 3,
+        currentModule: {
+          title: 'The Teachings of Lord Mahavira',
+          question: 'Who was the 24th and last Tirthankara of the current cosmic time cycle, renowned for revitalizing the core vows of Ahimsa (non-violence) and Satya?',
+          options: [
+            { text: 'Lord Rishabhanatha (Adinatha)', correct: false },
+            { text: 'Lord Parshvanatha', correct: false },
+            { text: 'Lord Mahavira (Vardhamana)', correct: true },
+            { text: 'Lord Neminatha', correct: false }
+          ],
+          rewardXp: 160,
+          rewardCoins: 45,
+          rewardRelic: {
+            id: 'relic_ahimsa_wheel',
+            title: 'Dilwara Carved Marble Ahimsa Wheel',
+            type: 'Sacred Marble Sculpture',
+            era: 'Solanki Period',
+            icon: '🪷'
+          }
+        }
+      },
+      {
+        id: 'sikh_legacy',
+        title: 'Sikh Legacy',
+        emblem: '☬',
+        emblemText: '☬',
+        description: 'Learn about the Sikh Gurus, battles, values & culture',
+        image: 'assets/path_sikh.jpg',
+        badge: 'Khalsa Panth & Seva',
+        colorClass: 'subpath-sikh',
+        accentColor: '#4A7F99',
+        progress: 40,
+        totalEvents: 14,
+        completedEvents: 6,
+        currentModule: {
+          title: 'The Foundation of the Khalsa',
+          question: 'Which revered Sikh Guru formalized the Khalsa Panth in 1699 on Vaisakhi at Anandpur Sahib, inaugurating the Panj Pyare?',
+          options: [
+            { text: 'Guru Nanak Dev Ji', correct: false },
+            { text: 'Guru Gobind Singh Ji', correct: true },
+            { text: 'Guru Arjan Dev Ji', correct: false },
+            { text: 'Guru Tegh Bahadur Ji', correct: false }
+          ],
+          rewardXp: 170,
+          rewardCoins: 50,
+          rewardRelic: {
+            id: 'relic_kirpan',
+            title: 'Sacred Steel Kirpan of Anandpur',
+            type: 'Sacred Regalia',
+            era: 'Khalsa Era',
+            icon: '⚔️'
+          }
+        }
+      },
+      {
+        id: 'folk_traditions',
+        title: 'Other Traditions & Folk Cultures',
+        emblem: '🎭',
+        emblemText: '🎭',
+        description: 'Explore diverse tribal, folk and regional traditions',
+        image: 'assets/path_folk.jpg',
+        badge: 'Living Folk & Tribal Lore',
+        colorClass: 'subpath-folk',
+        accentColor: '#9C5832',
+        progress: 20,
+        totalEvents: 12,
+        completedEvents: 2,
+        currentModule: {
+          title: 'The Sacred Theatre of Theyyam',
+          question: 'The ritual dance-theatre tradition of Theyyam, invoking sacred deities and folk legends through monumental headdresses and vibrant sacred face paint, originates primarily in:',
+          options: [
+            { text: 'North Malabar region of Kerala', correct: true },
+            { text: 'Shekhawati desert region of Rajasthan', correct: false },
+            { text: 'Kullu Valley of Himachal Pradesh', correct: false },
+            { text: 'Sundarbans of Bengal', correct: false }
+          ],
+          rewardXp: 150,
+          rewardCoins: 40,
+          rewardRelic: {
+            id: 'relic_theyyam_crown',
+            title: 'Ceremonial Theyyam Headdress Relief',
+            type: 'Folk Antiquity',
+            era: 'Traditional Heritage',
+            icon: '👺'
+          }
+        }
+      }
+    ],
     paths: [
       {
         id: 'spiritual',
@@ -261,7 +429,12 @@
         const stored = localStorage.getItem(STORAGE_KEY);
         if (stored) {
           const parsed = JSON.parse(stored);
-          return { ...defaultState, ...parsed };
+          return {
+            ...defaultState,
+            ...parsed,
+            religiousTraditions: parsed.religiousTraditions && parsed.religiousTraditions.length === 5 ? parsed.religiousTraditions : defaultState.religiousTraditions,
+            selectedReligiousPathId: parsed.selectedReligiousPathId || defaultState.selectedReligiousPathId
+          };
         }
       } catch (e) {
         console.warn('Could not read saved state from localStorage:', e);
@@ -407,6 +580,70 @@
       this.saveState();
       return {
         path,
+        xpGained,
+        coinsGained,
+        relic: module.rewardRelic,
+        leveledUp: levelResult.leveledUp,
+        newLevel: levelResult.newLevel
+      };
+    }
+
+    selectReligiousTradition(subPathId) {
+      if (!this.state.religiousTraditions) return null;
+      const found = this.state.religiousTraditions.find(t => t.id === subPathId);
+      if (found) {
+        this.state.selectedReligiousPathId = subPathId;
+        this.saveState();
+        return found;
+      }
+      return null;
+    }
+
+    getSelectedReligiousTradition() {
+      if (!this.state.religiousTraditions) return null;
+      return this.state.religiousTraditions.find(t => t.id === this.state.selectedReligiousPathId) || this.state.religiousTraditions[0];
+    }
+
+    completeReligiousTraditionModule(subPathId) {
+      const tradition = (this.state.religiousTraditions || []).find(t => t.id === subPathId);
+      if (!tradition) return null;
+
+      tradition.completedEvents = Math.min(tradition.totalEvents, tradition.completedEvents + 1);
+      tradition.progress = Math.min(100, Math.round((tradition.completedEvents / tradition.totalEvents) * 100));
+
+      const module = tradition.currentModule;
+      const xpGained = module.rewardXp || 150;
+      const coinsGained = module.rewardCoins || 45;
+
+      if (module.rewardRelic) {
+        const newRelic = {
+          id: module.rewardRelic.id + '_' + Date.now(),
+          title: module.rewardRelic.title,
+          era: module.rewardRelic.era,
+          type: module.rewardRelic.type,
+          icon: module.rewardRelic.icon || '🏺',
+          image: tradition.id
+        };
+        this.state.recentUnlocks.unshift(newRelic);
+        if (this.state.recentUnlocks.length > 15) {
+          this.state.recentUnlocks.pop();
+        }
+      }
+
+      this.advanceDailyQuest();
+      const levelResult = this.addXP(xpGained);
+      this.addCurrencies(coinsGained, 8, 1);
+
+      // Also advance overall spiritual path progress
+      const spiritualPath = this.state.paths.find(p => p.id === 'spiritual');
+      if (spiritualPath) {
+        spiritualPath.completedEvents = Math.min(spiritualPath.totalEvents, spiritualPath.completedEvents + 1);
+        spiritualPath.progress = Math.min(100, Math.round((spiritualPath.completedEvents / spiritualPath.totalEvents) * 100));
+      }
+
+      this.saveState();
+      return {
+        tradition,
         xpGained,
         coinsGained,
         relic: module.rewardRelic,
