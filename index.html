@@ -3,16 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ThinkBeyond | Loading</title>
+  <title>BharatQuest | Play. Explore. Discover Bharat.</title>
+  <meta name="description" content="Experience the glory of India's civilizations through games, challenges and stories in BharatQuest.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@500;600;700;800&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- Fullscreen Splash Video -->
-  <div id="splash-screen">
+  <!-- Fullscreen Splash Video Screen -->
+  <div id="splash-screen" role="region" aria-label="Introductory Video Splash">
     <video id="splash-video" muted playsinline preload="auto" autoplay>
       <source src="splash.mp4" type="video/mp4">
     </video>
@@ -24,12 +25,159 @@
 
     <!-- Skip button -->
     <button id="skip-btn" aria-label="Skip intro">
-      Skip Intro
+      <span>Skip Intro</span>
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <polyline points="13 17 18 12 13 7"></polyline>
         <polyline points="6 17 11 12 6 7"></polyline>
       </svg>
     </button>
+  </div>
+
+  <!-- Landing Page Container -->
+  <div id="landing-page" class="landing-page">
+    
+    <!-- Background Image Layer -->
+    <div class="landing-bg" style="background-image: url('background.jpg');"></div>
+    
+    <!-- Cinematic Vignette & Ambient Glow Overlays -->
+    <div class="landing-overlay"></div>
+    
+    <!-- Ambient Golden Particle Canvas -->
+    <canvas id="ambient-canvas" aria-hidden="true"></canvas>
+
+    <!-- Top Right Audio / Sound Control -->
+    <header class="top-bar">
+      <div class="logo-mark">
+        <span class="om-symbol">☸</span>
+        <span class="edition-tag">SIH 2026 EDITION</span>
+      </div>
+      <button id="audio-toggle-btn" class="audio-btn" aria-label="Toggle Sound" title="Toggle Sound FX">
+        <svg id="sound-on-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+          <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+        </svg>
+        <svg id="sound-off-icon" class="hidden-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+          <line x1="23" y1="9" x2="17" y2="15"></line>
+          <line x1="17" y1="9" x2="23" y2="15"></line>
+        </svg>
+      </button>
+    </header>
+
+    <!-- Center Hero Section matching the image reference -->
+    <main class="hero-container">
+      <div class="hero-content">
+        
+        <!-- Main Title -->
+        <h1 class="game-title">
+          <span class="title-text">BHARATQUEST</span>
+        </h1>
+
+        <!-- Subtitle -->
+        <p class="game-tagline">PLAY. EXPLORE. DISCOVER BHARAT.</p>
+
+        <!-- Description Paragraph -->
+        <p class="game-description">
+          Experience the glory of India's civilizations through games,<br class="hide-mobile">
+          challenges and stories.
+        </p>
+
+        <!-- CTA Start Journey Button -->
+        <div class="cta-wrapper">
+          <button id="start-journey-btn" class="btn-start-journey" aria-label="Start Journey">
+            <span class="btn-shine"></span>
+            <span class="btn-text">START JOURNEY</span>
+          </button>
+        </div>
+
+      </div>
+    </main>
+
+    <!-- Bottom Feature Bar matching the image reference -->
+    <footer class="bottom-bar-container">
+      <nav class="bottom-dock" aria-label="Explore Categories">
+        
+        <!-- Item 1: Play Games -->
+        <button class="dock-item" id="dock-games" aria-label="Play Games">
+          <div class="dock-icon-circle">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M21 6H3c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-10 7H8v3H6v-3H3v-2h3V8h2v3h3v2zm4.5 2c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm3-3c-.83 0-1.5-.67-1.5-1.5S17.67 9 18.5 9s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/>
+            </svg>
+          </div>
+          <span class="dock-label">Play Games</span>
+        </button>
+
+        <div class="dock-divider"></div>
+
+        <!-- Item 2: Learn History -->
+        <button class="dock-item" id="dock-history" aria-label="Learn History">
+          <div class="dock-icon-circle">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+            </svg>
+          </div>
+          <span class="dock-label">Learn History</span>
+        </button>
+
+        <div class="dock-divider"></div>
+
+        <!-- Item 3: Earn Rewards -->
+        <button class="dock-item" id="dock-rewards" aria-label="Earn Rewards">
+          <div class="dock-icon-circle">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="9"></circle>
+              <circle cx="12" cy="12" r="3"></circle>
+              <path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1"></path>
+            </svg>
+          </div>
+          <span class="dock-label">Earn Rewards</span>
+        </button>
+
+        <div class="dock-divider"></div>
+
+        <!-- Item 4: Explore Culture -->
+        <button class="dock-item" id="dock-culture" aria-label="Explore Culture">
+          <div class="dock-icon-circle">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 21h18M4 18h16M6 14v4M10 14v4M14 14v4M18 14v4M12 2l8 8H4l8-8z"></path>
+            </svg>
+          </div>
+          <span class="dock-label">Explore Culture</span>
+        </button>
+
+      </nav>
+    </footer>
+
+  </div>
+
+  <!-- Interactive Detail Dialog / Modal -->
+  <div id="info-modal" class="modal-backdrop" aria-hidden="true" role="dialog" aria-labelledby="modal-headline">
+    <div class="modal-card">
+      <div class="modal-header">
+        <span class="modal-kicker" id="modal-kicker">EXPLORE</span>
+        <h3 id="modal-headline" class="modal-headline">Feature Overview</h3>
+        <button id="modal-close-btn" class="modal-close-btn" aria-label="Close modal">✕</button>
+      </div>
+      <div class="modal-body" id="modal-body">
+        <!-- Injected via JavaScript -->
+      </div>
+      <div class="modal-footer">
+        <button id="modal-action-btn" class="btn-start-journey modal-btn">
+          <span class="btn-text">CONTINUE JOURNEY</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Journey Start Toast Banner -->
+  <div id="journey-toast" class="journey-toast" role="status" aria-live="polite">
+    <div class="toast-inner">
+      <span class="toast-symbol">🪔</span>
+      <div class="toast-text">
+        <strong>JOURNEY BEGUN</strong>
+        <p>Entering the Grand Courtyard of Ancient Bharat...</p>
+      </div>
+    </div>
   </div>
 
   <script src="script.js"></script>
