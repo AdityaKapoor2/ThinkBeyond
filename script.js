@@ -63,6 +63,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const ramayanaSvgPaths = document.getElementById('ramayana-svg-paths');
   const ramayanaNodesLayer = document.getElementById('ramayana-nodes-layer');
 
+  // TradGames Map Screen Elements
+  const tradgamesMapScreen = document.getElementById('tradgames-map-screen');
+  const btnBackFromTradgames = document.getElementById('btn-back-from-tradgames');
+  const tradgamesSvgPaths = document.getElementById('tradgames-svg-paths');
+  const tradgamesNodesLayer = document.getElementById('tradgames-nodes-layer');
+
   // Ramayana Dedicated Event Screen Elements
   const ramayanaEventScreen = document.getElementById('ramayana-event-screen');
   const btnBackToMap = document.getElementById('btn-back-to-map');
@@ -181,7 +187,7 @@ document.addEventListener('DOMContentLoaded', () => {
       osc2.start(now);
       osc1.stop(now + duration);
       osc2.stop(now + duration);
-    } catch (e) {}
+    } catch (e) { }
   }
 
   function playClickSound() {
@@ -201,7 +207,7 @@ document.addEventListener('DOMContentLoaded', () => {
       gain.connect(audioCtx.destination);
       osc.start(now);
       osc.stop(now + 0.1);
-    } catch (e) {}
+    } catch (e) { }
   }
 
   function playCelebrationChime() {
@@ -230,7 +236,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 400);
   }
 
-  splashVideo.play().catch(() => {});
+  splashVideo.play().catch(() => { });
 
   splashVideo.addEventListener('timeupdate', () => {
     if (splashVideo.duration) {
@@ -430,6 +436,8 @@ document.addEventListener('DOMContentLoaded', () => {
         playClickSound();
         if (path.id === 'spiritual') {
           openPathSelectionScreen();
+        } else if (path.id === 'tradgames') {
+          openTradGamesMapScreen();
         } else {
           launchPathModule(path);
         }
@@ -780,6 +788,92 @@ document.addEventListener('DOMContentLoaded', () => {
       });
 
       ramayanaNodesLayer.appendChild(marker);
+    });
+  }
+
+  // ─── TradGames Map Screen Logic ───
+  function openTradGamesMapScreen() {
+    if (dashboardScreen) {
+      dashboardScreen.classList.remove('active');
+      dashboardScreen.classList.add('hidden');
+    }
+    if (tradgamesMapScreen) tradgamesMapScreen.classList.remove('hidden');
+    renderTradGamesMap();
+  }
+
+  function closeTradGamesMapScreen() {
+    if (tradgamesMapScreen) tradgamesMapScreen.classList.add('hidden');
+    if (dashboardScreen) {
+      dashboardScreen.classList.remove('hidden');
+      dashboardScreen.classList.add('active');
+    }
+  }
+
+  if (btnBackFromTradgames) {
+    btnBackFromTradgames.addEventListener('click', () => {
+      playClickSound();
+      closeTradGamesMapScreen();
+    });
+  }
+
+  function renderTradGamesMap() {
+    if (!window.PlayerState || !tradgamesNodesLayer || !tradgamesSvgPaths) return;
+    const events = window.PlayerState.getTradGamesEvents();
+
+    tradgamesSvgPaths.innerHTML = '';
+    for (let i = 0; i < events.length - 1; i++) {
+      const e1 = events[i];
+      const e2 = events[i + 1];
+      const x1 = e1.coords.left * 10.24;
+      const y1 = e1.coords.top * 6.00;
+      const x2 = e2.coords.left * 10.24;
+      const y2 = e2.coords.top * 6.00;
+
+      const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      const cx1 = x1 + (x2 - x1) * 0.3;
+      const cy1 = y1 + (y2 - y1) * 0.1;
+      const cx2 = x1 + (x2 - x1) * 0.7;
+      const cy2 = y1 + (y2 - y1) * 0.9;
+      
+      path.setAttribute('d', `M ${x1} ${y1} C ${cx1} ${cy1}, ${cx2} ${cy2}, ${x2} ${y2}`);
+      path.setAttribute('class', 'timeline-conn-path');
+      tradgamesSvgPaths.appendChild(path);
+    }
+
+    tradgamesNodesLayer.innerHTML = '';
+    events.forEach(event => {
+      const marker = document.createElement('button');
+      marker.className = 'ramayana-node-marker';
+      marker.style.left = `${event.coords.left}%`;
+      marker.style.top = `${event.coords.top}%`;
+      marker.setAttribute('type', 'button');
+      marker.setAttribute('aria-label', `${event.title} (${event.location}): ${event.status}`);
+      marker.dataset.eventId = event.id;
+
+      let badgeSymbol = '◯';
+      let badgeClass = 'badge-available';
+      if (event.status === 'completed') { badgeSymbol = '✓'; badgeClass = 'badge-completed'; }
+      else if (event.status === 'in_progress') { badgeSymbol = '◯'; badgeClass = 'badge-inprogress'; }
+      else if (event.status === 'locked') { badgeSymbol = '🔒'; badgeClass = 'badge-locked'; }
+
+      marker.innerHTML = `
+        <div class="node-circle-portal">
+          <img src="${event.image}" alt="${event.title}" class="node-thumb-img" loading="lazy" style="${event.imagePosition ? `object-position: ${event.imagePosition};` : ''}" />
+          <span class="node-status-icon-badge ${badgeClass}">${badgeSymbol}</span>
+        </div>
+        <div class="node-label-pill">
+          <span class="node-title-text">${event.title}</span>
+          <span class="node-location-text">(${event.location})</span>
+        </div>
+      `;
+
+      marker.addEventListener('click', () => {
+        playClickSound();
+        const path = window.PlayerState.state.paths.find(p => p.id === 'tradgames');
+        if (path) launchPathModule(path);
+      });
+
+      tradgamesNodesLayer.appendChild(marker);
     });
   }
 

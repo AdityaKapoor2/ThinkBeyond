@@ -521,6 +521,62 @@
         }
       ]
     },
+    tradgamesTimeline: {
+      title: 'Traditional Games',
+      subtitle: 'Ancient Roots to Modern Revival',
+      events: [
+        {
+          id: 'trad_ancient',
+          order: 1,
+          title: 'ancient games(Indus valley and vedic era)',
+          location: 'Indus Valley and Vedic Era',
+          status: 'completed',
+          badgeType: 'completed',
+          coords: { left: 15, top: 75 },
+          image: 'assets/ramayana_nodes/birth_of_rama.png', // Placeholder
+        },
+        {
+          id: 'trad_classical',
+          order: 2,
+          title: 'classical and philosophical age',
+          location: 'Ancient India',
+          status: 'completed',
+          badgeType: 'completed',
+          coords: { left: 25, top: 50 },
+          image: 'assets/ramayana_nodes/exile_begins.png', // Placeholder
+        },
+        {
+          id: 'trad_medieval',
+          order: 3,
+          title: 'Medieval and royal court',
+          location: 'Imperial Courts',
+          status: 'in_progress',
+          badgeType: 'inprogress',
+          coords: { left: 50, top: 30 },
+          image: 'assets/ramayana_nodes/ramas_coronation.png', // Placeholder
+        },
+        {
+          id: 'trad_folk',
+          order: 4,
+          title: 'folk and street heritage',
+          location: 'Villages of Bharat',
+          status: 'locked',
+          badgeType: 'locked',
+          coords: { left: 75, top: 55 },
+          image: 'assets/ramayana_nodes/hanumans_journey.png', // Placeholder
+        },
+        {
+          id: 'trad_modern',
+          order: 5,
+          title: 'Modern revival and digital era',
+          location: 'Global Stage',
+          status: 'locked',
+          badgeType: 'locked',
+          coords: { left: 85, top: 80 },
+          image: 'assets/ramayana_nodes/bridge_to_lanka.png', // Placeholder
+        }
+      ]
+    },
     religiousTraditions: [
       {
         id: 'hindu_traditions',
@@ -913,7 +969,10 @@
             selectedReligiousPathId: parsed.selectedReligiousPathId || defaultState.selectedReligiousPathId,
             ramayanaTimeline: (parsed.ramayanaTimeline && parsed.ramayanaTimeline.events && parsed.ramayanaTimeline.events.length === 10) 
               ? parsed.ramayanaTimeline 
-              : defaultState.ramayanaTimeline
+              : defaultState.ramayanaTimeline,
+            tradgamesTimeline: (parsed.tradgamesTimeline && parsed.tradgamesTimeline.events && parsed.tradgamesTimeline.events.length === 5)
+              ? parsed.tradgamesTimeline
+              : defaultState.tradgamesTimeline
           };
         }
       } catch (e) {
@@ -1141,6 +1200,17 @@
       return (this.state.ramayanaTimeline && this.state.ramayanaTimeline.events) 
         ? this.state.ramayanaTimeline.events 
         : defaultState.ramayanaTimeline.events;
+    }
+
+    // ─── Traditional Games Timeline Map Methods ───
+    getTradGamesTimeline() {
+      return this.state.tradgamesTimeline || defaultState.tradgamesTimeline;
+    }
+
+    getTradGamesEvents() {
+      return (this.state.tradgamesTimeline && this.state.tradgamesTimeline.events)
+        ? this.state.tradgamesTimeline.events
+        : defaultState.tradgamesTimeline.events;
     }
 
     getRamayanaEvent(eventId) {

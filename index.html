@@ -690,6 +690,65 @@
     </div>
   </div>
 
+  <!-- ============================================================
+       3C-ALT. TRADITIONAL GAMES TIMELINE MAP SCREEN
+       ============================================================ -->
+  <div id="tradgames-map-screen" class="ramayana-map-screen hidden" role="region" aria-label="Traditional Games Map">
+    <div class="ramayana-map-overlay-bg"></div>
+
+    <div class="ramayana-map-frame">
+      <!-- Top Title Bar -->
+      <header class="ramayana-topbar">
+        <div class="ramayana-topbar-left">
+          <button id="btn-back-from-tradgames" class="btn-subpath-back" aria-label="Back to Dashboard">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+            <span>Back to Dashboard</span>
+          </button>
+
+          <div class="ramayana-header-titles">
+            <h1 class="ramayana-main-title">TRADITIONAL GAMES</h1>
+            <span class="ramayana-title-sep">/</span>
+            <span class="ramayana-subtitle">EXPLORATION MAP <span class="ramayana-yuga-tag">(BHARAT)</span></span>
+          </div>
+        </div>
+      </header>
+
+      <!-- Subheader & Epics Kicker -->
+      <div class="ramayana-kicker-bar">
+        <div class="ramayana-story-tag">
+          <h2 class="ramayana-kicker-title">The Evolution of Traditional Games</h2>
+          <p class="ramayana-tagline">Strategy &bull; Physical Prowess &bull; Culture</p>
+        </div>
+      </div>
+
+      <!-- Main Map Stage Area -->
+      <div class="ramayana-canvas-wrapper" id="tradgames-canvas-wrapper">
+        <div class="ramayana-map-canvas" id="tradgames-map-canvas">
+          <img src="assets/tradgames_map.jpg" alt="Traditional Games Map" class="ramayana-bg-art" id="tradgames-bg-art" />
+          <svg class="ramayana-svg-paths" viewBox="0 0 1024 600" preserveAspectRatio="none" id="tradgames-svg-paths"></svg>
+          <div class="ramayana-nodes-layer" id="tradgames-nodes-layer"></div>
+          
+          <div class="ramayana-map-legend" id="tradgames-map-legend">
+            <h4 class="legend-title">Map Legend</h4>
+            <ul class="legend-list">
+              <li class="legend-item"><span class="legend-symbol icon-completed">✓</span> <span>Completed</span></li>
+              <li class="legend-item"><span class="legend-symbol icon-inprogress">◯</span> <span>In Progress</span></li>
+              <li class="legend-item"><span class="legend-symbol icon-available">◯</span> <span>Available</span></li>
+              <li class="legend-item"><span class="legend-symbol icon-locked">🔒</span> <span>Locked</span></li>
+            </ul>
+          </div>
+
+          <div class="ramayana-bottom-banner">
+            <span class="diamond-flourish">◇</span>
+            <span class="banner-text">Complete events in order or explore side events to earn more rewards!</span>
+            <span class="diamond-flourish">◇</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- ============================================================
        3D. DEDICATED RAMAYANA EVENT STORY PAGE (OTHER PAGE)
