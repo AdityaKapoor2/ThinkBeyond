@@ -834,7 +834,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const cy1 = y1 + (y2 - y1) * 0.1;
       const cx2 = x1 + (x2 - x1) * 0.7;
       const cy2 = y1 + (y2 - y1) * 0.9;
-      
+
       path.setAttribute('d', `M ${x1} ${y1} C ${cx1} ${cy1}, ${cx2} ${cy2}, ${x2} ${y2}`);
       path.setAttribute('class', 'timeline-conn-path');
       tradgamesSvgPaths.appendChild(path);
@@ -869,8 +869,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
       marker.addEventListener('click', () => {
         playClickSound();
-        const path = window.PlayerState.state.paths.find(p => p.id === 'tradgames');
-        if (path) launchPathModule(path);
+        if (event.url) {
+          if (event.url.startsWith('http')) {
+            // External Netlify-hosted games: open in new tab
+            window.open(event.url, '_blank');
+          } else {
+            // Local game (Build Harappa): navigate in same window
+            window.location.href = event.url;
+          }
+        }
       });
 
       tradgamesNodesLayer.appendChild(marker);

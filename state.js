@@ -528,52 +528,57 @@
         {
           id: 'trad_ancient',
           order: 1,
-          title: 'ancient games(Indus valley and vedic era)',
-          location: 'Indus Valley and Vedic Era',
+          title: 'AKSHA DYUTA',
+          location: 'Dice Game of the Epics',
           status: 'completed',
           badgeType: 'completed',
           coords: { left: 15, top: 75 },
-          image: 'assets/ramayana_nodes/birth_of_rama.png', // Placeholder
+          image: 'assets/ramayana_nodes/birth_of_rama.png',
+          url: 'https://bharatam-aksha-dyuta.netlify.app/',
         },
         {
           id: 'trad_classical',
           order: 2,
-          title: 'classical and philosophical age',
-          location: 'Ancient India',
+          title: 'LOST SCRIPT DECODER',
+          location: 'Decipher Ancient Scripts',
           status: 'completed',
           badgeType: 'completed',
           coords: { left: 25, top: 50 },
-          image: 'assets/ramayana_nodes/exile_begins.png', // Placeholder
+          image: 'assets/ramayana_nodes/exile_begins.png',
+          url: 'https://bharatamlostscriptdecoder.netlify.app/',
         },
         {
           id: 'trad_medieval',
           order: 3,
-          title: 'Medieval and royal court',
-          location: 'Imperial Courts',
+          title: 'CHATURANGA',
+          location: 'The Origin of Chess',
           status: 'in_progress',
           badgeType: 'inprogress',
           coords: { left: 50, top: 30 },
-          image: 'assets/ramayana_nodes/ramas_coronation.png', // Placeholder
+          image: 'assets/ramayana_nodes/ramas_coronation.png',
+          url: 'https://bharatamchaturanga.netlify.app/',
         },
         {
           id: 'trad_folk',
           order: 4,
-          title: 'folk and street heritage',
-          location: 'Villages of Bharat',
+          title: 'LOST SEAL',
+          location: 'Recover the Ancient Seal',
           status: 'locked',
           badgeType: 'locked',
           coords: { left: 75, top: 55 },
-          image: 'assets/ramayana_nodes/hanumans_journey.png', // Placeholder
+          image: 'assets/ramayana_nodes/hanuman_journey.png',
+          url: 'https://bharatam-lost-seal-game.netlify.app/',
         },
         {
           id: 'trad_modern',
           order: 5,
-          title: 'Modern revival and digital era',
-          location: 'Global Stage',
+          title: 'BUILD HARAPPA',
+          location: 'Reconstruct the Lost City',
           status: 'locked',
           badgeType: 'locked',
           coords: { left: 85, top: 80 },
-          image: 'assets/ramayana_nodes/bridge_to_lanka.png', // Placeholder
+          image: 'assets/ramayana_nodes/bridge_to_lanka.png',
+          url: 'games/Game4/index.html',
         }
       ]
     },
@@ -967,12 +972,33 @@
             ...parsed,
             religiousTraditions: parsed.religiousTraditions && parsed.religiousTraditions.length === 5 ? parsed.religiousTraditions : defaultState.religiousTraditions,
             selectedReligiousPathId: parsed.selectedReligiousPathId || defaultState.selectedReligiousPathId,
-            ramayanaTimeline: (parsed.ramayanaTimeline && parsed.ramayanaTimeline.events && parsed.ramayanaTimeline.events.length === 10) 
-              ? parsed.ramayanaTimeline 
-              : defaultState.ramayanaTimeline,
-            tradgamesTimeline: (parsed.tradgamesTimeline && parsed.tradgamesTimeline.events && parsed.tradgamesTimeline.events.length === 5)
-              ? parsed.tradgamesTimeline
-              : defaultState.tradgamesTimeline
+            ramayanaTimeline: (() => {
+              const base = JSON.parse(JSON.stringify(defaultState.ramayanaTimeline));
+              if (parsed.ramayanaTimeline && parsed.ramayanaTimeline.events && parsed.ramayanaTimeline.events.length === 10) {
+                base.events.forEach((evt, i) => {
+                  const cached = parsed.ramayanaTimeline.events[i];
+                  if (cached) {
+                    evt.status = cached.status || evt.status;
+                    evt.badgeType = cached.badgeType || evt.badgeType;
+                  }
+                });
+              }
+              return base;
+            })(),
+            tradgamesTimeline: (() => {
+              // Always use default event definitions (names, URLs) but merge cached progress
+              const base = JSON.parse(JSON.stringify(defaultState.tradgamesTimeline));
+              if (parsed.tradgamesTimeline && parsed.tradgamesTimeline.events && parsed.tradgamesTimeline.events.length === 5) {
+                base.events.forEach((evt, i) => {
+                  const cached = parsed.tradgamesTimeline.events[i];
+                  if (cached) {
+                    evt.status = cached.status || evt.status;
+                    evt.badgeType = cached.badgeType || evt.badgeType;
+                  }
+                });
+              }
+              return base;
+            })()
           };
         }
       } catch (e) {
@@ -1197,8 +1223,8 @@
     }
 
     getRamayanaEvents() {
-      return (this.state.ramayanaTimeline && this.state.ramayanaTimeline.events) 
-        ? this.state.ramayanaTimeline.events 
+      return (this.state.ramayanaTimeline && this.state.ramayanaTimeline.events)
+        ? this.state.ramayanaTimeline.events
         : defaultState.ramayanaTimeline.events;
     }
 

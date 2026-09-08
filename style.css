@@ -3617,3 +3617,36 @@ body {
     justify-content: center;
   }
 }
+
+.game-iframe-body {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+}
+
+.game-iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: #0a0603;
+  display: block;
+}
+
+@media (max-width: 600px) {
+  .game-iframe-header {
+    padding: 8px 12px;
+    min-height: 44px;
+  }
+
+  .game-iframe-title-text {
+    font-size: 0.85rem;
+  }
+
+  .btn-close-game-iframe span {
+    display: none;
+  }
+
+  .btn-close-game-iframe {
+    padding: 6px 8px;
+  }
+}
