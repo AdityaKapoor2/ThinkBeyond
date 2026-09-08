@@ -563,7 +563,7 @@
           status: 'locked',
           badgeType: 'locked',
           coords: { left: 75, top: 55 },
-          image: 'assets/ramayana_nodes/hanumans_journey.png', // Placeholder
+          image: 'assets/ramayana_nodes/hanuman_journey.png', // Placeholder
         },
         {
           id: 'trad_modern',
