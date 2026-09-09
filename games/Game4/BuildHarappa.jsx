@@ -1,16 +1,16 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { 
-  getCardinalNeighbors, 
-  calculateCityStats, 
-  processEndTurn, 
+import {
+  getCardinalNeighbors,
+  calculateCityStats,
+  processEndTurn,
   createInitialGrid,
   DEFAULT_GRID_ROWS,
-  DEFAULT_GRID_COLS 
+  DEFAULT_GRID_COLS
 } from './cityBuilderEngine';
-import { 
-  HARAPPA_THEME, 
-  BUILDING_DEFINITIONS, 
-  GAME_CONSTANTS 
+import {
+  HARAPPA_THEME,
+  BUILDING_DEFINITIONS,
+  GAME_CONSTANTS
 } from './harappaConfig';
 import { useHarappaAudio } from './useHarappaAudio';
 
@@ -394,7 +394,7 @@ export default function BuildHarappa({ onReturnToTimeline, onNextMission }) {
   const currentActiveBuilding = BUILDING_DEFINITIONS.find((b) => b.id === activeTool);
 
   return (
-    <div 
+    <div
       className="w-full h-screen max-h-screen flex flex-col justify-between select-none overflow-hidden font-sans"
       style={{
         backgroundColor: HARAPPA_THEME.bgOuter,
@@ -404,7 +404,7 @@ export default function BuildHarappa({ onReturnToTimeline, onNextMission }) {
       {/* =====================================================================
           1. TOP RESOURCE BAR
       ===================================================================== */}
-      <header 
+      <header
         className="w-full px-6 py-2.5 flex items-center justify-between border-b"
         style={{
           backgroundColor: HARAPPA_THEME.panelBg,
@@ -413,24 +413,24 @@ export default function BuildHarappa({ onReturnToTimeline, onNextMission }) {
       >
         {/* Title & Era Badge */}
         <div className="flex items-center space-x-3">
-          <div 
+          <div
             className="w-8 h-8 rounded-lg flex items-center justify-center border"
-            style={{ 
+            style={{
               backgroundColor: HARAPPA_THEME.gridCanvasBg,
               borderColor: HARAPPA_THEME.border,
-              color: HARAPPA_THEME.goldAccent 
+              color: HARAPPA_THEME.goldAccent
             }}
           >
             <BadgeSealIcon className="w-5 h-5" />
           </div>
           <div>
             <div className="flex items-center space-x-2">
-              <span 
+              <span
                 className="text-[10px] font-bold uppercase tracking-widest px-1.5 py-0.5 rounded border"
-                style={{ 
-                  backgroundColor: 'rgba(232, 199, 126, 0.12)', 
+                style={{
+                  backgroundColor: 'rgba(232, 199, 126, 0.12)',
                   borderColor: 'rgba(232, 199, 126, 0.3)',
-                  color: HARAPPA_THEME.goldAccent 
+                  color: HARAPPA_THEME.goldAccent
                 }}
               >
                 BHARATAM • INDUS VALLEY
@@ -439,7 +439,7 @@ export default function BuildHarappa({ onReturnToTimeline, onNextMission }) {
                 Turn {turnNumber}
               </span>
             </div>
-            <h1 
+            <h1
               className="text-sm font-extrabold tracking-wide"
               style={{ color: HARAPPA_THEME.goldAccent }}
             >
@@ -451,11 +451,11 @@ export default function BuildHarappa({ onReturnToTimeline, onNextMission }) {
         {/* 4 Resource Chips */}
         <div className="flex items-center space-x-3 sm:space-x-4">
           {/* Water Chip */}
-          <div 
+          <div
             className="px-3 py-1 rounded-lg border flex items-center space-x-2 text-xs font-mono"
-            style={{ 
+            style={{
               backgroundColor: HARAPPA_THEME.gridCanvasBg,
-              borderColor: resources.water <= 20 ? HARAPPA_THEME.warningLow : HARAPPA_THEME.border 
+              borderColor: resources.water <= 20 ? HARAPPA_THEME.warningLow : HARAPPA_THEME.border
             }}
           >
             <RiverWaterIcon className="w-4 h-4" stroke={HARAPPA_THEME.waterIcon} />
@@ -467,11 +467,11 @@ export default function BuildHarappa({ onReturnToTimeline, onNextMission }) {
           </div>
 
           {/* Food Chip */}
-          <div 
+          <div
             className="px-3 py-1 rounded-lg border flex items-center space-x-2 text-xs font-mono"
-            style={{ 
+            style={{
               backgroundColor: HARAPPA_THEME.gridCanvasBg,
-              borderColor: resources.food <= 20 ? HARAPPA_THEME.warningLow : HARAPPA_THEME.border 
+              borderColor: resources.food <= 20 ? HARAPPA_THEME.warningLow : HARAPPA_THEME.border
             }}
           >
             <GranaryIcon className="w-4 h-4" stroke={HARAPPA_THEME.goldAccent} />
@@ -483,11 +483,11 @@ export default function BuildHarappa({ onReturnToTimeline, onNextMission }) {
           </div>
 
           {/* Materials Chip */}
-          <div 
+          <div
             className="px-3 py-1 rounded-lg border flex items-center space-x-2 text-xs font-mono"
-            style={{ 
+            style={{
               backgroundColor: HARAPPA_THEME.gridCanvasBg,
-              borderColor: resources.materials < 10 ? HARAPPA_THEME.warningLow : HARAPPA_THEME.border 
+              borderColor: resources.materials < 10 ? HARAPPA_THEME.warningLow : HARAPPA_THEME.border
             }}
           >
             <HouseIcon className="w-4 h-4" stroke={HARAPPA_THEME.mutedGold} />
@@ -499,9 +499,9 @@ export default function BuildHarappa({ onReturnToTimeline, onNextMission }) {
           </div>
 
           {/* Highlighted Civilization Score Chip */}
-          <div 
+          <div
             className="px-4 py-1.5 rounded-lg border flex items-center space-x-2.5 shadow-md transition-all"
-            style={{ 
+            style={{
               backgroundColor: 'rgba(232, 199, 126, 0.15)',
               borderColor: HARAPPA_THEME.goldAccent,
             }}
@@ -522,10 +522,10 @@ export default function BuildHarappa({ onReturnToTimeline, onNextMission }) {
           <button
             onClick={toggleMute}
             className="p-2 rounded-lg border transition-colors hover:opacity-80 ml-2"
-            style={{ 
+            style={{
               backgroundColor: HARAPPA_THEME.gridCanvasBg,
               borderColor: HARAPPA_THEME.border,
-              color: isMuted ? HARAPPA_THEME.warningLow : HARAPPA_THEME.goldAccent 
+              color: isMuted ? HARAPPA_THEME.warningLow : HARAPPA_THEME.goldAccent
             }}
             title={isMuted ? "Unmute Audio" : "Mute Audio"}
             aria-label={isMuted ? "Unmute Audio" : "Mute Audio"}
@@ -539,11 +539,11 @@ export default function BuildHarappa({ onReturnToTimeline, onNextMission }) {
           2. THREE-ZONE MAIN LAYOUT (TOOLBAR, GRID CANVAS, STATS PANEL)
       ===================================================================== */}
       <main className="flex-1 flex flex-row items-stretch justify-center p-3 gap-4 max-w-7xl mx-auto w-full overflow-hidden">
-        
+
         {/* -------------------------------------------------------------------
             LEFT TOOLBAR: Vertical Building Selection
         ------------------------------------------------------------------- */}
-        <aside 
+        <aside
           className="w-56 flex flex-col justify-between p-3 rounded-xl border shadow-lg overflow-y-auto"
           style={{
             backgroundColor: HARAPPA_THEME.panelBg,
@@ -581,12 +581,12 @@ export default function BuildHarappa({ onReturnToTimeline, onNextMission }) {
                     title={tool.description}
                   >
                     <div className="flex items-center space-x-2.5">
-                      <div 
+                      <div
                         className="w-7 h-7 rounded flex items-center justify-center border"
-                        style={{ 
+                        style={{
                           backgroundColor: tool.tileBg,
                           borderColor: HARAPPA_THEME.border,
-                          color: tool.iconTint 
+                          color: tool.iconTint
                         }}
                       >
                         {renderToolIcon(tool.id, "w-4 h-4", tool.iconTint)}
@@ -611,12 +611,12 @@ export default function BuildHarappa({ onReturnToTimeline, onNextMission }) {
           </div>
 
           {/* Active Tool Info Tip */}
-          <div 
+          <div
             className="p-2.5 rounded-lg border text-[11px] leading-relaxed mt-2"
-            style={{ 
+            style={{
               backgroundColor: HARAPPA_THEME.gridCanvasBg,
               borderColor: HARAPPA_THEME.border,
-              color: HARAPPA_THEME.creamMuted 
+              color: HARAPPA_THEME.creamMuted
             }}
           >
             {currentActiveBuilding ? (
@@ -636,10 +636,10 @@ export default function BuildHarappa({ onReturnToTimeline, onNextMission }) {
             CENTER GRID CANVAS: 6x6 Ancient City Grid
         ------------------------------------------------------------------- */}
         <section className="flex-1 flex flex-col items-center justify-center relative">
-          
+
           {/* Inline Error Toast */}
           {inlineMessage && (
-            <div 
+            <div
               className="absolute top-2 z-30 px-4 py-1.5 rounded-full border text-xs font-semibold shadow-xl transition-all duration-200 animate-pulse"
               style={{
                 backgroundColor: 'rgba(58, 44, 30, 0.95)',
@@ -652,7 +652,7 @@ export default function BuildHarappa({ onReturnToTimeline, onNextMission }) {
           )}
 
           {/* Grid Canvas Wrapper */}
-          <div 
+          <div
             className="p-3.5 sm:p-5 rounded-2xl border-2 shadow-2xl flex flex-col items-center"
             style={{
               backgroundColor: HARAPPA_THEME.gridCanvasBg,
@@ -669,7 +669,7 @@ export default function BuildHarappa({ onReturnToTimeline, onNextMission }) {
             </div>
 
             {/* The 6x6 Interactive Grid */}
-            <div 
+            <div
               className="grid grid-cols-6 gap-1.5 sm:gap-2 select-none"
               onMouseLeave={() => setHoveredIndex(null)}
             >
@@ -754,7 +754,7 @@ export default function BuildHarappa({ onReturnToTimeline, onNextMission }) {
                     {!isRiver && cellType !== '.' && (
                       <div className="flex flex-col items-center justify-center">
                         {renderToolIcon(cellType, "w-6 h-6 sm:w-7 sm:h-7", strokeColor)}
-                        <span 
+                        <span
                           className="text-[8px] sm:text-[9px] font-semibold tracking-tighter uppercase mt-0.5"
                           style={{ color: strokeColor }}
                         >
@@ -765,7 +765,7 @@ export default function BuildHarappa({ onReturnToTimeline, onNextMission }) {
 
                     {/* House Connection Status Indicator */}
                     {cellType === 'H' && (
-                      <div 
+                      <div
                         className="absolute top-1 right-1 w-2 h-2 rounded-full"
                         style={{ backgroundColor: isConnectedHouse ? HARAPPA_THEME.successGood : HARAPPA_THEME.warningLow }}
                         title={isConnectedHouse ? "Connected to Road & Drain (+Health & Happiness)" : "Disconnected: Requires adjacent Road AND Drain"}
@@ -781,7 +781,7 @@ export default function BuildHarappa({ onReturnToTimeline, onNextMission }) {
         {/* -------------------------------------------------------------------
             RIGHT STATS PANEL: Live City Metrics & End Turn
         ------------------------------------------------------------------- */}
-        <aside 
+        <aside
           className="w-64 flex flex-col justify-between p-4 rounded-xl border shadow-lg overflow-y-auto"
           style={{
             backgroundColor: HARAPPA_THEME.panelBg,
@@ -795,7 +795,7 @@ export default function BuildHarappa({ onReturnToTimeline, onNextMission }) {
 
             <div className="space-y-3">
               {/* Population */}
-              <div 
+              <div
                 className="p-2.5 rounded-lg border"
                 style={{ backgroundColor: HARAPPA_THEME.gridCanvasBg, borderColor: HARAPPA_THEME.border }}
               >
@@ -811,7 +811,7 @@ export default function BuildHarappa({ onReturnToTimeline, onNextMission }) {
               </div>
 
               {/* Health % */}
-              <div 
+              <div
                 className="p-2.5 rounded-lg border"
                 style={{ backgroundColor: HARAPPA_THEME.gridCanvasBg, borderColor: HARAPPA_THEME.border }}
               >
@@ -822,18 +822,18 @@ export default function BuildHarappa({ onReturnToTimeline, onNextMission }) {
                   </span>
                 </div>
                 <div className="w-full h-1.5 rounded-full overflow-hidden" style={{ backgroundColor: HARAPPA_THEME.panelBg }}>
-                  <div 
+                  <div
                     className="h-full transition-all duration-300 rounded-full"
-                    style={{ 
-                      width: `${cityStats.health}%`, 
-                      backgroundColor: cityStats.health >= 70 ? HARAPPA_THEME.successGood : HARAPPA_THEME.warningLow 
+                    style={{
+                      width: `${cityStats.health}%`,
+                      backgroundColor: cityStats.health >= 70 ? HARAPPA_THEME.successGood : HARAPPA_THEME.warningLow
                     }}
                   />
                 </div>
               </div>
 
               {/* Happiness % */}
-              <div 
+              <div
                 className="p-2.5 rounded-lg border"
                 style={{ backgroundColor: HARAPPA_THEME.gridCanvasBg, borderColor: HARAPPA_THEME.border }}
               >
@@ -844,18 +844,18 @@ export default function BuildHarappa({ onReturnToTimeline, onNextMission }) {
                   </span>
                 </div>
                 <div className="w-full h-1.5 rounded-full overflow-hidden" style={{ backgroundColor: HARAPPA_THEME.panelBg }}>
-                  <div 
+                  <div
                     className="h-full transition-all duration-300 rounded-full"
-                    style={{ 
-                      width: `${cityStats.happiness}%`, 
-                      backgroundColor: cityStats.happiness >= 70 ? HARAPPA_THEME.successGood : HARAPPA_THEME.warningLow 
+                    style={{
+                      width: `${cityStats.happiness}%`,
+                      backgroundColor: cityStats.happiness >= 70 ? HARAPPA_THEME.successGood : HARAPPA_THEME.warningLow
                     }}
                   />
                 </div>
               </div>
 
               {/* Trade % */}
-              <div 
+              <div
                 className="p-2.5 rounded-lg border"
                 style={{ backgroundColor: HARAPPA_THEME.gridCanvasBg, borderColor: HARAPPA_THEME.border }}
               >
@@ -866,7 +866,7 @@ export default function BuildHarappa({ onReturnToTimeline, onNextMission }) {
                   </span>
                 </div>
                 <div className="w-full h-1.5 rounded-full overflow-hidden" style={{ backgroundColor: HARAPPA_THEME.panelBg }}>
-                  <div 
+                  <div
                     className="h-full transition-all duration-300 rounded-full"
                     style={{ width: `${cityStats.trade}%`, backgroundColor: HARAPPA_THEME.goldAccent }}
                   />
@@ -874,12 +874,12 @@ export default function BuildHarappa({ onReturnToTimeline, onNextMission }) {
               </div>
 
               {/* Objective Banner */}
-              <div 
+              <div
                 className="p-2.5 rounded-lg border text-xs"
-                style={{ 
-                  backgroundColor: 'rgba(232, 199, 126, 0.08)', 
+                style={{
+                  backgroundColor: 'rgba(232, 199, 126, 0.08)',
                   borderColor: 'rgba(232, 199, 126, 0.25)',
-                  color: HARAPPA_THEME.goldAccent 
+                  color: HARAPPA_THEME.goldAccent
                 }}
               >
                 <strong className="block text-[11px] uppercase tracking-wider mb-0.5">Directive</strong>
@@ -923,10 +923,10 @@ export default function BuildHarappa({ onReturnToTimeline, onNextMission }) {
           3. WIN BANNER & PROGRESSION REWARD MODAL
       ===================================================================== */}
       {showWinBanner && (
-        <section 
+        <section
           className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-sm animate-fade-in"
         >
-          <div 
+          <div
             className="relative w-full max-w-lg rounded-2xl border-2 p-6 text-center shadow-2xl overflow-hidden"
             style={{
               backgroundColor: HARAPPA_THEME.panelBg,
@@ -953,7 +953,7 @@ export default function BuildHarappa({ onReturnToTimeline, onNextMission }) {
 
             {/* Rewards: Animated XP & Coins */}
             <div className="grid grid-cols-2 gap-3 my-4">
-              <div 
+              <div
                 className="p-3 rounded-xl border flex items-center space-x-3"
                 style={{ backgroundColor: HARAPPA_THEME.gridCanvasBg, borderColor: HARAPPA_THEME.border }}
               >
@@ -966,7 +966,7 @@ export default function BuildHarappa({ onReturnToTimeline, onNextMission }) {
                 </div>
               </div>
 
-              <div 
+              <div
                 className="p-3 rounded-xl border flex items-center space-x-3"
                 style={{ backgroundColor: HARAPPA_THEME.gridCanvasBg, borderColor: HARAPPA_THEME.border }}
               >
@@ -981,9 +981,9 @@ export default function BuildHarappa({ onReturnToTimeline, onNextMission }) {
             </div>
 
             {/* Knowledge Vault Unlock Card */}
-            <div 
+            <div
               className="p-3.5 rounded-xl border text-left mb-4"
-              style={{ 
+              style={{
                 backgroundColor: 'rgba(46, 34, 22, 0.95)',
                 borderColor: HARAPPA_THEME.border,
               }}
@@ -1024,10 +1024,10 @@ export default function BuildHarappa({ onReturnToTimeline, onNextMission }) {
               <button
                 onClick={() => setShowWinBanner(false)}
                 className="py-2.5 px-4 rounded-lg font-bold text-xs uppercase tracking-wider border"
-                style={{ 
-                  backgroundColor: HARAPPA_THEME.gridCanvasBg, 
-                  borderColor: HARAPPA_THEME.border, 
-                  color: HARAPPA_THEME.goldAccent 
+                style={{
+                  backgroundColor: HARAPPA_THEME.gridCanvasBg,
+                  borderColor: HARAPPA_THEME.border,
+                  color: HARAPPA_THEME.goldAccent
                 }}
               >
                 Continue City (Sandbox)

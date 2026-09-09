@@ -3650,3 +3650,86 @@ body {
     padding: 6px 8px;
   }
 }
+
+/* ============================================================
+   BHARATAM AI ROLEPLAY — Floating Entry Point
+   ============================================================ */
+
+#bharatam-entry {
+  position: absolute;
+  bottom: 24px;
+  right: 24px;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+  cursor: pointer;
+  /* subtle drop-shadow matching the gold theme */
+  filter: drop-shadow(0 4px 12px rgba(212, 153, 59, 0.45));
+  transition: transform 0.25s var(--ease-cinematic), filter 0.25s var(--ease-cinematic);
+}
+
+#bharatam-entry img {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  border: 2px solid var(--gold-mid);
+  object-fit: cover;
+  display: block;
+  transition: border-color 0.25s, box-shadow 0.25s;
+}
+
+.bharatam-entry-label {
+  font-family: var(--font-serif);
+  font-size: 0.6rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gold-main);
+  background: rgba(10, 6, 3, 0.78);
+  border: 1px solid var(--border-gold);
+  border-radius: 4px;
+  padding: 2px 7px;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  pointer-events: none;
+}
+
+/* Hover state */
+#bharatam-entry:hover {
+  transform: translateY(-3px);
+  filter: drop-shadow(0 6px 18px rgba(245, 198, 108, 0.65));
+}
+
+#bharatam-entry:hover img {
+  border-color: var(--gold-main);
+  box-shadow: 0 0 12px rgba(245, 198, 108, 0.5);
+}
+
+#bharatam-entry:hover .bharatam-entry-label {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Focus-visible for keyboard accessibility */
+#bharatam-entry:focus-visible {
+  outline: 2px solid var(--gold-main);
+  outline-offset: 4px;
+  border-radius: 50%;
+}
+
+/* Responsive — slightly smaller on mobile */
+@media (max-width: 600px) {
+  #bharatam-entry {
+    bottom: 16px;
+    right: 16px;
+  }
+
+  #bharatam-entry img {
+    width: 52px;
+    height: 52px;
+  }
+}
