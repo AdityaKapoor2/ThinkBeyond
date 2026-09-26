@@ -752,8 +752,12 @@ body {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(circle at 50% 30%, rgba(35, 20, 10, 0.45) 0%, rgba(12, 8, 4, 0.95) 75%, #070402 100%),
-    linear-gradient(180deg, rgba(14, 9, 5, 0.8) 0%, rgba(8, 5, 2, 0.98) 100%);
+    radial-gradient(circle at 50% 30%, rgba(35, 20, 10, 0.45) 0%, rgba(12, 8, 4, 0.75) 75%, rgba(7, 4, 2, 0.85) 100%),
+    linear-gradient(180deg, rgba(14, 9, 5, 0.7) 0%, rgba(8, 5, 2, 0.85) 100%),
+    url('background.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   pointer-events: none;
   z-index: 1;
 }
